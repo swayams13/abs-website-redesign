@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<footer style="background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;border-top:1px solid rgba(242,242,243,.14)">
+  <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,4vw,44px) 40px;display:grid;gap:clamp(32px,4vw,56px);grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+
+    <div>
+      <img src="assets/abs-logo.png" alt="ABS Fitness" style="height:50px;width:auto;display:block;mix-blend-mode:screen">
+      <p style="margin:22px 0 0;font-family:'Barlow Condensed',sans-serif;font-size:22px;line-height:1.24;color:#f2f2f3;max-width:19ch;text-transform:uppercase;letter-spacing:.01em">Your Body Can Achieve It. Your Mind Must Believe It.</p>
+      <p style="margin:18px 0 0;font-size:12px;font-weight:600;letter-spacing:.2em;color:#b8e600">#ITSNOTGYMITSLIFE</p>
+      <div style="display:flex;gap:10px;margin-top:26px">
+        <a href="https://instagram.com" style="display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-size:11px;font-weight:600;letter-spacing:.08em;text-decoration:none">IG</a>
+        <a href="https://facebook.com" style="display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-size:11px;font-weight:600;letter-spacing:.08em;text-decoration:none">FB</a>
+        <a href="https://youtube.com" style="display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-size:11px;font-weight:600;letter-spacing:.08em;text-decoration:none">YT</a>
+        <a href="https://wa.me/919763215051" style="display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-size:11px;font-weight:600;letter-spacing:.08em;text-decoration:none">WA</a>
+      </div>
+    </div>
+
+    <div>
+      <h4 style="margin:0 0 18px;font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Clubs in Pune</h4>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <sc-for list="{{ pune }}" as="p" hint-placeholder-count="8">
+          <a href="ABS-Club.dc.html?club={{ p.slug }}" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none" style-hover="color:#f2f2f3">{{ p.name }}</a>
+        </sc-for>
+        <a href="ABS-Locations.dc.html" style="margin-top:6px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8e600;text-decoration:none">All 35+ clubs →</a>
+      </div>
+    </div>
+
+    <div>
+      <h4 style="margin:0 0 18px;font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Other Cities</h4>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <sc-for list="{{ cities }}" as="c" hint-placeholder-count="5">
+          <a href="{{ c.href }}" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none" style-hover="color:#f2f2f3">{{ c.name }}</a>
+        </sc-for>
+      </div>
+      <h4 style="margin:32px 0 18px;font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Quick Links</h4>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <a href="ABS-Home v4.dc.html#passport" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">ABS Passport Program</a>
+        <a href="ABS-Trainers-Programs.dc.html#roster" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">Trainers &amp; Programs</a>
+        <a href="ABS-Trainers-Programs.dc.html#challenge" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">90-Day Challenge</a>
+        <a href="ABS-Home v4.dc.html#results" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">Transformations</a>
+        <a href="ABS-Franchise.dc.html" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">ABS Gym Franchise</a>
+        <a href="ABS-About.dc.html" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">About Us</a>
+        <a href="ABS-Timetable.dc.html" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">Time Table</a>
+        <a href="ABS-Events.dc.html" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">Events &amp; Activities</a>
+        <a href="ABS-Exercises.dc.html" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">Exercise Gallery</a>
+        <a href="ABS-Trainers-Programs.dc.html#bmi" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">BMI Calculator</a>
+        <a href="ABS-Careers.dc.html" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">Careers</a>
+        <a href="ABS-Contact.dc.html" style="font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">Contact Us &amp; FAQ</a>
+      </div>
+    </div>
+
+    <div>
+      <h4 style="margin:0 0 18px;font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Get In Touch</h4>
+      <a href="tel:+919763215051" style="display:block;font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:600;color:#ffffff;text-decoration:none;letter-spacing:.01em">+91 97632 15051</a>
+      <a href="mailto:info@absfitnessclub.in" style="display:block;margin-top:8px;font-size:14px;color:rgba(242,242,243,.72);text-decoration:none">info@absfitnessclub.in</a>
+      <p style="margin:20px 0 0;font-size:14px;line-height:1.6;color:rgba(242,242,243,.55)">Head office — Pune, Maharashtra.<br>Clubs open 5:00 AM – 11:00 PM.</p>
+      <a href="ABS-Home v4.dc.html#join" style="position:relative;display:inline-block;margin-top:26px;background:#b8e600;color:#0d0e0d;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:15px 26px;text-decoration:none">
+        Book a Free Club Tour
+        <i style="position:absolute;top:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;top:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+      </a>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid rgba(242,242,243,.12)">
+    <div style="max-width:1320px;margin:0 auto;padding:22px clamp(16px,4vw,44px);display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;font-size:12px;color:rgba(242,242,243,.45)">
+      <span>© 2026 ABS Fitness &amp; Wellness Club. Founded by Abhimanyu Sable.</span>
+      <span>35+ clubs · Pune · Mumbai · Nashik · Kolhapur · Ahilyanagar · Chhatrapati Sambhaji Nagar</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:560}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      pune: [['Magarpatta City', 'magarpatta-city'], ['Nanded City', 'nanded-city'], ['EON 2 Kharadi', 'eon-2-kharadi'], ['Baner', 'baner'], ['Camp', 'camp'], ['Bibwewadi', 'bibwewadi'], ['Model Colony', 'model-colony'], ['Kalyani Nagar', 'kalyani-nagar']].map(([name, slug]) => ({ name, slug })),
+      cities: [
+        { name: 'Mumbai — BKC', href: 'ABS-Club.dc.html?club=bkc' }, { name: 'Mumbai — Kandivali', href: 'ABS-Club.dc.html?club=kandivali' },
+        { name: 'Nashik', href: 'ABS-Locations.dc.html?city=Nashik' }, { name: 'Kolhapur', href: 'ABS-Locations.dc.html?city=Kolhapur' },
+        { name: 'Ahilyanagar', href: 'ABS-Locations.dc.html?city=Ahilyanagar' }, { name: 'Chhatrapati Sambhaji Nagar', href: 'ABS-Locations.dc.html?city=Chhatrapati%20Sambhaji%20Nagar' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

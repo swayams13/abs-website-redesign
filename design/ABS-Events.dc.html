@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events &amp; Activities — ABS Fitness &amp; Wellness Club</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#b8e600;text-decoration:none}
+a:hover{color:#cdf23c}
+h1,h2,h3,p{margin:0}
+::placeholder{color:rgba(242,242,243,.4)}
+</style>
+</helmet>
+
+<dc-import name="Nav" active="events" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d">
+  <section data-screen-label="Events" style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px)">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+      <div>
+        <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">ABS Events &amp; Activities</div>
+        <h1 style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(46px,7vw,100px);line-height:.88;color:#ffffff;max-width:14ch">More than a workout.</h1>
+        <p style="margin-top:18px;font-size:16px;line-height:1.6;max-width:54ch;color:rgba(242,242,243,.7)">ABS Fitness is not just about exercise. It’s a place where celebrations, festivals, and community events keep members connected, motivated, and inspired.</p>
+      </div>
+      <div style="display:flex;border:1px solid rgba(242,242,243,.3)">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="2">
+          <button type="button" onClick="{{ t.pick }}" style="font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:13px 20px;border:0;background:{{ t.bg }};color:{{ t.fg }};cursor:pointer">{{ t.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="margin-top:clamp(32px,4vw,52px);display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))">
+      <sc-for list="{{ events }}" as="ev" hint-placeholder-count="6">
+        <button type="button" onClick="{{ ev.pick }}" style="text-align:left;display:flex;flex-direction:column;background:transparent;border:1px solid {{ ev.bd }};color:#f2f2f3;padding:0;cursor:pointer;font-family:Barlow,sans-serif;transition:border-color .25s" style-hover="border-color:#b8e600">
+          <div style="position:relative;width:100%;aspect-ratio:16/10;background:#151716;overflow:hidden">
+            <image-slot id="{{ ev.slot }}" shape="rect" placeholder="{{ ev.t }}"></image-slot>
+            <div style="position:absolute;top:0;left:0;background:#b8e600;color:#0d0e0d;padding:10px 12px;text-align:center;pointer-events:none">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;line-height:1">{{ ev.day }}</div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase">{{ ev.mon }}</div>
+            </div>
+          </div>
+          <div style="padding:22px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#b8e600">{{ ev.cat }}</div>
+            <div style="margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;line-height:1;color:#ffffff">{{ ev.t }}</div>
+            <div style="margin-top:10px;font-size:13.5px;color:rgba(242,242,243,.6)">{{ ev.where }} · {{ ev.time }}</div>
+          </div>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;background:rgba(13,14,13,.8);display:flex;align-items:center;justify-content:center;padding:16px">
+      <div onClick="{{ stop }}" style="width:100%;max-width:760px;max-height:90vh;overflow:auto;background:#0d0e0d;border:1px solid rgba(242,242,243,.3)">
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:24px 28px;border-bottom:1px solid rgba(242,242,243,.14)">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#b8e600">{{ sel.cat }} · {{ sel.date }}</div>
+            <div style="margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:.95;color:#ffffff">{{ sel.t }}</div>
+          </div>
+          <button type="button" onClick="{{ close }}" aria-label="Close" style="flex-shrink:0;width:44px;height:44px;background:transparent;border:1px solid rgba(242,242,243,.3);color:#f2f2f3;font-size:20px;cursor:pointer">×</button>
+        </div>
+        <div style="padding:24px 28px 30px;display:grid;gap:18px">
+          <p style="font-size:16px;line-height:1.65;color:rgba(242,242,243,.8)">{{ sel.d }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px 28px;font-size:14px;color:rgba(242,242,243,.7)"><span>Where: <strong style="color:#f2f2f3">{{ sel.where }}</strong></span><span>Time: <strong style="color:#f2f2f3">{{ sel.time }}</strong></span><span>Entry: <strong style="color:#f2f2f3">{{ sel.fee }}</strong></span></div>
+          <sc-if value="{{ canRegister }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid rgba(242,242,243,.14);padding-top:20px">
+              <input type="text" value="{{ name }}" onChange="{{ onName }}" placeholder="Full name" style="background:transparent;border:1px solid {{ nameBd }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:14px 16px;outline:0">
+              <input type="tel" value="{{ phone }}" onChange="{{ onPhone }}" placeholder="Mobile number" style="background:transparent;border:1px solid {{ phoneBd }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:14px 16px;outline:0">
+              <button type="button" onClick="{{ register }}" style="grid-column:1/-1;background:#b8e600;color:#0d0e0d;border:0;font-family:Barlow,sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:16px;cursor:pointer">Register my spot</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ registered }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid #b8e600;padding:18px;font-size:15px;color:#f2f2f3">You’re registered, {{ firstName }}. We’ll send the details to {{ phone }}.</div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const EVENTS = [
+  ['2026-10-12', 'Festival', 'Navratri Garba Fitness Night', 'All Pune clubs', '7:00 PM', 'Free for members', 'A high-energy garba and dandiya workout to celebrate Navratri with the ABS community. Traditional wear encouraged.'],
+  ['2026-10-05', 'Challenge', '90-Day Challenge — New Batch', 'All clubs', '6:00 AM', 'Enrolment', 'The next 90 Days Weight Loss Challenge batch begins. Body composition test, diet plan and coached sessions for 90 days.'],
+  ['2026-11-08', 'Festival', 'Diwali Fitness Fest', 'Magarpatta City', '6:30 PM', 'Free for members', 'Group workouts, healthy festive food and prizes for the most consistent members of the season.'],
+  ['2026-11-22', 'Workshop', 'Nutrition Workshop with ABS Coaches', 'EON 2 Kharadi', '11:00 AM', 'Free', 'A practical session on eating for fat loss and strength using everyday Indian food.'],
+  ['2026-12-06', 'Community', 'ABS Run Club — 10K', 'Pune', '6:00 AM', 'Registration', 'A community 10K run for members, friends and family. Finisher medals for all.'],
+  ['2027-01-01', 'Challenge', 'New Year Transformation Kick-off', 'All clubs', '7:00 AM', 'Free for members', 'Start the year with goal-setting sessions and a free assessment with an ABS coach.'],
+  ['2026-01-18', 'Leadership', 'GROW 2026', 'Pune', '10:00 AM', 'Team event', 'ABS founder Abhimanyu Sable conducted his first leadership and growth session of the year with the ABS team.'],
+  ['2025-12-14', 'Anniversary', '20 Years of ABS', 'Pune', '7:00 PM', 'Members & team', 'Celebrating 20 years of ABS Fitness & Wellness Clubs and 40 years of Abhimanyu Sable in fitness.'],
+  ['2025-11-02', 'Festival', 'Diwali Fitness Fest 2025', 'All clubs', '6:30 PM', 'Members', 'Festive workouts and celebrations across ABS clubs.']
+];
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+class Component extends DCLogic {
+  state = { tab: 'up', sel: -1, name: '', phone: '', tried: false, reg: {} };
+  componentDidMount() { this._k = e => { if (e.key === 'Escape') this.setState({ sel: -1 }); }; window.addEventListener('keydown', this._k); }
+  componentWillUnmount() { window.removeEventListener('keydown', this._k); }
+  renderVals() {
+    const s = this.state, today = new Date().toISOString().slice(0, 10);
+    const all = EVENTS.map((e, i) => { const d = new Date(e[0]); return { i, iso: e[0], cat: e[1], t: e[2], where: e[3], time: e[4], fee: e[5], d: e[6], day: String(d.getDate()).padStart(2, '0'), mon: MON[d.getMonth()] + ' ' + String(d.getFullYear()).slice(2), date: d.getDate() + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear(), up: e[0] >= today }; });
+    const list = all.filter(e => (s.tab === 'up') === e.up).sort((a, b) => s.tab === 'up' ? a.iso.localeCompare(b.iso) : b.iso.localeCompare(a.iso));
+    const sel = all[s.sel] || {};
+    const okN = s.name.trim().length > 1, okP = /^[6-9]\d{9}$/.test(s.phone.replace(/\D/g, '').slice(-10));
+    const registered = !!s.reg[s.sel];
+    return {
+      tabs: [['up', 'Upcoming'], ['past', 'Past']].map(([k, label]) => ({ label, bg: s.tab === k ? '#b8e600' : 'transparent', fg: s.tab === k ? '#0d0e0d' : '#f2f2f3', pick: () => this.setState({ tab: k }) })),
+      events: list.map(e => ({ ...e, slot: 'ev-' + e.i, bd: 'rgba(242,242,243,.2)', pick: () => this.setState({ sel: e.i, tried: false }) })),
+      hasSel: s.sel >= 0, sel, close: () => this.setState({ sel: -1 }), stop: e => e.stopPropagation(),
+      canRegister: !!sel.up && !registered, registered,
+      name: s.name, phone: s.phone, onName: e => this.setState({ name: e.target.value }), onPhone: e => this.setState({ phone: e.target.value }),
+      nameBd: s.tried && !okN ? '#ff9b8a' : 'rgba(242,242,243,.28)', phoneBd: s.tried && !okP ? '#ff9b8a' : 'rgba(242,242,243,.28)',
+      register: () => { if (okN && okP) this.setState(st => ({ reg: { ...st.reg, [st.sel]: true } })); else this.setState({ tried: true }); },
+      firstName: s.name.trim().split(' ')[0]
+    };
+  }
+}
+</script>
+</body>
+</html>

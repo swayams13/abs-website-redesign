@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#b8e600;text-decoration:none}
+  a:hover{color:#cdf23c}
+  ::selection{background:#b8e600;color:#0d0e0d}
+  :focus-visible{outline:2px solid #b8e600;outline-offset:3px}
+  h1,h2,h3,h4{margin:0}
+  p{text-wrap:pretty}
+  input::placeholder{color:rgba(242,242,243,.45)}
+</style>
+</helmet>
+
+<div data-progress="" style="position:fixed;top:0;left:0;height:2px;width:0%;background:#b8e600;z-index:90;pointer-events:none"></div>
+
+<dc-import name="Nav" active="locations" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d">
+
+  <section data-screen-label="Locations hero" style="background:#0d0e0d;color:#f2f2f3;border-bottom:1px solid rgba(242,242,243,.14)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,92px) clamp(16px,4vw,44px) clamp(40px,5vw,68px)">
+      <div data-hero="" style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+        <span style="width:34px;height:2px;background:#b8e600"></span>
+        <span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600">{{ totalLine }}</span>
+      </div>
+      <div style="display:grid;gap:clamp(28px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:end">
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(44px,6.8vw,96px);line-height:.9;letter-spacing:-.015em;color:#ffffff;max-width:14ch">
+          <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block">Find your nearest</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block"><span style="color:#b8e600">ABS</span> Fitness Club</span></span>
+        </h1>
+        <div data-hero="" style="position:relative;border-left:2px solid #b8e600;padding:4px 0 4px 22px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">One membership, every location</div>
+          <p style="margin:12px 0 0;font-size:15.5px;line-height:1.6;color:rgba(242,242,243,.75);max-width:46ch">The ABS Passport Program means the club you pick below is not the only one you get. Train at any of the 35+ clubs on the same card.</p>
+          <a href="ABS-Home v4.dc.html#passport" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:4px">How the Passport works →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Filters" style="position:sticky;top:70px;z-index:40;background:rgba(13,14,13,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(242,242,243,.14)">
+    <div style="max-width:1320px;margin:0 auto;padding:16px clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between">
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ cityChips }}" as="c" hint-placeholder-count="7">
+            <button type="button" onClick="{{ c.pick }}" style="font-family:Barlow,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;cursor:pointer;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};transition:background .2s,color .2s,border-color .2s" style-hover="border-color:#b8e600">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex:1;min-width:250px;justify-content:flex-end">
+          <input type="search" value="{{ query }}" onChange="{{ onSearch }}" placeholder="Search area, e.g. Kharadi" style="flex:1;max-width:280px;background:transparent;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:14px;padding:12px 14px;outline:0;transition:border-color .2s" style-focus="border-color:#b8e600">
+          <button type="button" onClick="{{ toggleOpen }}" style="display:inline-flex;align-items:center;gap:8px;font-family:Barlow,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:12px 14px;cursor:pointer;border:1px solid {{ openBorder }};background:{{ openBg }};color:{{ openFg }};white-space:nowrap;transition:background .2s,color .2s" style-hover="border-color:#b8e600"><i style="width:7px;height:7px;border-radius:50%;background:{{ openDot }}"></i>Open now</button>
+          <button type="button" onClick="{{ toggleMap }}" style="font-family:Barlow,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:12px 16px;cursor:pointer;border:1px solid rgba(242,242,243,.28);background:transparent;color:#f2f2f3;white-space:nowrap;transition:border-color .2s" style-hover="border-color:#b8e600">{{ mapLabel }}</button>
+        </div>
+      </div>
+
+      <sc-if value="{{ showZones }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(242,242,243,.2)">
+          <span style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,242,243,.5);align-self:center;margin-right:4px">Pune area</span>
+          <sc-for list="{{ zoneChips }}" as="z" hint-placeholder-count="5">
+            <button type="button" onClick="{{ z.pick }}" style="font-family:Barlow,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.1em;padding:9px 14px;cursor:pointer;border:1px solid {{ z.border }};background:{{ z.bg }};color:{{ z.fg }};transition:background .2s,color .2s,border-color .2s" style-hover="border-color:#b8e600">{{ z.label }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section data-screen-label="Results">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(28px,4vw,48px) clamp(16px,4vw,44px) clamp(56px,8vw,104px)">
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between;margin-bottom:clamp(22px,3vw,34px)">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(24px,2.8vw,36px);letter-spacing:.01em;color:#ffffff">{{ resultLine }}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:13px;color:rgba(242,242,243,.6)">
+          <span>{{ filterLine }}</span>
+          <sc-if value="{{ filtered }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ clear }}" style="font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:0;color:#b8e600;cursor:pointer;padding:0;border-bottom:1px solid #b8e600">Clear</button>
+          </sc-if>
+        </div>
+      </div>
+
+      <sc-if value="{{ mapOn }}" hint-placeholder-val="{{ false }}">
+        <div style="position:relative;border:1px solid rgba(242,242,243,.2);background:#151716;background-image:linear-gradient(rgba(242,242,243,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(242,242,243,.06) 1px,transparent 1px);background-size:44px 44px;aspect-ratio:16/9;min-height:360px;margin-bottom:clamp(22px,3vw,34px);overflow:hidden">
+          <div style="position:absolute;top:16px;left:18px;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,242,243,.45);z-index:3">Schematic club map — not to scale</div>
+          <div style="position:absolute;left:20%;top:40%;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(40px,5vw,70px);letter-spacing:.02em;text-transform:uppercase;color:rgba(242,242,243,.07);transform:translate(-50%,-50%);pointer-events:none">Pune</div>
+          <div style="position:absolute;left:76%;top:26%;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(26px,3vw,42px);text-transform:uppercase;color:rgba(242,242,243,.07);transform:translate(-50%,-50%);pointer-events:none">Mumbai</div>
+          <div style="position:absolute;left:63%;top:6%;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,34px);text-transform:uppercase;color:rgba(242,242,243,.07);transform:translate(-50%,-50%);pointer-events:none">Nashik</div>
+          <div style="position:absolute;left:56%;top:92%;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,34px);text-transform:uppercase;color:rgba(242,242,243,.07);transform:translate(-50%,-50%);pointer-events:none">Kolhapur</div>
+          <div style="position:absolute;inset:16% 10% 10% 9%">
+            <sc-for list="{{ pins }}" as="p" hint-placeholder-count="12">
+              <a href="ABS-Club.dc.html?club={{ p.slug }}" style="position:absolute;left:{{ p.x }};top:{{ p.y }};transform:translateY(-50%);display:flex;align-items:center;gap:6px;z-index:2">
+                <span style="width:10px;height:10px;background:#b8e600;border:1.5px solid #0d0e0d;flex-shrink:0"></span>
+                <span style="font-size:10.5px;font-weight:600;letter-spacing:.03em;color:#f2f2f3;background:rgba(13,14,13,.9);padding:2px 5px;white-space:nowrap">{{ p.name }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="display:grid;gap:clamp(14px,1.8vw,24px);grid-template-columns:repeat(auto-fill,minmax(268px,1fr))">
+        <sc-for list="{{ visible }}" as="c" hint-placeholder-count="9">
+          <a href="ABS-Club.dc.html?club={{ c.slug }}" data-reveal="" style="position:relative;display:flex;flex-direction:column;border:1px solid rgba(242,242,243,.2);padding:clamp(20px,2.2vw,26px);color:#f2f2f3;min-height:230px;background:transparent;transition:border-color .3s,transform .4s cubic-bezier(.22,.7,.3,1)" style-hover="border-color:#b8e600;transform:translateY(-4px)">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+              <span style="font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b8e600">{{ c.cityShort }}</span>
+              <span style="font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.55)">{{ c.tag }}</span>
+            </div>
+            <h3 style="margin:14px 0 0;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(24px,2.3vw,29px);line-height:1.02;color:#ffffff">{{ c.name }}</h3>
+            <p style="margin:10px 0 0;font-size:13.5px;line-height:1.55;color:rgba(242,242,243,.6)">{{ c.addr }}</p>
+            <div style="margin-top:auto;padding-top:22px;display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid rgba(242,242,243,.14)">
+              <span style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:rgba(242,242,243,.6)"><i style="width:6px;height:6px;border-radius:50%;background:{{ c.dot }};flex-shrink:0"></i>{{ c.statusLabel }}</span>
+              <span style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8e600;white-space:nowrap">View club →</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid rgba(242,242,243,.2);padding:clamp(28px,4vw,60px) 24px;text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:30px;color:#ffffff">No club matches that search</div>
+          <p style="margin:12px 0 0;font-size:15px;color:rgba(242,242,243,.65)">Try an area name like Kharadi, Baner or Camp — or call <a href="tel:+919763215051">+91 97632 15051</a> and we will find your closest club.</p>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section data-screen-label="CTA" style="background:#b8e600;color:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,6vw,86px) clamp(16px,4vw,44px);display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between">
+      <div data-reveal="">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4vw,52px);line-height:.98;max-width:20ch">Not sure which club fits your routine?</h2>
+        <p style="margin:14px 0 0;font-size:15.5px;color:rgba(13,14,13,.75);max-width:52ch">Tell us where you live and work. With the Passport you may end up using two.</p>
+      </div>
+      <a href="ABS-Home v4.dc.html#join" style="background:#0d0e0d;color:#b8e600;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px;flex-shrink:0">Book a Free Club Tour →</a>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+
+<sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:1px;background:rgba(242,242,243,.2);border-top:1px solid rgba(242,242,243,.2)">
+    <a href="tel:+919763215051" style="flex:1;background:#0d0e0d;color:#f2f2f3;text-align:center;padding:16px 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Call</a>
+    <a href="ABS-Home v4.dc.html#join" style="flex:2;background:#b8e600;color:#0d0e0d;text-align:center;padding:16px 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Book a Free Tour</a>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, now: Date.now(), D: null, city: 'All cities', zone: 'All Pune', q: '', map: false, openOnly: false };
+
+  componentDidMount() {
+    const p = new URLSearchParams(window.location.search);
+    const city = p.get('city'), q = p.get('q');
+    import('./abs-data.js').then(m => this.setState({ D: m, city: city && m.CITIES.includes(city) ? city : 'All cities', q: q || '' }));
+    this._r = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._r);
+    this._clock = setInterval(() => this.setState({ now: Date.now() }), 30000);
+    this._onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight, bar = document.querySelector('[data-progress]');
+      if (bar) bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    if (this._motion()) this._hero();
+    this._reveal();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._r); window.removeEventListener('scroll', this._onScroll);
+    clearInterval(this._clock); if (this._io) this._io.disconnect();
+  }
+  componentDidUpdate() { this._reveal(); }
+  _motion() { return !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  _hero() {
+    const ease = 'cubic-bezier(.22,.7,.3,1)';
+    document.querySelectorAll('[data-hero-line]').forEach((el, i) => el.animate([{ transform: 'translateY(110%)' }, { transform: 'none' }], { duration: 900, delay: 120 + i * 110, easing: ease, fill: 'both' }));
+    document.querySelectorAll('[data-hero]').forEach((el, i) => el.animate([{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }], { duration: 800, delay: 350 + i * 100, easing: ease, fill: 'both' }));
+  }
+  _reveal() {
+    if (!('IntersectionObserver' in window) || !this._motion()) return;
+    if (!this._io) this._io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this._io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    document.querySelectorAll('[data-reveal]:not([data-reveal-init])').forEach((el, i) => {
+      el.setAttribute('data-reveal-init', '');
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.94) return;
+      el.style.opacity = '0'; el.style.transform = 'translateY(22px)';
+      el.style.transition = 'opacity .6s cubic-bezier(.22,.7,.3,1) ' + ((i % 6) * 50) + 'ms, transform .6s cubic-bezier(.22,.7,.3,1) ' + ((i % 6) * 50) + 'ms';
+      this._io.observe(el);
+    });
+  }
+  _syncUrl(city, q) {
+    try {
+      const u = new URL(window.location.href);
+      if (city && city !== 'All cities') u.searchParams.set('city', city); else u.searchParams.delete('city');
+      if (q && q.trim()) u.searchParams.set('q', q.trim()); else u.searchParams.delete('q');
+      window.history.replaceState(null, '', u.toString());
+    } catch (e) {}
+  }
+
+  renderVals() {
+    const S = this.state, D = S.D;
+    const narrow = S.w < 780;
+    const CLUBS = D ? D.CLUBS : [], CITIES = D ? ['All cities'].concat(D.CITIES) : ['All cities'], ZONES = D ? ['All Pune'].concat(D.ZONES) : ['All Pune'];
+    const needle = S.q.trim().toLowerCase();
+    const withStatus = CLUBS.map(c => { const st = D.status(c.hours, S.now); return { ...c, open: st.open, dot: st.dot, statusLabel: st.label }; });
+    const visible = withStatus.filter(c =>
+      (S.city === 'All cities' || c.city === S.city) &&
+      (S.city !== 'Pune' || S.zone === 'All Pune' || c.zone === S.zone) &&
+      (!S.openOnly || c.open) &&
+      (!needle || (c.name + ' ' + c.city + ' ' + c.addr).toLowerCase().includes(needle))
+    );
+    const bits = [];
+    if (S.city !== 'All cities') bits.push(S.city);
+    if (S.city === 'Pune' && S.zone !== 'All Pune') bits.push(S.zone + ' Pune');
+    if (S.openOnly) bits.push('open now');
+    if (needle) bits.push('“' + S.q.trim() + '”');
+    const on = (b) => ({ border: b ? '#b8e600' : 'rgba(242,242,243,.28)', bg: b ? '#b8e600' : 'transparent', fg: b ? '#0d0e0d' : '#f2f2f3' });
+    const openCount = withStatus.filter(c => c.open).length;
+    return {
+      narrow,
+      totalLine: D ? CLUBS.length + ' clubs · ' + D.CITIES.length + ' cities · ' + openCount + ' open right now' : '30 clubs · 6 cities',
+      visible: D ? visible : [],
+      empty: !!D && visible.length === 0,
+      mapOn: S.map, mapLabel: S.map ? '✕ Close map' : 'Map view',
+      toggleMap: () => this.setState(s => ({ map: !s.map })),
+      toggleOpen: () => this.setState(s => ({ openOnly: !s.openOnly })),
+      openBorder: on(S.openOnly).border, openBg: on(S.openOnly).bg, openFg: on(S.openOnly).fg, openDot: S.openOnly ? '#0d0e0d' : '#b8e600',
+      onSearch: (e) => { this.setState({ q: e.target.value }); this._syncUrl(S.city, e.target.value); },
+      query: S.q,
+      showZones: S.city === 'Pune',
+      filtered: bits.length > 0,
+      clear: () => { this.setState({ city: 'All cities', zone: 'All Pune', q: '', openOnly: false }); this._syncUrl('', ''); },
+      resultLine: D ? visible.length + (visible.length === 1 ? ' club' : ' clubs') : '',
+      filterLine: bits.length ? 'Filtered by ' + bits.join(' · ') : 'Showing every ABS club across Maharashtra',
+      pins: visible.map(c => ({ name: c.name, slug: c.slug, x: c.mx + '%', y: c.my + '%' })),
+      cityChips: CITIES.map(label => ({
+        label: label === 'Chhatrapati Sambhaji Nagar' ? 'Ch. Sambhaji Nagar' : label, ...on(S.city === label),
+        pick: () => { this.setState({ city: label, zone: 'All Pune' }); this._syncUrl(label, S.q); }
+      })),
+      zoneChips: ZONES.map(label => ({ label, ...on(S.zone === label), pick: () => this.setState({ zone: label }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

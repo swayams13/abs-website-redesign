@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us — ABS Fitness &amp; Wellness Club</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#b8e600;text-decoration:none}
+a:hover{color:#cdf23c}
+h1,h2,h3,p{margin:0}
+::placeholder{color:rgba(242,242,243,.4)}
+</style>
+</helmet>
+
+<dc-import name="Nav" active="contact" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d">
+  <section data-screen-label="Contact" style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px);display:grid;gap:clamp(36px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));align-items:start">
+    <div>
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Contact us</div>
+      <h1 style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(46px,7vw,100px);line-height:.88;color:#ffffff">Talk to ABS.</h1>
+      <p style="margin-top:18px;font-size:16px;line-height:1.6;max-width:46ch;color:rgba(242,242,243,.7)">Submit your details and our ABS Fitness team will contact you soon.</p>
+      <div style="margin-top:36px;border-top:1px solid rgba(242,242,243,.3)">
+        <sc-for list="{{ channels }}" as="c" hint-placeholder-count="4">
+          <a href="{{ c.href }}" style="display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:baseline;padding:18px 0;border-bottom:1px solid rgba(242,242,243,.14);color:#f2f2f3" style-hover="color:#b8e600">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.55)">{{ c.l }}</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(20px,2.2vw,26px)">{{ c.v }}</span>
+          </a>
+        </sc-for>
+      </div>
+      <div style="margin-top:26px;font-size:14.5px;line-height:1.7;color:rgba(242,242,243,.6)">Head office — Pune, Maharashtra.<br>Clubs open 5:00 AM – 11:00 PM, 7 days a week.<br><a href="ABS-Locations.dc.html">Find your nearest club →</a></div>
+    </div>
+
+    <div style="position:relative;border:1px solid rgba(242,242,243,.24);padding:clamp(24px,3vw,40px)">
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;gap:12px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.6)">I’m contacting you about</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+            <sc-for list="{{ topics }}" as="t" hint-placeholder-count="6">
+              <button type="button" onClick="{{ t.pick }}" style="font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:10px 14px;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer">{{ t.label }}</button>
+            </sc-for>
+          </div>
+          <input type="text" value="{{ f.name }}" onChange="{{ on.name }}" placeholder="Full name *" style="background:transparent;border:1px solid {{ bd.name }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+          <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+            <input type="tel" value="{{ f.phone }}" onChange="{{ on.phone }}" placeholder="Mobile number *" style="background:transparent;border:1px solid {{ bd.phone }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+            <input type="email" value="{{ f.email }}" onChange="{{ on.email }}" placeholder="Email" style="background:transparent;border:1px solid {{ bd.email }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+          </div>
+          <select value="{{ f.club }}" onChange="{{ on.club }}" style="background:#0d0e0d;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0">
+            <option value="">Nearest club (optional)</option>
+            <sc-for list="{{ clubs }}" as="c" hint-placeholder-count="8"><option value="{{ c }}">{{ c }}</option></sc-for>
+          </select>
+          <textarea value="{{ f.msg }}" onChange="{{ on.msg }}" rows="4" placeholder="Your message *" style="background:transparent;border:1px solid {{ bd.msg }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0;resize:vertical" style-focus="border-color:#b8e600"></textarea>
+          <sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:#ff9b8a">Please fill the highlighted fields.</div></sc-if>
+          <button type="button" onClick="{{ send }}" style="background:#b8e600;color:#0d0e0d;border:0;font-family:Barlow,sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:18px;cursor:pointer" style-hover="background:#cdf23c">Send message</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="min-height:320px;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Message received</div>
+          <div style="margin-top:14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,3.4vw,44px);line-height:.95;color:#ffffff">Thanks, {{ firstName }}.</div>
+          <p style="margin-top:14px;font-size:15px;line-height:1.6;color:rgba(242,242,243,.7)">Our team will call {{ f.phone }} about your {{ topicLower }} enquiry soon.</p>
+          <button type="button" onClick="{{ reset }}" style="align-self:flex-start;margin-top:22px;background:transparent;border:1px solid rgba(242,242,243,.3);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:12px 18px;cursor:pointer">Send another</button>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="faq" data-screen-label="FAQ" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1000px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,44px)">
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#4d5a00">Frequently asked questions</div>
+      <h2 style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;color:#0d0e0d">Got questions?</h2>
+      <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between">
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ cats }}" as="c" hint-placeholder-count="5">
+            <button type="button" onClick="{{ c.pick }}" style="font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:10px 14px;border:1.5px solid #1d1f20;background:{{ c.bg }};color:{{ c.fg }};cursor:pointer">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <input type="text" value="{{ q }}" onChange="{{ onQ }}" placeholder="Search questions" style="min-width:220px;background:transparent;border:0;border-bottom:2px solid #1d1f20;color:#1d1f20;font-family:Barlow,sans-serif;font-size:16px;padding:10px 2px;outline:0">
+      </div>
+      <div style="margin-top:28px;border-top:1.5px solid #1d1f20">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
+          <div style="border-bottom:1px solid rgba(29,31,32,.22)">
+            <button type="button" onClick="{{ f.toggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;text-align:left;background:transparent;border:0;color:#0d0e0d;padding:20px 0;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(19px,2vw,23px)">{{ f.q }}<span style="flex-shrink:0;font-size:22px;color:#4d5a00">{{ f.sign }}</span></button>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+              <p style="padding:0 40px 22px 0;font-size:15.5px;line-height:1.65;color:rgba(29,31,32,.8)">{{ f.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{ noFaq }}" hint-placeholder-val="{{ false }}"><div style="padding:28px 0;color:rgba(29,31,32,.7)">No question matches. Send us a message above.</div></sc-if>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const FAQ = [
+  ['Membership', 'Can I use my membership at other ABS clubs?', 'Yes. The ABS Passport Program gives every member with a valid card guest access at any other ABS club.'],
+  ['Membership', 'Do I need to book the free tour?', 'No, you can walk in any time the club is open. Booking guarantees a coach is free to walk you through the floor, the programs and a plan for your goal.'],
+  ['Membership', 'What are the club timings?', 'Clubs are open 5:00 AM – 11:00 PM. Timings can vary slightly by club; check your club page.'],
+  ['Membership', 'Can I freeze my membership?', 'Speak to your club’s front desk. Freeze options depend on your plan.'],
+  ['Training', 'I’m a complete beginner. Where do I start?', 'Start with a free assessment. A coach will recommend strength basics, group classes or personal training depending on your goal.'],
+  ['Training', 'Are group classes included?', 'Yes, group classes like HIIT, yoga, spin and Zumba are included for members. See the time table for your club.'],
+  ['Training', 'Do you offer diet guidance?', 'Yes. Nutrition guidance is part of personal training, weight loss programs and the 90-Day Challenge.'],
+  ['90-Day Challenge', 'What is the 90-Day Challenge?', 'A coached 90-day weight loss program. Lose weight. Gain strength. Stay consistent. Body composition is tracked from start to finish.'],
+  ['90-Day Challenge', 'When does the next batch start?', 'New batches start regularly. Check the banner on the home page or call +91 97632 15051.'],
+  ['Franchise', 'How can I open an ABS franchise?', 'Visit the ABS Gym Franchise page for investment details and send an enquiry. The franchise team will call you.'],
+  ['Careers', 'How do I apply for a job at ABS?', 'See open roles on the Careers page and apply with your CV.']
+];
+const TOPICS = ['Membership', 'Personal training', '90-Day Challenge', 'Franchise', 'Careers', 'Feedback'];
+const CLUBS = ['Magarpatta City', 'Nanded City', 'EON 2 Kharadi', 'Baner', 'Camp', 'Bibwewadi', 'Model Colony', 'Kalyani Nagar', 'Mumbai — BKC', 'Mumbai — Kandivali', 'Nashik', 'Kolhapur', 'Ahilyanagar', 'Chhatrapati Sambhaji Nagar'];
+const EMPTY = { name: '', phone: '', email: '', club: '', msg: '' };
+class Component extends DCLogic {
+  state = { topic: 'Membership', f: { ...EMPTY }, tried: false, sent: false, cat: 'All', q: '', open: 0 };
+  errs() {
+    const f = this.state.f, e = {};
+    if (f.name.trim().length < 2) e.name = 1;
+    if (!/^[6-9]\d{9}$/.test(f.phone.replace(/\D/g, '').slice(-10))) e.phone = 1;
+    if (f.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) e.email = 1;
+    if (f.msg.trim().length < 3) e.msg = 1;
+    return e;
+  }
+  renderVals() {
+    const s = this.state, f = s.f, e = s.tried ? this.errs() : {};
+    const on = {}; Object.keys(EMPTY).forEach(k => { on[k] = ev => { const v = ev.target.value; this.setState(st => ({ f: { ...st.f, [k]: v } })); }; });
+    const pill = x => ({ bd: x ? '#b8e600' : 'rgba(242,242,243,.3)', bg: x ? '#b8e600' : 'transparent', fg: x ? '#0d0e0d' : '#f2f2f3' });
+    const bdr = k => e[k] ? '#ff9b8a' : 'rgba(242,242,243,.28)';
+    const q = s.q.trim().toLowerCase();
+    const faqs = FAQ.map((x, i) => ({ i, c: x[0], q: x[1], a: x[2] })).filter(x => (s.cat === 'All' || x.c === s.cat) && (!q || (x.q + x.a).toLowerCase().includes(q)));
+    return {
+      channels: [['Call', '+91 97632 15051', 'tel:+919763215051'], ['WhatsApp', '+91 97632 15051', 'https://wa.me/919763215051'], ['Email', 'info@absfitnessclub.in', 'mailto:info@absfitnessclub.in'], ['Franchise', 'Franchise enquiries →', 'ABS-Franchise.dc.html#apply']].map(([l, v, href]) => ({ l, v, href })),
+      topics: TOPICS.map(t => ({ label: t, ...pill(s.topic === t), pick: () => this.setState({ topic: t }) })),
+      f, on, bd: { name: bdr('name'), phone: bdr('phone'), email: bdr('email'), msg: bdr('msg') }, clubs: CLUBS,
+      hasErr: Object.keys(e).length > 0,
+      send: () => { this.setState({ tried: true }); if (!Object.keys(this.errs()).length) this.setState({ sent: true }); },
+      notSent: !s.sent, sent: s.sent, firstName: f.name.trim().split(' ')[0], topicLower: s.topic.toLowerCase(),
+      reset: () => this.setState({ f: { ...EMPTY }, tried: false, sent: false }),
+      cats: ['All', 'Membership', 'Training', '90-Day Challenge', 'Franchise', 'Careers'].map(c => ({ label: c, bg: s.cat === c ? '#0d0e0d' : 'transparent', fg: s.cat === c ? '#b8e600' : '#1d1f20', pick: () => this.setState({ cat: c }) })),
+      q: s.q, onQ: ev => this.setState({ q: ev.target.value }),
+      faqs: faqs.map(x => { const open = s.open === x.i; return { ...x, open, sign: open ? '−' : '+', toggle: () => this.setState({ open: open ? -1 : x.i }) }; }),
+      noFaq: faqs.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

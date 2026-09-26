@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exercise Gallery — ABS Fitness &amp; Wellness Club</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#b8e600;text-decoration:none}
+a:hover{color:#cdf23c}
+h1,h2,h3,p{margin:0}
+::placeholder{color:rgba(242,242,243,.4)}
+</style>
+</helmet>
+
+<dc-import name="Nav" active="trainers" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d">
+  <section data-screen-label="Exercise Gallery" style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px)">
+    <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Exercise gallery</div>
+    <h1 style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(46px,7vw,100px);line-height:.88;color:#ffffff">Learn the moves.</h1>
+    <p style="margin-top:18px;font-size:16px;line-height:1.6;max-width:54ch;color:rgba(242,242,243,.7)">Step-by-step guides to the exercises ABS coaches use every day. Ask any coach on the floor to check your form.</p>
+
+    <div style="margin-top:clamp(28px,4vw,44px);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="7">
+          <button type="button" onClick="{{ g.pick }}" style="font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:10px 14px;border:1px solid {{ g.bd }};background:{{ g.bg }};color:{{ g.fg }};cursor:pointer">{{ g.label }}</button>
+        </sc-for>
+      </div>
+      <input type="text" value="{{ q }}" onChange="{{ onQ }}" placeholder="Search exercises" style="min-width:220px;background:transparent;border:0;border-bottom:2px solid rgba(242,242,243,.35);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:16px;padding:10px 2px;outline:0" style-focus="border-color:#b8e600">
+    </div>
+
+    <div style="margin-top:28px;display:grid;gap:clamp(20px,3vw,40px);grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));align-items:start">
+      <div style="display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+        <sc-for list="{{ items }}" as="x" hint-placeholder-count="9">
+          <button type="button" onClick="{{ x.pick }}" style="text-align:left;background:transparent;border:1px solid {{ x.bd }};color:#f2f2f3;padding:0;cursor:pointer;font-family:Barlow,sans-serif">
+            <div style="position:relative;aspect-ratio:1;background:#151716;overflow:hidden"><image-slot id="{{ x.slot }}" shape="rect" placeholder="{{ x.n }}"></image-slot></div>
+            <div style="padding:10px 12px">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:17px;line-height:1.05;color:#ffffff">{{ x.n }}</div>
+              <div style="margin-top:4px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.55)">{{ x.g }}</div>
+            </div>
+          </button>
+        </sc-for>
+        <sc-if value="{{ none }}" hint-placeholder-val="{{ false }}"><div style="grid-column:1/-1;padding:24px 0;color:rgba(242,242,243,.6)">No exercise matches “{{ q }}”.</div></sc-if>
+      </div>
+
+      <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ true }}">
+        <div style="position:sticky;top:90px;border:1px solid rgba(242,242,243,.24);padding:clamp(22px,3vw,34px)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b8e600">{{ sel.g }} · {{ sel.lvl }}</div>
+          <h2 style="margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(32px,3.6vw,48px);line-height:.95;color:#ffffff">{{ sel.n }}</h2>
+          <div style="margin-top:12px;font-size:14px;color:rgba(242,242,243,.65)">Works: {{ sel.m }} · Equipment: {{ sel.eq }}</div>
+          <div style="margin-top:22px;border-top:1px solid rgba(242,242,243,.2)">
+            <sc-for list="{{ sel.steps }}" as="st" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:36px 1fr;gap:10px;padding:14px 0;border-bottom:1px solid rgba(242,242,243,.12)">
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;color:#b8e600">{{ st.no }}</span>
+                <span style="font-size:15px;line-height:1.55;color:#f2f2f3">{{ st.t }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:18px;background:#151716;padding:14px 16px;font-size:14px;line-height:1.55;color:rgba(242,242,243,.8)"><strong style="color:#b8e600">Coach tip:</strong> {{ sel.tip }}</div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const EX = [
+  ['Back Squat', 'Legs', 'Quads, glutes, core', 'Barbell, rack', 'Intermediate', ['Set the bar on your upper back and grip it just outside shoulders.', 'Stand feet shoulder-width, toes slightly out.', 'Brace, then sit down and back until thighs are at least parallel.', 'Drive up through the whole foot to stand tall.'], 'Keep your knees tracking over your toes and your chest up.'],
+  ['Goblet Squat', 'Legs', 'Quads, glutes', 'Dumbbell / kettlebell', 'Beginner', ['Hold the weight at your chest with both hands.', 'Squat down between your heels keeping elbows inside knees.', 'Pause at the bottom, then stand up.'], 'The best way to learn the squat before loading a barbell.'],
+  ['Walking Lunge', 'Legs', 'Quads, glutes, balance', 'Bodyweight / dumbbells', 'Beginner', ['Step forward and lower until both knees are near 90°.', 'Push through the front heel to bring the back leg through.', 'Continue alternating legs.'], 'Take a long enough step that the front knee stays over the ankle.'],
+  ['Deadlift', 'Back', 'Hamstrings, glutes, back', 'Barbell', 'Intermediate', ['Stand with the bar over mid-foot.', 'Hinge and grip the bar just outside your legs.', 'Brace, pull the slack out, then push the floor away.', 'Lock out with hips and knees together, then lower under control.'], 'Keep the bar dragging close to your legs the whole way.'],
+  ['Lat Pulldown', 'Back', 'Lats, biceps', 'Cable machine', 'Beginner', ['Grip the bar slightly wider than shoulders.', 'Lean back slightly and pull the bar to your upper chest.', 'Return slowly until arms are straight.'], 'Think about driving your elbows down, not pulling with your hands.'],
+  ['Seated Cable Row', 'Back', 'Mid-back, lats', 'Cable machine', 'Beginner', ['Sit tall with a slight bend in the knees.', 'Pull the handle to your stomach, squeezing shoulder blades.', 'Extend arms slowly without rounding.'], 'Don’t rock your torso to move the weight.'],
+  ['Bench Press', 'Chest', 'Chest, shoulders, triceps', 'Barbell, bench', 'Intermediate', ['Lie with eyes under the bar and feet flat.', 'Grip slightly wider than shoulders and unrack.', 'Lower to mid-chest, then press back up.'], 'Always use a spotter or safety arms for heavy sets.'],
+  ['Push-up', 'Chest', 'Chest, triceps, core', 'Bodyweight', 'Beginner', ['Hands under shoulders, body in a straight line.', 'Lower your chest to just above the floor.', 'Press back up without letting hips sag.'], 'Elevate your hands on a bench to make it easier.'],
+  ['Overhead Press', 'Shoulders', 'Shoulders, triceps', 'Barbell / dumbbells', 'Intermediate', ['Hold the bar at your collarbone, elbows slightly forward.', 'Brace and press straight overhead.', 'Move your head through at the top, then lower.'], 'Squeeze glutes so you don’t lean back.'],
+  ['Lateral Raise', 'Shoulders', 'Side delts', 'Dumbbells', 'Beginner', ['Stand holding light dumbbells at your sides.', 'Raise arms out to shoulder height with soft elbows.', 'Lower slowly.'], 'Go light. This is a control exercise, not a heavy one.'],
+  ['Plank', 'Core', 'Abs, deep core', 'Bodyweight', 'Beginner', ['Forearms under shoulders, legs straight.', 'Squeeze glutes and brace your stomach.', 'Hold a straight line from head to heels.'], 'Quality over time. Stop when your hips start to drop.'],
+  ['Dead Bug', 'Core', 'Deep core', 'Bodyweight', 'Beginner', ['Lie on your back, arms up, knees at 90°.', 'Lower opposite arm and leg while keeping lower back down.', 'Return and switch sides.'], 'Breathe out as you extend. Keep your back flat on the floor.'],
+  ['Kettlebell Swing', 'Full body', 'Glutes, hamstrings, conditioning', 'Kettlebell', 'Intermediate', ['Hinge and hike the bell between your legs.', 'Snap your hips forward to float the bell to chest height.', 'Let it fall back and repeat.'], 'It’s a hip hinge, not a squat and not an arm lift.'],
+  ['Burpee', 'Full body', 'Full body, conditioning', 'Bodyweight', 'Beginner', ['Squat and place hands on the floor.', 'Jump feet back to a plank.', 'Jump feet in and explode up.'], 'Step back instead of jumping if you’re just starting out.'],
+  ['Cat–Cow', 'Mobility', 'Spine', 'Mat', 'Beginner', ['Start on hands and knees.', 'Breathe in and drop your belly, lifting chest.', 'Breathe out and round your back.'], 'Move slowly with your breath.'],
+  ['World’s Greatest Stretch', 'Mobility', 'Hips, thoracic spine', 'Mat', 'Beginner', ['Step into a deep lunge.', 'Place the inside hand down and rotate the other arm to the ceiling.', 'Hold, then switch sides.'], 'A great warm-up before any leg or full-body session.']
+];
+const GROUPS = ['All', 'Legs', 'Back', 'Chest', 'Shoulders', 'Core', 'Full body', 'Mobility'];
+class Component extends DCLogic {
+  state = { g: 'All', q: '', sel: 0 };
+  renderVals() {
+    const s = this.state, q = s.q.trim().toLowerCase();
+    const pill = on => ({ bd: on ? '#b8e600' : 'rgba(242,242,243,.3)', bg: on ? '#b8e600' : 'transparent', fg: on ? '#0d0e0d' : '#f2f2f3' });
+    const items = EX.map((e, i) => ({ i, n: e[0], g: e[1] })).filter(x => (s.g === 'All' || x.g === s.g) && (!q || x.n.toLowerCase().includes(q) || x.g.toLowerCase().includes(q)));
+    const e = EX[s.sel];
+    return {
+      groups: GROUPS.map(g => ({ label: g, ...pill(s.g === g), pick: () => this.setState({ g }) })),
+      q: s.q, onQ: ev => this.setState({ q: ev.target.value }),
+      items: items.map(x => ({ ...x, slot: 'ex-' + x.i, bd: x.i === s.sel ? '#b8e600' : 'rgba(242,242,243,.18)', pick: () => this.setState({ sel: x.i }) })),
+      none: items.length === 0, hasSel: !!e,
+      sel: { n: e[0], g: e[1], m: e[2], eq: e[3], lvl: e[4], steps: e[5].map((t, i) => ({ no: String(i + 1).padStart(2, '0'), t })), tip: e[6] }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Us — ABS Fitness &amp; Wellness Club</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#b8e600;text-decoration:none}
+a:hover{color:#cdf23c}
+h1,h2,h3,p{margin:0}
+</style>
+</helmet>
+
+<dc-import name="Nav" active="about" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d">
+  <section data-screen-label="About Hero" style="position:relative;min-height:clamp(520px,80svh,820px);display:flex;align-items:flex-end;overflow:hidden">
+    <div style="position:absolute;inset:0"><image-slot id="ab-hero" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2400&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="ABS club floor"></image-slot></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(96deg,rgba(13,14,13,.97) 0%,rgba(13,14,13,.85) 45%,rgba(13,14,13,.3) 100%)"></div>
+    <div style="position:relative;width:100%;max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,120px) clamp(16px,4vw,44px) clamp(40px,5vw,64px)">
+      <div style="display:flex;align-items:center;gap:12px;font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600"><span style="width:28px;height:2px;background:#b8e600"></span>About ABS Fitness</div>
+      <h1 style="margin-top:22px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(46px,8vw,116px);line-height:.88;letter-spacing:-.015em;color:#ffffff;max-width:13ch">Your body can achieve it. <span style="color:#b8e600">Your mind must believe it.</span></h1>
+      <p style="margin-top:26px;font-size:clamp(16px,1.5vw,19px);line-height:1.55;max-width:52ch;color:rgba(242,242,243,.82)">Welcome to ABS Fitness – #ItsNotGymItsLife. One of Maharashtra’s fastest-growing fitness chains, founded by Abhimanyu Sable.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-top:clamp(40px,6vw,72px);border-top:1px solid rgba(242,242,243,.2)">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="padding:20px 20px 0 0">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,44px);line-height:1;color:#ffffff">{{ s.v }}</div>
+            <div style="margin-top:8px;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,242,243,.6)">{{ s.l }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="mission" data-screen-label="Mission & Vision" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px)">
+      <div style="display:flex;border:1.5px solid #1d1f20;width:max-content;max-width:100%">
+        <sc-for list="{{ mvTabs }}" as="t" hint-placeholder-count="2">
+          <button type="button" onClick="{{ t.pick }}" style="font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:14px 22px;border:0;background:{{ t.bg }};color:{{ t.fg }};cursor:pointer">{{ t.label }}</button>
+        </sc-for>
+      </div>
+      <div style="margin-top:clamp(32px,4vw,52px);display:grid;gap:clamp(32px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));align-items:start">
+        <div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,4.6vw,62px);line-height:.95;color:#0d0e0d;max-width:16ch">{{ mv.h }}</h2>
+          <p style="margin-top:22px;font-size:16.5px;line-height:1.65;color:rgba(29,31,32,.82);max-width:56ch;text-wrap:pretty">{{ mv.p1 }}</p>
+          <p style="margin-top:14px;font-size:16.5px;line-height:1.65;color:rgba(29,31,32,.82);max-width:56ch;text-wrap:pretty">{{ mv.p2 }}</p>
+        </div>
+        <div style="border-top:1.5px solid #1d1f20">
+          <div style="padding:18px 0 6px;font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4d5a00">{{ mv.listTitle }}</div>
+          <sc-for list="{{ mv.list }}" as="l" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:44px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid rgba(29,31,32,.18)">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.16em;color:#4d5a00">{{ l.no }}</span>
+              <span style="font-size:15.5px;line-height:1.55;color:#1d1f20">{{ l.t }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Philosophy" style="background:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px)">
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Our philosophy</div>
+      <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;color:#ffffff;max-width:16ch">Fitness is for everyone.</h2>
+      <p style="margin-top:22px;font-size:16.5px;line-height:1.65;max-width:62ch;color:rgba(242,242,243,.72)">We are committed to building an inclusive fitness community where people of all ages, abilities, and experience levels feel welcome, respected, and supported. Our gyms are designed to be safe, motivating spaces where beginners and experienced members alike can train with confidence.</p>
+      <div style="margin-top:clamp(32px,4vw,52px);display:grid;gap:1px;background:rgba(242,242,243,.16);border:1px solid rgba(242,242,243,.16);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <sc-for list="{{ values }}" as="v" hint-placeholder-count="4">
+          <div style="background:#0d0e0d;padding:clamp(24px,2.8vw,36px)">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.2em;color:#b8e600">{{ v.no }}</div>
+            <div style="margin-top:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;line-height:1;color:#ffffff">{{ v.t }}</div>
+            <p style="margin-top:10px;font-size:14.5px;line-height:1.55;color:rgba(242,242,243,.65)">{{ v.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:clamp(40px,5vw,64px);display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.55);margin-right:6px">What we offer</span>
+        <sc-for list="{{ offers }}" as="o" hint-placeholder-count="6">
+          <a href="{{ o.href }}" style="border:1px solid rgba(242,242,243,.25);padding:10px 14px;color:#f2f2f3;font-size:14px;font-weight:600" style-hover="border-color:#b8e600;color:#f2f2f3">{{ o.t }} →</a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="founder" data-screen-label="Founder Story" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px);display:grid;gap:clamp(36px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));align-items:start">
+      <div style="position:sticky;top:100px">
+        <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#4d5a00">Our founder</div>
+        <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(40px,5.6vw,76px);line-height:.9;color:#0d0e0d">Abhimanyu Sable</h2>
+        <div style="margin-top:10px;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(29,31,32,.6)">Founder. President. Pioneer.</div>
+        <div style="position:relative;margin-top:28px;aspect-ratio:4/5;max-width:420px;background:#e0e0e2;overflow:hidden"><image-slot id="ab-founder" src="assets/abhimanyu-sable.jpg" shape="rect" placeholder="Abhimanyu Sable" fit="cover" position="50% 20%"></image-slot></div>
+        <p style="margin-top:22px;font-size:15.5px;line-height:1.65;color:rgba(29,31,32,.8);max-width:48ch">Founder of ABS Fitness and Founder President of UHFF, India’s first registered association of fitness club owners. With 35+ years of fitness industry expertise, he has helped convert fitness into a structured business category by introducing standards, training systems, and scalable operational models.</p>
+      </div>
+      <div style="border-left:1.5px solid #1d1f20;padding-left:clamp(20px,3vw,40px)">
+        <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="8">
+          <div style="position:relative;padding:0 0 clamp(28px,3.4vw,44px)">
+            <span style="position:absolute;left:calc(-1 * clamp(20px,3vw,40px) - 7px);top:6px;width:12px;height:12px;background:#b8e600;border:1.5px solid #1d1f20"></span>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1;color:#0d0e0d">{{ t.y }}</div>
+            <div style="margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:21px;line-height:1.05;color:#1d1f20">{{ t.t }}</div>
+            <p style="margin-top:8px;font-size:15px;line-height:1.6;color:rgba(29,31,32,.75);max-width:54ch">{{ t.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" data-screen-label="Members Reviews" style="background:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+        <div>
+          <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Members reviews</div>
+          <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;color:#ffffff">In their words.</h2>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ revTabs }}" as="t" hint-placeholder-count="4">
+            <button type="button" onClick="{{ t.pick }}" style="font-family:Barlow,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:11px 16px;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer">{{ t.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="margin-top:clamp(32px,4vw,52px);display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="6">
+          <div style="border:1px solid rgba(242,242,243,.2);padding:26px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-size:15px;letter-spacing:3px;color:#b8e600">{{ r.stars }}</div>
+            <p style="font-size:16px;line-height:1.6;color:#f2f2f3;flex:1;text-wrap:pretty">“{{ r.q }}”</p>
+            <div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid rgba(242,242,243,.14);padding-top:14px">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:18px;color:#ffffff">{{ r.n }}</span>
+              <span style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,242,243,.55)">{{ r.c }} · {{ r.tag }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" data-screen-label="Gallery" style="background:#0d0e0d;border-top:1px solid rgba(242,242,243,.14)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+        <div>
+          <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Gallery</div>
+          <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;color:#ffffff">Moments of progress.</h2>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ galTabs }}" as="t" hint-placeholder-count="5">
+            <button type="button" onClick="{{ t.pick }}" style="font-family:Barlow,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:11px 16px;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer">{{ t.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="margin-top:clamp(32px,4vw,52px);display:grid;gap:6px;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))">
+        <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="8">
+          <div style="position:relative;aspect-ratio:1;background:#151716;overflow:hidden">
+            <image-slot id="{{ g.id }}" shape="rect" placeholder="{{ g.ph }}"></image-slot>
+            <span style="position:absolute;left:10px;bottom:10px;pointer-events:none;background:rgba(13,14,13,.85);padding:5px 9px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">{{ g.cat }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const REVIEWS = [
+  ['Weight loss', 'The 90-day challenge gave me structure I never had. The coach tracked everything and I finally stayed consistent.', 'Member', 'Pune'],
+  ['Strength', 'Proper racks, platforms and coaches who actually correct your form. Best strength floor I have trained on.', 'Member', 'Pune'],
+  ['Community', 'It really is not just a gym. The festival events and group classes made me look forward to coming every day.', 'Member', 'Mumbai'],
+  ['Personal training', 'My trainer built the plan around my back issue. Six months in, no pain and I am lifting more than ever.', 'Member', 'Nashik'],
+  ['Weight loss', 'Diet guidance plus workouts that were never boring. Lost weight without starving myself.', 'Member', 'Kolhapur'],
+  ['Community', 'I travel for work and the Passport lets me train at any ABS club. Same standard everywhere.', 'Member', 'Pune']
+];
+const GAL = [['Clubs', 'Club interior'], ['Classes', 'Group class'], ['Events', 'Festival celebration'], ['Transformations', 'Member transformation'], ['Clubs', 'Strength floor'], ['Events', 'GROW 2026 session'], ['Classes', 'Yoga studio'], ['Transformations', '90-Day finishers'], ['Clubs', 'Cardio zone'], ['Events', 'Anniversary night'], ['Classes', 'Spin class'], ['Transformations', 'Before & after']];
+const MV = {
+  mission: {
+    h: 'Our mission', listTitle: 'We are committed to',
+    p1: 'Our mission at ABS Fitness is to transform the way people engage with fitness and wellness by making it scientific, sustainable, and accessible. We believe that true fitness is not just about physical appearance, but about building strength, mobility, endurance, confidence, discipline, and a long-term healthy lifestyle.',
+    p2: 'By combining the expertise of certified coaches with modern equipment and structured systems, we create an environment where every member can train safely, progress consistently, and achieve meaningful results.',
+    list: ['Empowering individuals through evidence-based training programs, balanced nutrition guidance, and continuous education.', 'Promoting functional health by focusing on movement quality, injury prevention, and mobility.', 'Encouraging sustainable lifestyle habits that include mindful nutrition, active living, and adequate recovery.']
+  },
+  vision: {
+    h: 'Our vision', listTitle: 'We envision a future where',
+    p1: 'Our vision at ABS Fitness is to become a national leader in fitness and wellness by creating a culture where health is valued, accessible, and integrated into everyday life.',
+    p2: 'We aspire to redefine fitness in India by elevating standards, empowering individuals, and building a community that understands that wellness is a lifelong commitment, not a temporary goal.',
+    list: ['Fitness is accessible to everyone, regardless of age, background, or fitness level.', 'Training is scientific and personalized, driven by education, technology, and skilled professionals.', 'Gyms act as wellness ecosystems, offering strength, conditioning, mobility, nutrition, and recovery under one guided system.', 'Fitness professionals are respected and supported as a structured career.']
+  }
+};
+class Component extends DCLogic {
+  state = { mv: 'mission', rev: 'All', gal: 'All' };
+  renderVals() {
+    const s = this.state;
+    const pill = on => ({ bd: on ? '#b8e600' : 'rgba(242,242,243,.3)', bg: on ? '#b8e600' : 'transparent', fg: on ? '#0d0e0d' : '#f2f2f3' });
+    const num = (a) => a.map((t, i) => ({ no: String(i + 1).padStart(2, '0'), t }));
+    const mv = MV[s.mv];
+    return {
+      stats: [['35+', 'Locations'], ['1,00,000+', 'Members served'], ['10,00,000', 'Sq ft managed'], ['2005', 'Established']].map(([v, l]) => ({ v, l })),
+      mvTabs: [['mission', 'Mission'], ['vision', 'Vision']].map(([k, label]) => ({ label, bg: s.mv === k ? '#0d0e0d' : 'transparent', fg: s.mv === k ? '#b8e600' : '#1d1f20', pick: () => this.setState({ mv: k }) })),
+      mv: { ...mv, list: num(mv.list) },
+      values: [
+        ['Science first', 'Evidence-based training programs and structured systems, so every member trains safely and progresses consistently.'],
+        ['Member first', 'We focus on personalization, guidance, motivation, and consistent support so each member feels valued, understood, and empowered.'],
+        ['Community', 'Celebrations, festivals and community events keep members connected, motivated and inspired.'],
+        ['Continuous learning', 'Fitness science evolves, and so do we. We invest in education, certifications, workshops, and industry exposure for our team.']
+      ].map(([t, d], i) => ({ no: String(i + 1).padStart(2, '0'), t, d })),
+      offers: [['Strength & Conditioning', 'strength'], ['Weight Loss', 'weight-loss'], ['Mobility & Flexibility', 'mobility'], ['Personal Training', 'personal-training'], ['Sports-Specific Training', 'sports'], ['Group Classes', 'group-classes']].map(([t, k]) => ({ t, href: 'ABS-Service.dc.html?service=' + k })),
+      timeline: [
+        ['Early years', 'Inspired by his brother', 'His passion was sparked by his elder brother, Shantanu Sable, who competed at state and national levels in bodybuilding.'],
+        ['1991', 'First job as a trainer', 'Began his career as a fitness trainer at the gym in Hotel Sagar Plaza, Pune.'],
+        ['1991 – 96', 'Sancheti Hospital & Poona Club', 'Trained members and gained hands-on experience at two of Pune’s best-known institutions.'],
+        ['1996', 'Health Club Manager, Holiday Inn', 'Chose a career in fitness over a Chemistry degree and a Master’s in Management.'],
+        ['ACSM', 'Certified in Atlanta, USA', 'Earned certification from the American College of Sports Medicine and became a member of IHRSA. First Indian to be certified by ACSM.'],
+        ['2003', 'ACE nomination', 'Nominated for the ACE Fitness Professional of the Year Award, held in San Francisco.'],
+        ['2005', 'ABS Fitness is founded', 'The first ABS Fitness & Wellness Club opens in Pune. Franchising follows in 2014.'],
+        ['Today', '35+ clubs, 1 lakh+ members', 'Founder President of UHFF, India’s first association of fitness club owners. Mentoring the next generation of fitness professionals.']
+      ].map(([y, t, d]) => ({ y, t, d })),
+      revTabs: ['All', 'Weight loss', 'Strength', 'Personal training', 'Community'].map(k => ({ label: k, ...pill(s.rev === k), pick: () => this.setState({ rev: k }) })),
+      reviews: REVIEWS.filter(r => s.rev === 'All' || r[0] === s.rev).map(([tag, q, n, c]) => ({ tag, q, n, c, stars: '★★★★★' })),
+      galTabs: ['All', 'Clubs', 'Classes', 'Events', 'Transformations'].map(k => ({ label: k, ...pill(s.gal === k), pick: () => this.setState({ gal: k }) })),
+      gallery: GAL.map(([cat, ph], i) => ({ cat, ph, id: 'ab-gal-' + (i + 1) })).filter(g => s.gal === 'All' || g.cat === s.gal)
+    };
+  }
+}
+</script>
+</body>
+</html>

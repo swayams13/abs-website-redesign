@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#b8e600;text-decoration:none}
+  a:hover{color:#cdf23c}
+  ::selection{background:#b8e600;color:#0d0e0d}
+  :focus-visible{outline:2px solid #b8e600;outline-offset:3px}
+  h1,h2,h3,h4{margin:0}
+  p{text-wrap:pretty}
+  input::placeholder{color:rgba(242,242,243,.45)}
+</style>
+</helmet>
+
+<div data-progress="" style="position:fixed;top:0;left:0;height:2px;width:0%;background:#b8e600;z-index:90;pointer-events:none"></div>
+
+<dc-import name="Nav" active="trainers" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d">
+
+  <section data-screen-label="Hero" style="position:relative;overflow:hidden;background:#0d0e0d;color:#f2f2f3">
+    <div style="position:absolute;inset:0"><image-slot id="tp-hero" src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=2400&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Coach with client on the floor — wide"></image-slot></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(96deg,rgba(13,14,13,.97) 0%,rgba(13,14,13,.88) 50%,rgba(13,14,13,.55) 100%)"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(16px,4vw,44px) clamp(44px,6vw,80px)">
+      <div data-hero="" style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+        <span style="width:34px;height:2px;background:#b8e600"></span>
+        <span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600">Coaching &amp; programs</span>
+      </div>
+      <div style="display:grid;gap:clamp(28px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:end">
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(50px,8.4vw,120px);line-height:.9;letter-spacing:-.015em;color:#ffffff">
+          <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block">Train with</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block;color:#b8e600">experts</span></span>
+        </h1>
+        <p data-hero="" style="margin:0;font-size:clamp(16px,1.6vw,19px);line-height:1.55;color:rgba(242,242,243,.78);max-width:48ch">Every ABS club runs on a coached floor. Certified trainers, structured programming and a plan that gets reviewed — not a membership card and good luck.</p>
+      </div>
+      <div data-hero="" style="display:flex;flex-wrap:wrap;gap:20px;margin-top:clamp(30px,4vw,48px)">
+        <a href="#challenge" style="position:relative;background:#b8e600;color:#0d0e0d;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px;transition:background .25s" style-hover="background:#cdf23c">
+          90-Day Challenge
+          <i style="position:absolute;top:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+          <i style="position:absolute;top:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+          <i style="position:absolute;bottom:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+          <i style="position:absolute;bottom:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+        </a>
+        <a href="#programs" style="border:1px solid rgba(242,242,243,.4);color:#f2f2f3;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px;transition:border-color .25s,background .25s" style-hover="border-color:#f2f2f3;background:rgba(242,242,243,.06)">See programs</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="roster" data-screen-label="Roster" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px)">
+      <div style="display:grid;gap:24px 48px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:end;margin-bottom:clamp(28px,3.5vw,44px)">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#6d8a00;margin-bottom:14px">01 — The roster</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(32px,4.6vw,60px);line-height:.98;max-width:18ch">Who you will actually be working with</h2>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(29,31,32,.55);margin-bottom:10px">Filter by focus</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ focusChips }}" as="f" hint-placeholder-count="6">
+              <button type="button" onClick="{{ f.pick }}" style="font-family:Barlow,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;cursor:pointer;border:1.5px solid #0d0e0d;background:{{ f.bg }};color:{{ f.fg }};transition:background .2s,color .2s">{{ f.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;gap:clamp(14px,1.8vw,24px);grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+        <sc-for list="{{ trainers }}" as="t" hint-placeholder-count="6">
+          <article data-reveal="" style="position:relative;border:1px solid rgba(29,31,32,.2);display:flex;flex-direction:column;background:#f2f2f3;transition:border-color .3s" style-hover="border-color:#1d1f20">
+            <div style="position:relative;min-width:0;min-height:0;aspect-ratio:4/5;background:#e0e0e2">
+              <image-slot id="{{ t.slot }}" src="{{ t.photo }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Trainer portrait"></image-slot>
+            </div>
+            <div style="padding:clamp(20px,2.2vw,26px);display:flex;flex-direction:column;flex:1">
+              <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(24px,2.3vw,30px);line-height:1.02">{{ t.name }}</h3>
+              <div style="margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5c7500">{{ t.role }}</div>
+              <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:rgba(29,31,32,.72)">{{ t.bio }}</p>
+              <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(29,31,32,.14);display:flex;flex-wrap:wrap;gap:7px">
+                <sc-for list="{{ t.tags }}" as="tag" hint-placeholder-count="2">
+                  <span style="border:1px solid rgba(29,31,32,.24);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 9px">{{ tag }}</span>
+                </sc-for>
+              </div>
+              <div style="margin-top:16px;font-size:13px;color:rgba(29,31,32,.55)">Based at <a href="ABS-Club.dc.html?club={{ t.club }}" style="color:#1d1f20;border-bottom:1.5px solid #b8e600">{{ t.clubName }}</a></div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+      <sc-if value="{{ noTrainers }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid rgba(29,31,32,.2);padding:40px;text-align:center;font-size:15px;color:rgba(29,31,32,.65)">No coach with that focus on the roster right now.</div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="programs" data-screen-label="Programs" style="background:#0d0e0d;color:#f2f2f3">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px)">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600;margin-bottom:14px">02 — Programs &amp; services</div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(32px,4.6vw,60px);line-height:.98;color:#ffffff;max-width:18ch;margin-bottom:clamp(28px,3.5vw,44px)">Pick the one that matches your goal</h2>
+
+      <div style="display:grid;gap:clamp(14px,1.8vw,24px);grid-template-columns:repeat(auto-fit,minmax(290px,1fr))">
+        <sc-for list="{{ programs }}" as="p" hint-placeholder-count="5">
+          <article data-reveal="" style="position:relative;border:1px solid rgba(242,242,243,.2);display:flex;flex-direction:column;min-height:380px;overflow:hidden;background:#151716;transition:border-color .3s" style-hover="border-color:#b8e600">
+            <div style="position:absolute;inset:0"><image-slot id="{{ p.slot }}" src="{{ p.src }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="{{ p.ph }}"></image-slot></div>
+            <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(13,14,13,.97) 0%,rgba(13,14,13,.86) 55%,rgba(13,14,13,.35) 100%)"></div>
+            <div style="position:relative;padding:clamp(24px,2.6vw,32px);display:flex;flex-direction:column;flex:1">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.2em;color:#b8e600">{{ p.no }}</span>
+                <span style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,242,243,.6)">{{ p.meta }}</span>
+              </div>
+              <h3 style="margin:auto 0 0;padding-top:70px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(26px,2.6vw,34px);line-height:1;color:#ffffff">{{ p.t }}</h3>
+              <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:rgba(242,242,243,.75)">{{ p.d }}</p>
+              <div style="display:flex;flex-direction:column;gap:7px;margin-top:18px">
+                <sc-for list="{{ p.points }}" as="pt" hint-placeholder-count="3">
+                  <div style="display:flex;gap:10px;font-size:13.5px;color:rgba(242,242,243,.65)"><span style="color:#b8e600">·</span>{{ pt }}</div>
+                </sc-for>
+              </div>
+              <a href="{{ p.href }}" style="margin-top:26px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">{{ p.cta }} →</a>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenge" data-screen-label="90-Day Challenge" style="background:#b8e600;color:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,102px) clamp(16px,4vw,44px);display:grid;gap:clamp(32px,4.5vw,68px);grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:start">
+      <div data-reveal="">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+          <span style="width:34px;height:2px;background:#0d0e0d"></span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase">03 — Current campaign</span>
+        </div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(40px,6.4vw,88px);line-height:.9;letter-spacing:-.015em">90 Days. One Goal. Real Results.</h2>
+        <p style="margin:24px 0 0;font-size:clamp(16px,1.6vw,19px);line-height:1.55;max-width:46ch;font-weight:500">A coached 12-week block with measured checkpoints. Body composition, nutrition and programming reviewed every fortnight by your trainer.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:12px;margin-top:34px">
+          <sc-for list="{{ countdown }}" as="c" hint-placeholder-count="4">
+            <div style="border:1.5px solid #0d0e0d;padding:16px 14px;text-align:center;background:rgba(255,255,255,.22)">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,44px);line-height:1;font-variant-numeric:tabular-nums">{{ c.v }}</div>
+              <div style="margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">{{ c.l }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:16px 0 0;font-size:13.5px;font-weight:600;letter-spacing:.06em">Until the next batch starts — {{ batchDate }}. {{ spotsLine }}</p>
+        <div style="margin-top:12px;height:4px;background:rgba(13,14,13,.2)"><div style="height:100%;width:{{ spotsPct }};background:#0d0e0d"></div></div>
+      </div>
+
+      <div data-reveal="" style="position:relative;border:1.5px solid #0d0e0d;padding:clamp(26px,3vw,40px);background:#0d0e0d;color:#f2f2f3">
+        <sc-if value="{{ notEnrolled }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Reserve your place</div>
+            <div style="display:flex;align-items:baseline;gap:10px;margin-top:16px">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(38px,4.6vw,56px);line-height:.9;color:#ffffff">₹11,999</span>
+              <span style="font-size:14px;color:rgba(242,242,243,.6)">for the full 12 weeks</span>
+            </div>
+            <p style="margin:12px 0 0;font-size:14px;color:rgba(242,242,243,.62)">Open to members and non-members. Existing members pay ₹8,999.</p>
+            <div style="display:grid;gap:10px;margin-top:24px">
+              <input type="text" value="{{ fName }}" onChange="{{ onName }}" placeholder="Full name" style="width:100%;background:transparent;border:1px solid {{ nameBorder }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0;transition:border-color .2s" style-focus="border-color:#b8e600">
+              <input type="tel" value="{{ fPhone }}" onChange="{{ onPhone }}" placeholder="Mobile number" style="width:100%;background:transparent;border:1px solid {{ phoneBorder }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0;transition:border-color .2s" style-focus="border-color:#b8e600">
+              <select value="{{ fGoal }}" onChange="{{ onGoal }}" style="width:100%;background:#0d0e0d;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+                <option value="Fat loss">Goal: Fat loss</option>
+                <option value="Muscle gain">Goal: Muscle gain</option>
+                <option value="Post-injury return">Goal: Post-injury return</option>
+                <option value="General fitness">Goal: General fitness</option>
+              </select>
+              <select value="{{ fClub }}" onChange="{{ onClub }}" style="width:100%;background:#0d0e0d;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+                <sc-for list="{{ clubOptions }}" as="o" hint-placeholder-count="10">
+                  <option value="{{ o.slug }}">{{ o.label }}</option>
+                </sc-for>
+              </select>
+              <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;color:#ff9b8a">{{ error }}</div>
+              </sc-if>
+              <button type="button" onClick="{{ enrol }}" style="width:100%;background:#b8e600;color:#0d0e0d;border:0;font-family:Barlow,sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:18px;cursor:pointer;transition:background .25s" style-hover="background:#cdf23c">Enrol in the challenge</button>
+            </div>
+            <p style="margin:14px 0 0;font-size:12.5px;color:rgba(242,242,243,.45)">A coach calls you within 24 hours to schedule your baseline assessment.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ enrolled }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:24px 0;text-align:center;min-height:420px;display:flex;flex-direction:column;justify-content:center">
+            <div style="width:44px;height:44px;background:#b8e600;margin:0 auto"></div>
+            <div style="margin-top:22px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:32px;line-height:1;color:#ffffff">You are on the list, {{ firstName }}</div>
+            <p style="margin:14px auto 0;font-size:15px;line-height:1.6;color:rgba(242,242,243,.7);max-width:36ch">A coach from ABS {{ fClubName }} will call {{ fPhone }} within 24 hours to book your baseline assessment for the {{ fGoalLower }} track.</p>
+            <a href="ABS-Club.dc.html?club={{ fClub }}" style="display:inline-block;margin-top:24px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">See your club →</a>
+            <button type="button" onClick="{{ reset }}" style="align-self:center;margin-top:16px;background:transparent;border:1px solid rgba(242,242,243,.3);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:12px 18px;cursor:pointer" style-hover="border-color:#b8e600">Enrol someone else</button>
+          </div>
+        </sc-if>
+        <i style="position:absolute;top:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(#0d0e0d,#0d0e0d) center/1px 100% no-repeat,linear-gradient(#0d0e0d,#0d0e0d) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;top:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(#0d0e0d,#0d0e0d) center/1px 100% no-repeat,linear-gradient(#0d0e0d,#0d0e0d) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(#0d0e0d,#0d0e0d) center/1px 100% no-repeat,linear-gradient(#0d0e0d,#0d0e0d) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(#0d0e0d,#0d0e0d) center/1px 100% no-repeat,linear-gradient(#0d0e0d,#0d0e0d) center/100% 1px no-repeat"></i>
+      </div>
+    </div>
+  </section>
+
+  <section id="bmi" data-screen-label="BMI Calculator" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px);display:grid;gap:clamp(32px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));align-items:center">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#4d5a00;margin-bottom:14px">BMI Calculator</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(32px,4.6vw,60px);line-height:.98;color:#0d0e0d;max-width:14ch">Know your starting point.</h2>
+        <p style="margin:18px 0 0;font-size:15.5px;line-height:1.6;max-width:46ch;color:rgba(29,31,32,.75)">Body Mass Index is a quick first check. At your free assessment an ABS coach measures body composition for the full picture.</p>
+        <div style="margin-top:28px;display:grid;gap:18px">
+          <label style="display:grid;gap:8px"><span style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase">Height <span>{{ bmiH }} cm</span></span><input type="range" min="130" max="210" value="{{ bmiH }}" onChange="{{ onBmiH }}" style="width:100%;accent-color:#0d0e0d"></label>
+          <label style="display:grid;gap:8px"><span style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase">Weight <span>{{ bmiW }} kg</span></span><input type="range" min="35" max="160" value="{{ bmiW }}" onChange="{{ onBmiW }}" style="width:100%;accent-color:#0d0e0d"></label>
+        </div>
+      </div>
+      <div style="background:#0d0e0d;color:#f2f2f3;padding:clamp(26px,3vw,40px)">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.6)">Your BMI</div>
+        <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-top:8px"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(64px,8vw,104px);line-height:.9;color:#ffffff">{{ bmiVal }}</span><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;color:{{ bmiColor }}">{{ bmiCat }}</span></div>
+        <div style="position:relative;margin-top:24px;height:10px;display:grid;grid-template-columns:18.5fr 6.5fr 5fr 10fr">
+          <span style="background:#7fa8ff"></span><span style="background:#b8e600"></span><span style="background:#ffc94d"></span><span style="background:#ff8a6b"></span>
+          <span style="position:absolute;top:-6px;left:{{ bmiPos }};width:3px;height:22px;background:#ffffff;margin-left:-1px"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:11px;color:rgba(242,242,243,.55)"><span>Under 18.5</span><span>18.5–24.9</span><span>25–29.9</span><span>30+</span></div>
+        <p style="margin:22px 0 0;font-size:14.5px;line-height:1.6;color:rgba(242,242,243,.75)">{{ bmiAdvice }}</p>
+        <a href="{{ bmiHref }}" style="display:inline-block;margin-top:18px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">{{ bmiCta }} →</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="CTA" style="background:#0d0e0d;border-top:1px solid rgba(242,242,243,.14)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px);display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between">
+      <div data-reveal="">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4.2vw,54px);line-height:.98;max-width:18ch;color:#ffffff">Not sure which program is right?</h2>
+        <p style="margin:14px 0 0;font-size:15.5px;color:rgba(242,242,243,.72);max-width:50ch">Book a free consultation. A coach reviews your history, your schedule and your goal, then tells you honestly what will work.</p>
+      </div>
+      <a href="ABS-Home v4.dc.html#join" style="position:relative;background:#b8e600;color:#0d0e0d;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px;flex-shrink:0;transition:background .25s" style-hover="background:#cdf23c">
+        Get Fitness Advice
+        <i style="position:absolute;top:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;top:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+      </a>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+
+<sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:1px;background:rgba(242,242,243,.2);border-top:1px solid rgba(242,242,243,.2)">
+    <a href="tel:+919763215051" style="flex:1;background:#0d0e0d;color:#f2f2f3;text-align:center;padding:16px 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Call</a>
+    <a href="#challenge" style="flex:2;background:#b8e600;color:#0d0e0d;text-align:center;padding:16px 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Join the 90-Day Challenge</a>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const BATCH = new Date('2026-10-01T06:00:00+05:30');
+const FOCUS = ['All', 'Strength', 'Fat loss', 'Yoga', 'HIIT', 'Onboarding'];
+const MATCH = { Strength: ['Strength', 'Powerlifting', 'Olympic lifting', 'Transformation'], 'Fat loss': ['Fat loss', 'Functional', 'Transformation'], Yoga: ['Hatha', 'Mobility', 'Yoga'], HIIT: ['HIIT', 'Spin', 'Zumba'], Onboarding: ['Onboarding', 'Ladies circuit'] };
+
+class Component extends DCLogic {
+  state = { bmiH: 170, bmiW: 72, w: typeof window !== 'undefined' ? window.innerWidth : 1280, now: Date.now(), D: null, focus: 'All', enrolled: false, name: '', phone: '', goal: 'Fat loss', club: 'magarpatta-city', error: '' };
+
+  componentDidMount() {
+    import('./abs-data.js').then(m => this.setState({ D: m }));
+    this._r = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._r);
+    this._t = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this._onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight, bar = document.querySelector('[data-progress]');
+      if (bar) bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    if (this._motion()) this._hero();
+    this._reveal();
+  }
+  componentWillUnmount() {
+    clearInterval(this._t); window.removeEventListener('resize', this._r); window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+  }
+  componentDidUpdate() { this._reveal(); }
+  _motion() { return !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  _hero() {
+    const ease = 'cubic-bezier(.22,.7,.3,1)';
+    document.querySelectorAll('[data-hero-line]').forEach((el, i) => el.animate([{ transform: 'translateY(110%)' }, { transform: 'none' }], { duration: 900, delay: 120 + i * 110, easing: ease, fill: 'both' }));
+    document.querySelectorAll('[data-hero]').forEach((el, i) => el.animate([{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }], { duration: 800, delay: 350 + i * 100, easing: ease, fill: 'both' }));
+  }
+  _reveal() {
+    if (!('IntersectionObserver' in window) || !this._motion()) return;
+    if (!this._io) this._io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this._io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    document.querySelectorAll('[data-reveal]:not([data-reveal-init])').forEach((el, i) => {
+      el.setAttribute('data-reveal-init', '');
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.94) return;
+      el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity .62s cubic-bezier(.22,.7,.3,1) ' + ((i % 6) * 55) + 'ms, transform .62s cubic-bezier(.22,.7,.3,1) ' + ((i % 6) * 55) + 'ms';
+      this._io.observe(el);
+    });
+  }
+
+  _bmi() {
+    const h = this.state.bmiH, w = this.state.bmiW, v = w / Math.pow(h / 100, 2);
+    const c = v < 18.5 ? ['Underweight', '#7fa8ff', 'A strength program with nutrition support can help you build healthy weight.', 'Strength & Conditioning', 'strength'] : v < 25 ? ['Healthy', '#b8e600', 'You are in the healthy range. Keep building strength and mobility to stay there.', 'Strength & Conditioning', 'strength'] : v < 30 ? ['Overweight', '#ffc94d', 'A structured plan with training and diet guidance works best from here.', 'Weight Loss program', 'weight-loss'] : ['Obese', '#ff8a6b', 'Start with a coached program. The 90-Day Challenge gives you a plan, diet and tracking.', '90-Day Challenge', '90-day'];
+    return { bmiH: h, bmiW: w, bmiVal: v.toFixed(1), bmiCat: c[0], bmiColor: c[1], bmiAdvice: c[2], bmiCta: c[3], bmiHref: 'ABS-Service.dc.html?service=' + c[4], bmiPos: Math.min(100, Math.max(0, (v - 10) / 30 * 100)) + '%',
+      onBmiH: e => this.setState({ bmiH: +e.target.value }), onBmiW: e => this.setState({ bmiW: +e.target.value }) };
+  }
+
+  renderVals() {
+    const S = this.state, D = S.D;
+    const ms = Math.max(0, BATCH.getTime() - S.now), s = Math.floor(ms / 1000), pad = n => String(n).padStart(2, '0');
+    const all = D ? D.TRAINERS : [];
+    const clubName = (slug) => { const c = D && D.clubBySlug(slug); return c ? c.name : ''; };
+    const trainers = all.filter(t => S.focus === 'All' || t.tags.some(tag => MATCH[S.focus].includes(tag))).map(t => ({ ...t, clubName: 'ABS ' + clubName(t.club) }));
+    const err = () => {
+      if (S.name.trim().length < 2) return 'Please enter your full name.';
+      if (!D || !D.validPhone(S.phone)) return 'Enter a valid 10-digit Indian mobile number.';
+      return '';
+    };
+    return {
+      narrow: S.w < 780,
+      focusChips: FOCUS.map(f => ({ label: f, bg: S.focus === f ? '#0d0e0d' : 'transparent', fg: S.focus === f ? '#b8e600' : '#0d0e0d', pick: () => this.setState({ focus: f }) })),
+      trainers, noTrainers: !!D && trainers.length === 0,
+      programs: [
+        { no: '01', src: 'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=1200&q=80', t: 'Personal Training', meta: '1-on-1', d: 'One coach, one plan, reviewed every fortnight. For people who have joined a gym before and stopped.', points: ['Baseline assessment and goal setting', 'Programme rewritten every 4 weeks', 'Nutrition guidance included'], cta: 'Get fitness advice', href: 'ABS-Home v4.dc.html#join', slot: 'tp-pg-pt', ph: 'Personal training — coach with client' },
+        { no: '02', src: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=1200&q=80', t: 'Group Classes', meta: 'Included in membership', d: 'HIIT, spin, Zumba and functional circuits running morning and evening at every ABS club.', points: ['No booking needed — drop in', 'Morning and evening slots daily', 'Same timetable across Pune clubs'], cta: 'See a club timetable', href: 'ABS-Club.dc.html?club=magarpatta-city#timetable', slot: 'tp-pg-group', ph: 'Group class in session' },
+        { no: '03', src: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80', t: 'Yoga & Wellness', meta: 'Led by Sana Merchant', d: 'Hatha and vinyasa, plus a dedicated mobility track for members coming back from injury.', points: ['Beginner and intermediate streams', 'Breathwork and recovery sessions', 'Post-injury modifications'], cta: 'Join this program', href: 'ABS-Home v4.dc.html#join', slot: 'tp-pg-yoga', ph: 'Yoga studio' },
+        { no: '04', src: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=1200&q=80', t: 'Strength Training', meta: 'Platforms at 12 clubs', d: 'Full free-weight floors, racks and Olympic platforms with progressive programming from first squat to competition.', points: ['Technique coaching on the platform', 'Linear and block periodisation', 'Meet prep for competitive lifters'], cta: 'Join this program', href: 'ABS-Home v4.dc.html#join', slot: 'tp-pg-strength', ph: 'Racks and platforms' },
+        { no: '05', src: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1200&q=80', t: '90-Day Weight Loss Challenge', meta: 'Next batch 1 Oct', d: 'The current ABS campaign. One goal, 12 coached weeks, measured checkpoints and a result you can see in the photos.', points: ['Fortnightly body-composition tracking', 'Nutrition plan and weekly check-ins', 'Open to members and non-members'], cta: 'Enrol now', href: '#challenge', slot: 'tp-pg-90', ph: 'Measurement day' }
+      ].map(p => ({ ...p, href: 'ABS-Service.dc.html?service=' + ({ '01': 'personal-training', '02': 'group-classes', '03': 'mobility', '04': 'strength', '05': '90-day' })[p.no] })),
+      ...this._bmi(),
+      batchDate: '1 October 2026', spotsLine: '38 of 60 places taken across Pune clubs.', spotsPct: Math.round(38 / 60 * 100) + '%',
+      countdown: [
+        { v: Math.floor(s / 86400), l: 'Days' }, { v: pad(Math.floor(s / 3600) % 24), l: 'Hours' },
+        { v: pad(Math.floor(s / 60) % 60), l: 'Minutes' }, { v: pad(s % 60), l: 'Seconds' }
+      ],
+      clubOptions: (D ? D.CLUBS : []).map(c => ({ slug: c.slug, label: 'Club: ABS ' + c.name + ' · ' + c.cityShort })),
+      fName: S.name, fPhone: S.phone, fGoal: S.goal, fGoalLower: S.goal.toLowerCase(), fClub: S.club, fClubName: clubName(S.club), firstName: S.name.trim().split(/\s+/)[0] || '',
+      onName: e => this.setState({ name: e.target.value, error: '' }), onPhone: e => this.setState({ phone: e.target.value, error: '' }),
+      onGoal: e => this.setState({ goal: e.target.value }), onClub: e => this.setState({ club: e.target.value }),
+      nameBorder: S.error && S.name.trim().length < 2 ? '#ff9b8a' : 'rgba(242,242,243,.28)',
+      phoneBorder: S.error && !(D && D.validPhone(S.phone)) ? '#ff9b8a' : 'rgba(242,242,243,.28)',
+      hasError: !!S.error, error: S.error,
+      enrolled: S.enrolled, notEnrolled: !S.enrolled,
+      enrol: () => { const e = err(); if (e) this.setState({ error: e }); else this.setState({ enrolled: true, error: '' }); },
+      reset: () => this.setState({ enrolled: false, name: '', phone: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

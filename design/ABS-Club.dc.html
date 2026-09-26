@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#b8e600;text-decoration:none}
+  a:hover{color:#cdf23c}
+  ::selection{background:#b8e600;color:#0d0e0d}
+  :focus-visible{outline:2px solid #b8e600;outline-offset:3px}
+  h1,h2,h3,h4{margin:0}
+  p{text-wrap:pretty}
+  input::placeholder{color:rgba(242,242,243,.45)}
+</style>
+</helmet>
+
+<div data-progress="" style="position:fixed;top:0;left:0;height:2px;width:0%;background:#b8e600;z-index:90;pointer-events:none"></div>
+
+<dc-import name="Nav" active="locations" hint-size="100%,70px"></dc-import>
+
+<sc-if value="{{ missing }}" hint-placeholder-val="{{ false }}">
+  <main style="background:#0d0e0d;min-height:60vh;display:grid;place-items:center;padding:clamp(60px,10vw,140px) clamp(16px,4vw,44px)">
+    <div style="text-align:center;max-width:52ch">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600">Club not found</div>
+      <h1 style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(40px,6vw,80px);line-height:.92;color:#ffffff">We don't have a club by that name yet</h1>
+      <p style="margin:20px 0 0;font-size:16px;line-height:1.6;color:rgba(242,242,243,.7)">Browse all 35+ ABS clubs across Maharashtra, or call <a href="tel:+919763215051">+91 97632 15051</a> and we'll point you to the nearest one.</p>
+      <a href="ABS-Locations.dc.html" style="display:inline-block;margin-top:28px;background:#b8e600;color:#0d0e0d;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:18px 30px">All locations →</a>
+    </div>
+  </main>
+</sc-if>
+
+<sc-if value="{{ found }}" hint-placeholder-val="{{ true }}">
+<main style="background:#0d0e0d">
+
+  <section data-screen-label="Club hero" style="position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0"><image-slot id="{{ heroSlot }}" src="{{ p0 }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Club exterior or main floor — wide"></image-slot></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(96deg,rgba(13,14,13,.97) 0%,rgba(13,14,13,.9) 45%,rgba(13,14,13,.6) 100%)"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;padding:clamp(22px,3vw,32px) clamp(16px,4vw,44px) 0;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.55);display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center">
+      <a href="ABS-Home v4.dc.html" style="color:rgba(242,242,243,.55)" style-hover="color:#f2f2f3">Home</a><span>/</span>
+      <a href="ABS-Locations.dc.html" style="color:rgba(242,242,243,.55)" style-hover="color:#f2f2f3">Locations</a><span>/</span>
+      <a href="{{ cityHref }}" style="color:rgba(242,242,243,.55)" style-hover="color:#f2f2f3">{{ club.city }}</a><span>/</span>
+      <span style="color:#b8e600">{{ club.name }}</span>
+    </div>
+
+    <div style="position:relative;max-width:1320px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(16px,4vw,44px) clamp(44px,6vw,88px);display:grid;gap:clamp(30px,4vw,60px);grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:start">
+      <div>
+        <div data-hero="" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:22px">
+          <sc-if value="{{ hasTag }}" hint-placeholder-val="{{ true }}">
+            <span style="background:#b8e600;color:#0d0e0d;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:7px 11px">{{ club.tag }}</span>
+          </sc-if>
+          <span style="border:1px solid rgba(242,242,243,.32);font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 11px;color:rgba(242,242,243,.85)">Passport enabled</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(242,242,243,.25);padding:6px 11px;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,242,243,.85)"><i data-pulse="" style="width:7px;height:7px;border-radius:50%;background:{{ live.dot }}"></i>{{ live.label }}</span>
+        </div>
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(46px,7vw,104px);line-height:.9;letter-spacing:-.015em;color:#ffffff">
+          <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block">ABS Fitness</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block;color:#b8e600">{{ club.name }}</span></span>
+        </h1>
+
+        <div data-hero="" style="display:grid;gap:20px 34px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:clamp(30px,4vw,44px);padding-top:26px;border-top:1px solid rgba(242,242,243,.2)">
+          <div>
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600;margin-bottom:8px">Address</div>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:rgba(242,242,243,.82)">{{ club.addr }},<br>{{ club.city }}, Maharashtra</p>
+          </div>
+          <div>
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600;margin-bottom:8px">Hours</div>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:rgba(242,242,243,.82)">Mon–Sat {{ club.hours }}<br>Sunday {{ club.sunday }}</p>
+          </div>
+          <div>
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600;margin-bottom:8px">Reach the club</div>
+            <a href="tel:+919763215051" style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:26px;color:#ffffff;display:block;line-height:1.1" style-hover="color:#b8e600">+91 97632 15051</a>
+            <a href="mailto:info@absfitnessclub.in" style="font-size:14px;color:rgba(242,242,243,.7);display:block;margin-top:6px">info@absfitnessclub.in</a>
+          </div>
+        </div>
+
+        <div data-hero="" style="display:flex;flex-wrap:wrap;gap:20px;margin-top:clamp(28px,3.5vw,40px)">
+          <a href="#tour" style="position:relative;background:#b8e600;color:#0d0e0d;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 30px;transition:background .25s" style-hover="background:#cdf23c">
+            Book a Free Tour
+            <i style="position:absolute;top:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+            <i style="position:absolute;top:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+            <i style="position:absolute;bottom:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+            <i style="position:absolute;bottom:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+          </a>
+          <a href="{{ club.maps }}" target="_blank" rel="noopener" style="border:1px solid rgba(242,242,243,.4);color:#f2f2f3;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 30px;transition:border-color .25s,background .25s" style-hover="border-color:#f2f2f3;background:rgba(242,242,243,.06)">Get Directions</a>
+        </div>
+      </div>
+
+      <div data-hero="" style="position:relative;border:1px solid rgba(242,242,243,.24);background:rgba(21,23,22,.9);background-image:linear-gradient(rgba(242,242,243,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(242,242,243,.06) 1px,transparent 1px);background-size:40px 40px;min-height:clamp(300px,38vw,430px);display:flex;align-items:center;justify-content:center;overflow:hidden">
+        <div style="position:absolute;top:14px;left:16px;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,242,243,.4)">Map — {{ club.addr }}</div>
+        <div style="position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);text-align:center">
+          <div style="width:18px;height:18px;background:#b8e600;border:2px solid #0d0e0d;margin:0 auto"></div>
+          <div style="margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;color:#ffffff">ABS {{ club.name }}</div>
+          <div style="margin-top:4px;font-size:12px;color:rgba(242,242,243,.55)">{{ club.city }}</div>
+        </div>
+        <a href="{{ club.maps }}" target="_blank" rel="noopener" style="position:absolute;bottom:14px;right:16px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8e600">Open in Google Maps →</a>
+        <i style="position:absolute;top:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Gallery" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(44px,6vw,84px) clamp(16px,4vw,44px) 0">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#6d8a00;margin-bottom:16px">01 — Inside the club</div>
+      <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))">
+        <div data-reveal="" style="position:relative;grid-column:span 2;min-width:0;min-height:0;aspect-ratio:16/10;background:#e0e0e2;border:1px solid rgba(29,31,32,.18)"><image-slot id="{{ g1 }}" src="{{ p1 }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Main training floor"></image-slot></div>
+        <div data-reveal="" style="position:relative;min-width:0;min-height:0;aspect-ratio:4/5;background:#e0e0e2;border:1px solid rgba(29,31,32,.18)"><image-slot id="{{ g2 }}" src="{{ p2 }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Free-weight area"></image-slot></div>
+        <div data-reveal="" style="position:relative;min-width:0;min-height:0;aspect-ratio:4/5;background:#e0e0e2;border:1px solid rgba(29,31,32,.18)"><image-slot id="{{ g3 }}" src="{{ p3 }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Group class studio"></image-slot></div>
+        <div data-reveal="" style="position:relative;min-width:0;min-height:0;aspect-ratio:4/5;background:#e0e0e2;border:1px solid rgba(29,31,32,.18)"><image-slot id="{{ g4 }}" src="{{ p4 }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Cardio deck"></image-slot></div>
+        <div data-reveal="" style="position:relative;min-width:0;min-height:0;aspect-ratio:4/5;background:#e0e0e2;border:1px solid rgba(29,31,32,.18)"><image-slot id="{{ g5 }}" src="{{ p5 }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Locker room"></image-slot></div>
+      </div>
+    </div>
+
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px);display:grid;gap:clamp(34px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <div data-reveal="">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#6d8a00;margin-bottom:14px">02 — Amenities</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4vw,50px);line-height:.98;max-width:16ch">Everything you need on one floor</h2>
+        <div style="display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:28px;border-top:1px solid rgba(29,31,32,.18)">
+          <sc-for list="{{ amenities }}" as="a" hint-placeholder-count="12">
+            <div style="display:flex;align-items:center;gap:11px;padding:13px 12px 13px 0;border-bottom:1px solid rgba(29,31,32,.12);font-size:14.5px">
+              <span style="width:7px;height:7px;background:#b8e600;flex-shrink:0"></span>{{ a }}
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div id="tour" data-reveal="" style="position:relative;align-self:start;border:1px solid rgba(29,31,32,.22);padding:clamp(26px,3vw,40px);background:#0d0e0d;color:#f2f2f3">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Membership</div>
+            <div style="display:flex;align-items:baseline;gap:10px;margin-top:18px">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(46px,6vw,72px);line-height:.9;color:#ffffff">{{ club.price }}</span>
+              <span style="font-size:14px;color:rgba(242,242,243,.6)">/ month</span>
+            </div>
+            <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:rgba(242,242,243,.72);max-width:38ch">Annual plans at ABS {{ club.name }} start here and include full Passport access to all 35+ clubs, group classes and a quarterly body-composition assessment.</p>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600;margin-top:26px;padding-top:22px;border-top:1px solid rgba(242,242,243,.18)">Free club tour at {{ club.name }}</div>
+            <div style="display:grid;gap:12px;margin-top:16px">
+              <input type="text" value="{{ fName }}" onChange="{{ onName }}" placeholder="Full name" style="width:100%;background:transparent;border:1px solid {{ nameBorder }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0;transition:border-color .2s" style-focus="border-color:#b8e600">
+              <input type="tel" value="{{ fPhone }}" onChange="{{ onPhone }}" placeholder="Mobile number" style="width:100%;background:transparent;border:1px solid {{ phoneBorder }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0;transition:border-color .2s" style-focus="border-color:#b8e600">
+              <select value="{{ fTime }}" onChange="{{ onTime }}" style="width:100%;background:#0d0e0d;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+                <option value="Morning">Morning (6 – 10 AM)</option>
+                <option value="Afternoon">Afternoon (12 – 4 PM)</option>
+                <option value="Evening">Evening (5 – 9 PM)</option>
+              </select>
+              <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;color:#ff9b8a">{{ error }}</div>
+              </sc-if>
+              <button type="button" onClick="{{ send }}" style="width:100%;background:#b8e600;color:#0d0e0d;border:0;font-family:Barlow,sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:18px;cursor:pointer;transition:background .25s" style-hover="background:#cdf23c">Book my free tour</button>
+            </div>
+            <p style="margin:14px 0 0;font-size:12.5px;color:rgba(242,242,243,.45);text-align:center">Or walk in any day, {{ club.hours }}.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="min-height:320px;display:flex;flex-direction:column;justify-content:center">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Request received</div>
+            <div style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,3.4vw,44px);line-height:.95;color:#ffffff">See you at {{ club.name }}, {{ firstName }}.</div>
+            <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:rgba(242,242,243,.7)">A coach will call {{ fPhone }} to fix a {{ fTimeLower }} slot for your tour.</p>
+            <button type="button" onClick="{{ reset }}" style="align-self:flex-start;margin-top:24px;background:transparent;border:1px solid rgba(242,242,243,.3);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:12px 18px;cursor:pointer" style-hover="border-color:#b8e600">Book another</button>
+          </div>
+        </sc-if>
+        <i style="position:absolute;top:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(rgba(29,31,32,.5),rgba(29,31,32,.5)) center/1px 100% no-repeat,linear-gradient(rgba(29,31,32,.5),rgba(29,31,32,.5)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;top:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(rgba(29,31,32,.5),rgba(29,31,32,.5)) center/1px 100% no-repeat,linear-gradient(rgba(29,31,32,.5),rgba(29,31,32,.5)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(rgba(29,31,32,.5),rgba(29,31,32,.5)) center/1px 100% no-repeat,linear-gradient(rgba(29,31,32,.5),rgba(29,31,32,.5)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(rgba(29,31,32,.5),rgba(29,31,32,.5)) center/1px 100% no-repeat,linear-gradient(rgba(29,31,32,.5),rgba(29,31,32,.5)) center/100% 1px no-repeat"></i>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Trainers" style="background:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:clamp(26px,3vw,40px)">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600;margin-bottom:14px">03 — Coaching team</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4.4vw,56px);line-height:.98;color:#ffffff">Trainers at this club</h2>
+        </div>
+        <a href="ABS-Trainers-Programs.dc.html#roster" style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:5px">Full roster →</a>
+      </div>
+      <div style="display:grid;gap:clamp(14px,1.8vw,22px);grid-template-columns:repeat(auto-fit,minmax(210px,1fr))">
+        <sc-for list="{{ trainers }}" as="t" hint-placeholder-count="4">
+          <a href="ABS-Trainers-Programs.dc.html#roster" data-reveal="" style="position:relative;display:block;overflow:hidden;border:1px solid rgba(242,242,243,.2);transition:border-color .3s" style-hover="border-color:#b8e600">
+            <div style="position:relative;min-width:0;min-height:0;aspect-ratio:4/5;background:#151716">
+              <image-slot id="{{ t.slot }}" src="{{ t.photo }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Trainer portrait"></image-slot>
+              <div style="position:absolute;inset:auto 0 0 0;height:50%;pointer-events:none;background:linear-gradient(0deg,rgba(13,14,13,.9),rgba(13,14,13,0))"></div>
+            </div>
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:18px 18px 20px">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:24px;line-height:1.05;color:#ffffff">{{ t.name }}</div>
+              <div style="margin-top:7px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">{{ t.role }}</div>
+              <div style="margin-top:8px;font-size:13.5px;color:rgba(242,242,243,.7)">{{ t.spec }}</div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="timetable" data-screen-label="Timetable" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:clamp(24px,3vw,36px)">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#6d8a00;margin-bottom:14px">04 — This week</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4.4vw,56px);line-height:.98">Class timetable</h2>
+        </div>
+        <p style="margin:0;font-size:14px;color:rgba(29,31,32,.6);max-width:34ch">Group classes are included in every membership. Drop in — no booking needed.</p>
+      </div>
+      <div data-reveal="" style="overflow-x:auto;border:1px solid rgba(29,31,32,.2)">
+        <table style="width:100%;min-width:660px;border-collapse:collapse;font-size:14.5px">
+          <thead>
+            <tr style="background:#0d0e0d;color:#f2f2f3">
+              <th style="text-align:left;padding:14px 18px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b8e600">Time</th>
+              <th style="text-align:left;padding:14px 18px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b8e600">Class</th>
+              <th style="text-align:left;padding:14px 18px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b8e600">Coach</th>
+              <th style="text-align:left;padding:14px 18px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b8e600">Days</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ timetable }}" as="r" hint-placeholder-count="7">
+              <tr style="border-top:1px solid rgba(29,31,32,.14)">
+                <td style="padding:15px 18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;white-space:nowrap">{{ r.time }}</td>
+                <td style="padding:15px 18px;font-weight:600">{{ r.cls }}</td>
+                <td style="padding:15px 18px;color:rgba(29,31,32,.7)">{{ r.coach }}</td>
+                <td style="padding:15px 18px;color:rgba(29,31,32,.7);white-space:nowrap">{{ r.days }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,44px) clamp(48px,7vw,96px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin-bottom:clamp(22px,3vw,34px)">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4.4vw,56px);line-height:.98">Member reviews</h2>
+        <span style="font-size:14px;color:rgba(29,31,32,.6)">{{ rating }} ★ · {{ reviewCount }} Google reviews for this club</span>
+      </div>
+      <div style="display:grid;gap:clamp(14px,1.8vw,24px);grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+        <sc-for list="{{ reviews }}" as="q" hint-placeholder-count="3">
+          <figure data-reveal="" style="position:relative;margin:0;border:1px solid rgba(29,31,32,.2);padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column">
+            <div style="font-size:13px;letter-spacing:.14em;color:#6d8a00">★★★★★</div>
+            <blockquote style="margin:16px 0 0;font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:clamp(20px,2vw,24px);line-height:1.3">“{{ q.quote }}”</blockquote>
+            <figcaption style="margin-top:auto;padding-top:22px;font-size:14px">
+              <span style="font-weight:700">{{ q.name }}</span>
+              <span style="display:block;margin-top:3px;color:rgba(29,31,32,.6);font-size:13px">{{ q.meta }}</span>
+            </figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasNearby }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Nearby" style="background:#0d0e0d">
+      <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px)">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:clamp(24px,3vw,36px)">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600;margin-bottom:14px">05 — Also in {{ club.city }}</div>
+            <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4.4vw,56px);line-height:.98;color:#ffffff">Your card works here too</h2>
+          </div>
+          <a href="{{ cityHref }}" style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:5px">All {{ club.city }} clubs →</a>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <sc-for list="{{ nearby }}" as="n" hint-placeholder-count="6">
+            <a href="ABS-Club.dc.html?club={{ n.slug }}" style="display:flex;align-items:center;gap:10px;border:1px solid rgba(242,242,243,.25);padding:12px 16px;color:#f2f2f3;font-size:14.5px;font-weight:600;transition:border-color .25s" style-hover="border-color:#b8e600"><i style="width:6px;height:6px;border-radius:50%;background:{{ n.dot }}"></i>{{ n.name }}<span style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.5)">{{ n.hours }}</span></a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <section data-screen-label="Passport CTA" style="background:#b8e600;color:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(44px,6vw,84px) clamp(16px,4vw,44px);display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between">
+      <div data-reveal="">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px">ABS Passport Program</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4.4vw,58px);line-height:.94;max-width:20ch">Traveling? Use this club as a guest with your membership card.</h2>
+        <p style="margin:16px 0 0;font-size:16px;line-height:1.6;max-width:52ch;color:rgba(13,14,13,.78)">Already an ABS member at another club? Show your card at the {{ club.name }} front desk and train. No day pass, no extra charge.</p>
+      </div>
+      <a href="ABS-Home v4.dc.html#passport" style="background:#0d0e0d;color:#b8e600;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px;flex-shrink:0">How the Passport works →</a>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+
+<sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:1px;background:rgba(242,242,243,.2);border-top:1px solid rgba(242,242,243,.2)">
+    <a href="tel:+919763215051" style="flex:1;background:#0d0e0d;color:#f2f2f3;text-align:center;padding:16px 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Call club</a>
+    <a href="#tour" style="flex:2;background:#b8e600;color:#0d0e0d;text-align:center;padding:16px 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Book a Free Tour</a>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, now: Date.now(), D: null, name: '', phone: '', time: 'Morning', sent: false, error: '' };
+
+  componentDidMount() {
+    import('./abs-data.js').then(m => this.setState({ D: m }));
+    this._r = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._r);
+    this._clock = setInterval(() => this.setState({ now: Date.now() }), 30000);
+    this._onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight, bar = document.querySelector('[data-progress]');
+      if (bar) bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._reveal();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._r); window.removeEventListener('scroll', this._onScroll);
+    clearInterval(this._clock); if (this._io) this._io.disconnect();
+  }
+  componentDidUpdate() {
+    this._reveal();
+    if (this.state.D && !this._heroDone) { this._heroDone = true; this._hero(); }
+  }
+  _motion() { return !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  _hero() {
+    if (!this._motion()) return;
+    const ease = 'cubic-bezier(.22,.7,.3,1)';
+    document.querySelectorAll('[data-hero-line]').forEach((el, i) => el.animate([{ transform: 'translateY(110%)' }, { transform: 'none' }], { duration: 900, delay: 120 + i * 110, easing: ease, fill: 'both' }));
+    document.querySelectorAll('[data-hero]').forEach((el, i) => el.animate([{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }], { duration: 800, delay: 350 + i * 100, easing: ease, fill: 'both' }));
+    const d = document.querySelector('[data-pulse]');
+    if (d) d.animate([{ boxShadow: '0 0 0 0 rgba(184,230,0,.6)' }, { boxShadow: '0 0 0 8px rgba(184,230,0,0)' }], { duration: 1600, iterations: Infinity });
+  }
+  _reveal() {
+    if (!('IntersectionObserver' in window) || !this._motion()) return;
+    if (!this._io) this._io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this._io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    document.querySelectorAll('[data-reveal]:not([data-reveal-init])').forEach((el, i) => {
+      el.setAttribute('data-reveal-init', '');
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.94) return;
+      el.style.opacity = '0'; el.style.transform = 'translateY(22px)';
+      el.style.transition = 'opacity .65s cubic-bezier(.22,.7,.3,1) ' + ((i % 6) * 55) + 'ms, transform .65s cubic-bezier(.22,.7,.3,1) ' + ((i % 6) * 55) + 'ms';
+      this._io.observe(el);
+    });
+  }
+
+  renderVals() {
+    const S = this.state, D = S.D;
+    const narrow = S.w < 780;
+    if (!D) return { found: false, missing: false, narrow };
+    const slug = new URLSearchParams(window.location.search).get('club') || 'magarpatta-city';
+    const club = D.clubBySlug(slug);
+    if (!club) return { found: false, missing: true, narrow };
+    const det = D.clubDetails(club), live = D.status(club.hours, S.now);
+    const nearby = D.clubsInCity(club.city).filter(c => c.slug !== club.slug).map(c => ({ ...c, dot: D.status(c.hours, S.now).dot }));
+    const err = () => {
+      if (S.name.trim().length < 2) return 'Please enter your full name.';
+      if (!D.validPhone(S.phone)) return 'Enter a valid 10-digit Indian mobile number.';
+      return '';
+    };
+    return {
+      found: true, missing: false, narrow, club, live,
+      hasTag: !!club.tag,
+      cityHref: 'ABS-Locations.dc.html?city=' + encodeURIComponent(club.city),
+      heroSlot: 'club-' + club.slug + '-hero', ...Object.fromEntries(D.clubPhotos(club.slug).map((u, i) => ['p' + i, u])), g1: 'club-' + club.slug + '-g1', g2: 'club-' + club.slug + '-g2', g3: 'club-' + club.slug + '-g3', g4: 'club-' + club.slug + '-g4', g5: 'club-' + club.slug + '-g5',
+      amenities: det.amenities, trainers: det.trainers, timetable: det.timetable, reviews: det.reviews, rating: det.rating, reviewCount: det.reviewCount,
+      nearby, hasNearby: nearby.length > 0,
+      fName: S.name, fPhone: S.phone, fTime: S.time, fTimeLower: S.time.toLowerCase(), firstName: S.name.trim().split(/\s+/)[0] || '',
+      onName: e => this.setState({ name: e.target.value, error: '' }), onPhone: e => this.setState({ phone: e.target.value, error: '' }), onTime: e => this.setState({ time: e.target.value }),
+      nameBorder: S.error && S.name.trim().length < 2 ? '#ff9b8a' : 'rgba(242,242,243,.28)',
+      phoneBorder: S.error && !D.validPhone(S.phone) ? '#ff9b8a' : 'rgba(242,242,243,.28)',
+      hasError: !!S.error, error: S.error,
+      send: () => { const e = err(); if (e) this.setState({ error: e }); else this.setState({ sent: true, error: '' }); },
+      sent: S.sent, notSent: !S.sent, reset: () => this.setState({ sent: false, name: '', phone: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

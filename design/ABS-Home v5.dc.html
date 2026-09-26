@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  a:hover{color:#cdf23c}
+  ::selection{background:#b8e600;color:#0d0e0d}
+  :focus-visible{outline:2px solid #b8e600;outline-offset:3px}
+  h1,h2,h3,p{margin:0}
+  p{text-wrap:pretty}
+  input::placeholder{color:rgba(242,242,243,.4)}
+</style>
+</helmet>
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:80;padding:16px clamp(12px,3vw,32px);pointer-events:none">
+  <nav style="pointer-events:auto;max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 8px 8px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:{{ navBg }};backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);box-shadow:0 20px 50px rgba(0,0,0,.18);transition:background .4s ease">
+    <a href="#top" aria-label="ABS Fitness home" style="display:flex;align-items:center"><img src="assets/abs-logo-white.png" alt="ABS Fitness &amp; Wellness Club" style="height:30px;width:auto;display:block"></a>
+    <sc-if value="{{ wideNav }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:center;gap:30px">
+        <a href="ABS-About.dc.html" style="font-size:14px;font-weight:500;color:rgba(242,242,243,.82)">About</a>
+        <a href="ABS-Locations.dc.html" style="font-size:14px;font-weight:500;color:rgba(242,242,243,.82)">Locations</a>
+        <a href="ABS-Trainers-Programs.dc.html" style="font-size:14px;font-weight:500;color:rgba(242,242,243,.82)">Programs</a>
+        <a href="ABS-Timetable.dc.html" style="font-size:14px;font-weight:500;color:rgba(242,242,243,.82)">Timetable</a>
+        <a href="ABS-Franchise.dc.html" style="font-size:14px;font-weight:500;color:rgba(242,242,243,.82)">Franchise</a>
+        <a href="ABS-Contact.dc.html" style="font-size:14px;font-weight:500;color:rgba(242,242,243,.82)">Contact</a>
+      </div>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:8px">
+      <a href="#join" style="background:#b8e600;color:#0d0e0d;font-size:14px;font-weight:700;padding:12px 20px;border-radius:999px;transition:background .3s ease-out" style-hover="background:#cdf23c;color:#0d0e0d">Book a free tour</a>
+      <sc-if value="{{ narrowNav }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" aria-expanded="{{ menu }}" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#f2f2f3;cursor:pointer;display:grid;place-items:center;font-size:18px">{{ menuIcon }}</button>
+      </sc-if>
+    </div>
+  </nav>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="pointer-events:auto;max-width:1320px;margin:8px auto 0;padding:14px;border-radius:24px;border:1px solid rgba(255,255,255,.14);background:rgba(13,14,13,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:grid;gap:2px">
+      <a href="ABS-About.dc.html" style="padding:14px 12px;font-size:20px;font-weight:600">About</a>
+      <a href="ABS-Locations.dc.html" style="padding:14px 12px;font-size:20px;font-weight:600">Locations</a>
+      <a href="ABS-Trainers-Programs.dc.html" style="padding:14px 12px;font-size:20px;font-weight:600">Programs</a>
+      <a href="ABS-Timetable.dc.html" style="padding:14px 12px;font-size:20px;font-weight:600">Timetable</a>
+      <a href="ABS-Franchise.dc.html" style="padding:14px 12px;font-size:20px;font-weight:600">Franchise</a>
+      <a href="ABS-Contact.dc.html" style="padding:14px 12px;font-size:20px;font-weight:600">Contact</a>
+      <a href="tel:+919763215051" style="margin-top:8px;padding:14px 12px;border-top:1px solid rgba(255,255,255,.12);font-size:15px;color:#b8e600">+91 97632 15051</a>
+    </div>
+  </sc-if>
+</header>
+
+<main id="top">
+
+  <section data-screen-label="Hero" style="position:relative;min-height:max(640px,100svh);display:flex;align-items:flex-end;overflow:hidden;background:#0d0e0d">
+    <div data-hero-bg="" style="position:absolute;inset:0;will-change:transform">
+      <image-slot id="v5-hero" credit="Unsplash" credit-href="https://unsplash.com" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&amp;fit=crop&amp;w=2400&amp;q=80" shape="rect" placeholder="Hero — ABS training floor, wide shot"></image-slot>
+    </div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(13,14,13,.55) 0%,rgba(13,14,13,0) 26%,rgba(13,14,13,.35) 55%,rgba(13,14,13,.94) 100%)"></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(13,14,13,.7) 0%,rgba(13,14,13,0) 65%)"></div>
+
+    <div data-hero-content="" style="position:relative;width:100%;max-width:1320px;margin:0 auto;padding:140px clamp(16px,4vw,44px) clamp(40px,6vw,72px);display:flex;align-items:flex-end;justify-content:space-between;gap:40px">
+      <div style="max-width:820px">
+        <div data-hero="" style="display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 8px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-size:13px;font-weight:500;color:rgba(255,255,255,.92)">
+          <span style="display:inline-flex;align-items:center;gap:7px;background:rgba(13,14,13,.55);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600"><i data-pulse="" style="width:7px;height:7px;border-radius:50%;background:{{ liveDot }}"></i>{{ liveShort }}</span>
+          1,00,000+ members since 2005
+        </div>
+        <h1 style="margin-top:26px;font-weight:800;font-size:clamp(46px,7.4vw,112px);line-height:.98;letter-spacing:-.035em;color:#ffffff">
+          <span data-hero="" style="display:block">Your body can achieve it.</span>
+          <span data-hero="" style="display:block">Your mind must <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;letter-spacing:-.01em;font-size:1.1em;color:#b8e600">believe it.</span></span>
+        </h1>
+        <p data-hero="" style="margin-top:26px;font-size:clamp(16px,1.4vw,19px);line-height:1.6;font-weight:500;max-width:52ch;color:rgba(242,242,243,.86)">35+ clubs across Maharashtra. Over a lakh members. Twenty years of Abhimanyu Sable's ABS. One membership card opens every single club.</p>
+        <div data-hero="" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:34px">
+          <a href="#join" style="display:inline-flex;align-items:center;gap:12px;background:#b8e600;color:#0d0e0d;font-size:15px;font-weight:700;padding:18px 20px 18px 28px;border-radius:999px;transition:background .3s ease-out,transform .3s ease-out" style-hover="background:#cdf23c;color:#0d0e0d;transform:translateY(-2px)">Book a free club tour <span style="width:30px;height:30px;border-radius:50%;background:#0d0e0d;color:#b8e600;display:grid;place-items:center;font-size:14px">→</span></a>
+          <a href="ABS-Locations.dc.html" style="font-size:15px;font-weight:600;color:#ffffff;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:3px" style-hover="border-color:#b8e600">Find your nearest club</a>
+        </div>
+      </div>
+
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <div data-hero="" style="flex:0 0 280px;padding:22px;border-radius:26px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 30px 60px rgba(0,0,0,.25)">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)">ABS today</div>
+          <div style="display:grid;gap:14px;margin-top:16px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.14)"><span style="font-size:34px;font-weight:700;letter-spacing:-.03em;color:#ffffff">35+</span><span style="font-size:13px;color:rgba(255,255,255,.75)">Clubs</span></div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.14)"><span style="font-size:34px;font-weight:700;letter-spacing:-.03em;color:#ffffff">6</span><span style="font-size:13px;color:rgba(255,255,255,.75)">Cities</span></div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:34px;font-weight:700;letter-spacing:-.03em;color:#ffffff">20</span><span style="font-size:13px;color:rgba(255,255,255,.75)">Years of ABS</span></div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <sc-if value="{{ showRail }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#f2f2f3;color:#1d1f20;padding:26px 0;border-bottom:1px solid rgba(29,31,32,.1)">
+      <div style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,44px);display:flex;align-items:center;gap:28px">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <div style="flex-shrink:0;font-size:13px;font-weight:600;color:rgba(29,31,32,.6);max-width:16ch;line-height:1.4">One card opens every club</div>
+        </sc-if>
+        <div style="flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
+          <div data-marquee="" style="display:flex;width:max-content">
+            <sc-for list="{{ rail }}" as="r" hint-placeholder-count="12">
+              <div style="display:flex;align-items:baseline;gap:8px;padding:0 26px;white-space:nowrap">
+                <span style="font-size:20px;font-weight:700;letter-spacing:-.02em;color:#1d1f20">{{ r.name }}</span>
+                <span style="font-size:12px;font-weight:500;color:rgba(29,31,32,.5)">{{ r.city }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <section id="programs" data-screen-label="Programs" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(16px,4vw,44px)">
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(36px,4vw,56px)">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#6d8a00">What we coach</div>
+          <h2 style="margin-top:14px;font-weight:700;font-size:clamp(34px,4.6vw,60px);line-height:1.04;letter-spacing:-.03em;max-width:16ch">Programs built around one goal at a time</h2>
+        </div>
+        <a href="ABS-Trainers-Programs.dc.html" style="font-size:15px;font-weight:600;color:#1d1f20;border-bottom:1px solid rgba(29,31,32,.35);padding-bottom:3px" style-hover="color:#1d1f20;border-color:#1d1f20">All programs →</a>
+      </div>
+      <div style="display:grid;gap:clamp(14px,1.6vw,20px);grid-template-columns:{{ progCols }}">
+        <sc-for list="{{ programs }}" as="p" hint-placeholder-count="4">
+          <a href="{{ p.href }}" data-reveal="" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;aspect-ratio:3/4;min-height:380px;border-radius:24px;overflow:hidden;color:#ffffff;background:#1d1f20;transition:transform .45s ease-out,box-shadow .45s ease-out" style-hover="transform:translateY(-6px);box-shadow:0 30px 60px rgba(13,14,13,.22);color:#ffffff">
+            <div style="position:absolute;inset:0"><image-slot id="{{ p.slot }}" credit="Unsplash" credit-href="https://unsplash.com" src="{{ p.img }}" shape="rect" placeholder="{{ p.t }}"></image-slot></div>
+            <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(13,14,13,0) 30%,rgba(13,14,13,.88) 100%)"></div>
+            <span style="position:absolute;top:18px;left:18px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:12px;font-weight:600">{{ p.tag }}</span>
+            <div style="position:relative;padding:24px">
+              <h3 style="font-weight:700;font-size:24px;letter-spacing:-.02em;line-height:1.15">{{ p.t }}</h3>
+              <p style="margin-top:10px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.8)">{{ p.d }}</p>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="passport" data-screen-label="Passport" style="background:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(16px,4vw,44px);display:grid;gap:clamp(40px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:center">
+      <div data-reveal="">
+        <div style="font-size:13px;font-weight:600;color:#b8e600">The ABS Passport</div>
+        <h2 style="margin-top:14px;font-weight:700;font-size:clamp(38px,5.4vw,76px);line-height:1;letter-spacing:-.035em;color:#ffffff">One card. <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:1.1em;letter-spacing:-.01em">Every</span> club.</h2>
+        <p style="margin-top:22px;font-size:17px;line-height:1.6;max-width:44ch;color:rgba(242,242,243,.78)">One membership, every ABS club. No transfer fees, no guest passes, no paperwork. Work in Kharadi and live in Baner? Train at both.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:32px">
+          <sc-for list="{{ cities }}" as="c" hint-placeholder-count="6">
+            <button type="button" onClick="{{ c.pick }}" style="font-family:inherit;font-size:14px;font-weight:600;padding:11px 18px;border-radius:999px;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};cursor:pointer;transition:background .3s,color .3s,border-color .3s">{{ c.city }}</button>
+          </sc-for>
+        </div>
+        <a href="{{ selHref }}" style="display:inline-block;margin-top:28px;font-size:15px;font-weight:600;color:#ffffff;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:3px" style-hover="border-color:#b8e600">See every club in {{ sel.city }} →</a>
+      </div>
+
+      <div data-reveal="" style="width:100%">
+        <div style="position:relative;padding:clamp(28px,4vw,48px) clamp(12px,2vw,24px) clamp(20px,3vw,32px);border-radius:28px;background:radial-gradient(120% 90% at 80% 100%,rgba(184,230,0,.10),rgba(13,14,13,0) 60%),#151716;border:1px solid rgba(255,255,255,.06);overflow:hidden">
+          <div style="position:relative;max-width:460px;margin:0 auto;transform:{{ tapTf }};transition:transform .7s cubic-bezier(.22,1,.36,1);z-index:2">
+            <div style="position:relative;aspect-ratio:1.586;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#262928 0%,#141615 55%,#0d0e0d 100%);box-shadow:0 40px 70px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.10);color:#f2f2f3">
+              <div aria-hidden="true" style="position:absolute;right:-18%;top:-40%;width:75%;aspect-ratio:1;border-radius:50%;border:clamp(18px,3vw,30px) solid #b8e600;opacity:.95"></div>
+              <div aria-hidden="true" style="position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.025) 0 1px,transparent 1px 7px)"></div>
+              <div style="position:absolute;inset:0;padding:clamp(16px,3.2vw,26px);display:flex;flex-direction:column">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+                  <img src="assets/abs-logo-white.png" alt="ABS Fitness &amp; Wellness Club" style="height:clamp(22px,3.4vw,30px);width:auto;display:block">
+                </div>
+                <div style="margin-top:clamp(10px,2vw,18px);display:flex;align-items:center;gap:14px">
+                  <div aria-hidden="true" style="width:clamp(34px,5vw,44px);aspect-ratio:1.3;border-radius:7px;background:linear-gradient(135deg,#e9e2c6,#b9ad85 45%,#e6ddbd 70%,#a89c74);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)"></div>
+                  <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2f2f3" stroke-width="2" stroke-linecap="round"><path d="M8.5 7.5a6 6 0 0 1 0 9"></path><path d="M12 5a9.5 9.5 0 0 1 0 14"></path><path d="M15.5 2.5a13 13 0 0 1 0 19"></path></svg>
+                </div>
+                <div style="margin-top:auto">
+                  <div style="font-weight:800;font-size:clamp(22px,3.8vw,32px);letter-spacing:-.03em;line-height:1">Passport</div>
+                  <div style="margin-top:4px;font-size:clamp(10px,1.4vw,12px);font-weight:600;color:#b8e600">Valid at every ABS club</div>
+                  <div style="margin-top:clamp(10px,2vw,16px);display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
+                    <div style="min-width:0">
+                      <div style="font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.55)">Member</div>
+                      <div style="margin-top:3px;font-size:clamp(13px,1.9vw,16px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ ppName }}</div>
+                    </div>
+                    <div style="text-align:right;flex:none">
+                      <div style="font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.55)">No.</div>
+                      <div style="margin-top:3px;font-family:ui-monospace,Menlo,monospace;font-size:clamp(11px,1.6vw,13px);letter-spacing:.08em">ABS 0035 2026</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="position:relative;margin:clamp(-28px,-3vw,-18px) auto 0;max-width:340px;padding:clamp(36px,5vw,48px) 20px 20px;border-radius:22px;background:#0d0e0d;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:16px;z-index:1">
+            <div aria-hidden="true" style="flex:none;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid {{ tapRing }};box-shadow:0 0 0 6px {{ tapGlow }};transition:border-color .3s,box-shadow .3s">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tapRing }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+            </div>
+            <div data-ptap="" style="min-width:0">
+              <div style="font-size:12px;font-weight:600;color:#b8e600">Access granted</div>
+              <div style="margin-top:3px;font-size:17px;font-weight:700;letter-spacing:-.02em;color:#ffffff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">ABS {{ tapClub }}</div>
+              <div style="margin-top:2px;font-size:12.5px;color:rgba(242,242,243,.7)">{{ sel.city }} · Tap in, train</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+          <span data-pcity="" style="font-size:14px;font-weight:700;color:#ffffff;margin-right:6px">{{ sel.city }} · {{ sel.count }}</span>
+          <sc-for list="{{ selClubs }}" as="k" hint-placeholder-count="6">
+            <a href="ABS-Club.dc.html?club={{ k.slug }}" style="padding:6px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.18);font-size:12.5px;font-weight:500;color:#ffffff" style-hover="border-color:#b8e600;color:#ffffff">{{ k.name }}</a>
+          </sc-for>
+          <sc-if value="{{ selMore }}" hint-placeholder-val="{{ false }}">
+            <span style="padding:6px 11px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.75)">{{ selMoreLabel }}</span>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="founder" data-screen-label="Founder" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(16px,4vw,44px);display:grid;gap:clamp(40px,6vw,96px);grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));align-items:center">
+      <div data-reveal="" style="position:relative;max-width:520px;width:100%">
+        <div style="position:relative;aspect-ratio:4/5;border-radius:28px;overflow:hidden;background:#e0e0e2">
+          <image-slot id="v5-founder" src="assets/abhimanyu-sable.jpg" shape="rect" placeholder="Abhimanyu Sable — portrait" style="object-position:50% 20%"></image-slot>
+        </div>
+        <div style="position:absolute;right:-12px;bottom:28px;padding:16px 20px;border-radius:18px;background:#ffffff;box-shadow:0 24px 50px rgba(13,14,13,.14)">
+          <div style="font-size:16px;font-weight:700;letter-spacing:-.01em">Abhimanyu Sable</div>
+          <div style="margin-top:3px;font-size:13px;color:rgba(29,31,32,.62)">Founder, MD &amp; CEO</div>
+        </div>
+      </div>
+      <div data-reveal="">
+        <div style="font-size:13px;font-weight:600;color:#6d8a00">Since club one · Pune, 29 August 2005</div>
+        <blockquote style="margin:18px 0 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(44px,5.6vw,80px);line-height:1;letter-spacing:-.01em;color:#1d1f20">“It's not a gym. It's life.”</blockquote>
+        <p style="margin-top:28px;font-size:17px;line-height:1.65;max-width:50ch;color:rgba(29,31,32,.74)">Abhimanyu Sable has spent forty years in fitness and twenty building ABS. He opened the first club in Pune in 2005. Today there are more than thirty-five across six cities, all run on one membership and one idea.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0 28px;margin-top:36px;border-top:1px solid rgba(29,31,32,.14)">
+          <sc-for list="{{ creds }}" as="c" hint-placeholder-count="4">
+            <div style="padding:16px 0;border-bottom:1px solid rgba(29,31,32,.14);font-size:14.5px;font-weight:500;line-height:1.45">{{ c }}</div>
+          </sc-for>
+        </div>
+        <a href="ABS-About.dc.html#founder" style="display:inline-block;margin-top:30px;font-size:15px;font-weight:600;color:#1d1f20;border-bottom:1px solid rgba(29,31,32,.35);padding-bottom:3px" style-hover="color:#1d1f20;border-color:#1d1f20">Read the founder story →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenge" data-screen-label="90-Day Challenge" style="position:relative;background:#0d0e0d;overflow:hidden">
+    <div style="position:absolute;inset:0;opacity:.5"><image-slot id="v5-challenge" credit="Unsplash" credit-href="https://unsplash.com" src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&amp;fit=crop&amp;w=2000&amp;q=80" shape="rect" placeholder="90-Day Challenge — coached session"></image-slot></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(13,14,13,.96) 0%,rgba(13,14,13,.82) 50%,rgba(13,14,13,.5) 100%)"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(16px,4vw,44px)">
+      <div style="display:grid;gap:clamp(40px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));align-items:center">
+        <div data-reveal="">
+          <div style="font-size:13px;font-weight:600;color:#b8e600">The 90-Day Challenge</div>
+          <h2 style="margin-top:14px;font-weight:700;font-size:clamp(38px,5.4vw,76px);line-height:1;letter-spacing:-.035em;color:#ffffff">90 days. One goal. <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:1.1em;letter-spacing:-.01em;color:#b8e600">Real results.</span></h2>
+          <p style="margin-top:22px;font-size:17px;line-height:1.6;max-width:46ch;color:rgba(242,242,243,.8)">A coached 90-day block with a dedicated coach, a nutrition plan and fortnightly measurements. All group classes and Passport access are included.</p>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-top:32px">
+            <a href="#join" style="background:#ffffff;color:#0d0e0d;font-size:15px;font-weight:700;padding:16px 26px;border-radius:999px;transition:background .3s ease-out" style-hover="background:#b8e600;color:#0d0e0d">Enrol for the next batch</a>
+            <span style="font-size:14px;color:rgba(242,242,243,.72)">Next batch starts <strong style="color:#ffffff;font-weight:600">{{ batch }}</strong></span>
+          </div>
+        </div>
+        <div data-reveal="" style="padding:clamp(20px,2.4vw,30px);border-radius:26px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)">
+          <sc-for list="{{ phases }}" as="ph" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:84px 1fr;gap:16px;padding:18px 4px;border-bottom:{{ ph.rule }}">
+              <div style="font-size:14px;font-weight:700;color:#b8e600;padding-top:2px">{{ ph.d }}</div>
+              <div>
+                <div style="font-size:17px;font-weight:700;color:#ffffff">{{ ph.t }}</div>
+                <div style="margin-top:4px;font-size:14px;line-height:1.55;color:rgba(242,242,243,.7)">{{ ph.x }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:24px;margin-top:clamp(56px,7vw,96px);padding-top:32px;border-top:1px solid rgba(255,255,255,.16)">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div data-reveal="">
+            <div style="font-size:clamp(40px,4.6vw,60px);font-weight:700;letter-spacing:-.04em;line-height:1;color:#ffffff">{{ s.n }}</div>
+            <div style="margin-top:10px;font-size:14px;color:rgba(242,242,243,.68)">{{ s.k }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" data-screen-label="Testimonials" style="background:#ffffff;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(16px,4vw,44px) clamp(96px,11vw,150px)">
+      <div data-reveal="" style="text-align:center;max-width:720px;margin:0 auto">
+        <div style="font-size:13px;font-weight:600;color:#6d8a00">Members</div>
+        <h2 style="margin-top:14px;font-weight:700;font-size:clamp(34px,4.6vw,60px);line-height:1.04;letter-spacing:-.03em">People who stayed <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:1.1em;letter-spacing:-.01em">for years</span></h2>
+      </div>
+      <div style="display:grid;gap:56px clamp(16px,2vw,24px);grid-template-columns:{{ revCols }};margin-top:clamp(44px,5vw,68px)">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+          <figure data-reveal="" style="position:relative;margin:0;padding:40px 30px 60px;border-radius:22px;background:#f2f2f3">
+            <div aria-hidden="true" style="position:absolute;top:6px;right:24px;font-family:'Cormorant Garamond',serif;font-size:130px;line-height:1;color:rgba(29,31,32,.09)">”</div>
+            <div style="font-size:14px;letter-spacing:2px;color:#6d8a00">★★★★★</div>
+            <blockquote style="position:relative;margin:18px 0 0;font-size:17px;line-height:1.6;font-weight:500;color:#1d1f20">{{ t.quote }}</blockquote>
+            <figcaption style="position:absolute;left:24px;bottom:-26px;display:flex;align-items:center;gap:12px;padding:8px 18px 8px 8px;border-radius:999px;background:#ffffff;box-shadow:0 14px 34px rgba(13,14,13,.12)">
+              <span style="position:relative;width:38px;height:38px;border-radius:50%;overflow:hidden;background:#1d1f20;color:#b8e600;display:grid;place-items:center;font-size:13px;font-weight:700">{{ t.ini }}</span>
+              <span>
+                <span style="display:block;font-size:14px;font-weight:700">{{ t.name }}</span>
+                <span style="display:block;font-size:12px;color:rgba(29,31,32,.6)">{{ t.role }}</span>
+              </span>
+            </figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" data-screen-label="Join" style="background:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(16px,4vw,44px);display:grid;gap:clamp(40px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));align-items:center">
+      <div data-reveal="">
+        <h2 style="font-weight:800;font-size:clamp(44px,6.4vw,96px);line-height:.98;letter-spacing:-.04em;color:#ffffff">Walk in once.<br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:1.1em;letter-spacing:-.01em;color:#b8e600">Stay for years.</span></h2>
+        <p style="margin-top:24px;font-size:17px;line-height:1.6;max-width:44ch;color:rgba(242,242,243,.76)">Book a free tour at any ABS club. A coach walks you through the floor, the programs and the plan that fits your goal. No card, no commitment.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:30px;font-size:15px">
+          <a href="tel:+919763215051" style="font-weight:600;color:#ffffff" style-hover="color:#b8e600">+91 97632 15051</a>
+          <a href="https://wa.me/919763215051" style="font-weight:600;color:rgba(242,242,243,.72)" style-hover="color:#b8e600">WhatsApp us</a>
+        </div>
+      </div>
+      <div data-reveal="" style="padding:clamp(24px,3vw,40px);border-radius:28px;background:#151716;border:1px solid rgba(255,255,255,.1)">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <div style="font-size:20px;font-weight:700;letter-spacing:-.02em;color:#ffffff">Book a free club tour</div>
+            <div style="margin-top:6px;font-size:14px;color:rgba(242,242,243,.6)">A coach calls you once to fix a time.</div>
+            <div style="display:grid;gap:12px;margin-top:24px">
+              <input type="text" value="{{ fName }}" onChange="{{ onName }}" placeholder="Full name" aria-label="Full name" style="width:100%;background:rgba(255,255,255,.04);border:1px solid {{ nameBorder }};border-radius:14px;color:#f2f2f3;font-family:inherit;font-size:15px;padding:16px 18px;outline:0;transition:border-color .2s" style-focus="border-color:#b8e600">
+              <input type="tel" value="{{ fPhone }}" onChange="{{ onPhone }}" placeholder="Mobile number" aria-label="Mobile number" style="width:100%;background:rgba(255,255,255,.04);border:1px solid {{ phoneBorder }};border-radius:14px;color:#f2f2f3;font-family:inherit;font-size:15px;padding:16px 18px;outline:0;transition:border-color .2s" style-focus="border-color:#b8e600">
+              <select value="{{ fClub }}" onChange="{{ onClub }}" aria-label="Choose your club" style="width:100%;background:#1b1d1c;border:1px solid {{ clubBorder }};border-radius:14px;color:#f2f2f3;font-family:inherit;font-size:15px;padding:16px 18px;outline:0" style-focus="border-color:#b8e600">
+                <option value="">Choose your club</option>
+                <sc-for list="{{ clubOptions }}" as="o" hint-placeholder-count="10">
+                  <option value="{{ o.slug }}">{{ o.label }}</option>
+                </sc-for>
+              </select>
+              <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;color:#ff9b8a">{{ error }}</div>
+              </sc-if>
+              <button type="button" onClick="{{ send }}" style="margin-top:4px;width:100%;background:#b8e600;color:#0d0e0d;border:0;border-radius:999px;font-family:inherit;font-size:15px;font-weight:700;padding:18px;cursor:pointer;transition:background .3s ease-out" style-hover="background:#cdf23c">Book my free tour</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="min-height:320px;display:flex;flex-direction:column;justify-content:center">
+            <div style="font-size:13px;font-weight:600;color:#b8e600">Request received</div>
+            <div style="margin-top:12px;font-size:clamp(28px,3vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.1;color:#ffffff">See you on the floor, {{ firstName }}.</div>
+            <p style="margin-top:14px;font-size:15px;line-height:1.6;color:rgba(242,242,243,.72)">A coach from ABS {{ fClubName }} will call {{ fPhone }} to fix a time for your tour.</p>
+            <button type="button" onClick="{{ reset }}" style="align-self:flex-start;margin-top:24px;background:transparent;border:1px solid rgba(255,255,255,.25);border-radius:999px;color:#f2f2f3;font-family:inherit;font-size:14px;font-weight:600;padding:12px 20px;cursor:pointer" style-hover="border-color:#b8e600">Book another</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background:#0d0e0d;border-top:1px solid rgba(255,255,255,.1)">
+  <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,6vw,80px) clamp(16px,4vw,44px) 28px">
+    <div style="display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))">
+      <div>
+        <img src="assets/abs-logo-white.png" alt="ABS Fitness &amp; Wellness Club" style="height:40px;width:auto;display:block">
+        <p style="margin-top:18px;font-size:14px;line-height:1.6;color:rgba(242,242,243,.6);max-width:28ch">#ITSNOTGYMITSLIFE</p>
+      </div>
+      <div style="display:grid;gap:12px;align-content:start;font-size:14px">
+        <div style="font-size:13px;font-weight:600;color:rgba(242,242,243,.45)">Explore</div>
+        <a href="ABS-About.dc.html" style="color:rgba(242,242,243,.82)">About</a>
+        <a href="ABS-Trainers-Programs.dc.html" style="color:rgba(242,242,243,.82)">Programs &amp; coaches</a>
+        <a href="ABS-Timetable.dc.html" style="color:rgba(242,242,243,.82)">Timetable</a>
+        <a href="ABS-Events.dc.html" style="color:rgba(242,242,243,.82)">Events</a>
+        <a href="ABS-Careers.dc.html" style="color:rgba(242,242,243,.82)">Careers</a>
+      </div>
+      <div style="display:grid;gap:12px;align-content:start;font-size:14px">
+        <div style="font-size:13px;font-weight:600;color:rgba(242,242,243,.45)">Cities</div>
+        <sc-for list="{{ footCities }}" as="fc" hint-placeholder-count="6">
+          <a href="{{ fc.href }}" style="color:rgba(242,242,243,.82)">{{ fc.name }}</a>
+        </sc-for>
+      </div>
+      <div style="display:grid;gap:12px;align-content:start;font-size:14px">
+        <div style="font-size:13px;font-weight:600;color:rgba(242,242,243,.45)">Get in touch</div>
+        <a href="tel:+919763215051" style="font-size:20px;font-weight:700;letter-spacing:-.02em;color:#ffffff">+91 97632 15051</a>
+        <a href="mailto:info@absfitnessclub.in" style="color:rgba(242,242,243,.82)">info@absfitnessclub.in</a>
+        <a href="ABS-Franchise.dc.html" style="color:rgba(242,242,243,.82)">Own an ABS club →</a>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:56px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font-size:12.5px;color:rgba(242,242,243,.45)">
+      <span>© 2026 ABS Fitness &amp; Wellness Club</span>
+      <span>Pune · Mumbai · Nashik · Kolhapur · Ahilyanagar · Ch. Sambhaji Nagar</span>
+    </div>
+  </div>
+  <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+    <div style="height:84px"></div>
+  </sc-if>
+</footer>
+
+<sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:12px;right:12px;bottom:12px;z-index:70;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(13,14,13,.78);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)">
+    <a href="tel:+919763215051" style="flex:1;text-align:center;padding:14px 8px;border-radius:999px;font-size:14px;font-weight:600;color:#f2f2f3">Call</a>
+    <a href="#join" style="flex:2;text-align:center;padding:14px 8px;border-radius:999px;background:#b8e600;color:#0d0e0d;font-size:14px;font-weight:700">Book a free tour</a>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;rail&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, now: Date.now(), city: 0, D: null, menu: false, scrolled: false, name: '', phone: '', club: '', error: '', sent: false, tap: 0 };
+
+  componentDidMount() {
+    this._tap = setInterval(() => { if (!document.hidden) this.setState(s => ({ tap: s.tap + 1 })); }, 1500);
+    import('./abs-data.js').then(m => this.setState({ D: m }));
+    this._r = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._r);
+    this._clock = setInterval(() => this.setState({ now: Date.now() }), 30000);
+    this._onScroll = () => {
+      const y = window.scrollY, s = y > 40;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+      if (!this._motion()) return;
+      const h = window.innerHeight, p = Math.min(1, y / h);
+      const c = document.querySelector('[data-hero-content]'), bg = document.querySelector('[data-hero-bg]');
+      if (c) { c.style.opacity = String(1 - p * 1.1); c.style.transform = 'translateY(' + (p * -40) + 'px)'; }
+      if (bg) bg.style.transform = 'scale(' + (1 + p * 0.06) + ')';
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+    if (this._motion()) { this._hero(); this._pulse(); }
+    this._reveal();
+    this._marquee();
+  }
+  componentWillUnmount() {
+    clearInterval(this._tap);
+    window.removeEventListener('resize', this._r);
+    window.removeEventListener('scroll', this._onScroll);
+    clearInterval(this._clock);
+    if (this._io) this._io.disconnect();
+  }
+  componentDidUpdate(pp, ps) {
+    this._reveal();
+    if (!this._marqueeOn || ps.D !== this.state.D) this._marquee();
+    if (ps.city !== this.state.city && this._motion()) {
+      const el = document.querySelector('[data-pcity]');
+      if (el) el.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'cubic-bezier(.22,1,.36,1)' });
+    }
+  }
+  _motion() { return (this.props.motion ?? true) && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  _hero() {
+    document.querySelectorAll('[data-hero]').forEach((el, i) => el.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 900, delay: 150 + i * 110, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' }));
+  }
+  _pulse() {
+    const d = document.querySelector('[data-pulse]');
+    if (d) d.animate([{ boxShadow: '0 0 0 0 rgba(184,230,0,.6)' }, { boxShadow: '0 0 0 7px rgba(184,230,0,0)' }], { duration: 1600, iterations: Infinity });
+  }
+  _marquee() {
+    const t = document.querySelector('[data-marquee]');
+    if (!t || !t.children.length) return;
+    if (this._ma) this._ma.cancel();
+    this._marqueeOn = true;
+    if (!this._motion()) return;
+    this._ma = t.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 36000, iterations: Infinity, easing: 'linear' });
+  }
+  _reveal() {
+    if (!('IntersectionObserver' in window) || !this._motion()) return;
+    if (!this._io) this._io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this._io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    document.querySelectorAll('[data-reveal]:not([data-rv])').forEach((el, i) => {
+      el.setAttribute('data-rv', '');
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.94) return;
+      const d = (i % 4) * 80;
+      el.style.opacity = '0'; el.style.transform = 'translateY(26px)';
+      el.style.transition = 'opacity .8s cubic-bezier(.22,1,.36,1) ' + d + 'ms, transform .8s cubic-bezier(.22,1,.36,1) ' + d + 'ms, box-shadow .45s ease-out';
+      this._io.observe(el);
+    });
+  }
+  _batch() {
+    const now = new Date(this.state.now);
+    const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1));
+    while (d.getUTCDay() !== 1) d.setUTCDate(d.getUTCDate() + 1);
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', timeZone: 'UTC' });
+  }
+  _cities() {
+    const M = this.state.D;
+    const fb = [['Pune', 21], ['Mumbai', 2], ['Nashik', 2], ['Kolhapur', 2], ['Ahilyanagar', 1], ['Chhatrapati Sambhaji Nagar', 2]];
+    return fb.map(([city, n]) => {
+      const clubs = M ? M.clubsInCity(city).map(c => ({ name: c.name, slug: c.slug })) : [];
+      const count = M ? clubs.length : n;
+      return { city: city === 'Chhatrapati Sambhaji Nagar' ? 'Ch. Sambhaji Nagar' : city, full: city, count: count + (count === 1 ? ' club' : ' clubs'), clubs };
+    });
+  }
+
+  renderVals() {
+    const S = this.state, M = S.D, w = S.w;
+    const img = id => 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=1200&q=80';
+    const live = M ? M.status('5:00 AM – 11:00 PM', S.now) : { short: 'Open now', dot: '#b8e600' };
+    const cities = this._cities(), sel = cities[S.city];
+    const railSrc = M ? M.CLUBS.map(c => ({ name: c.name, city: c.cityShort })) : [['Magarpatta City', 'Pune'], ['EON 2 Kharadi', 'Pune'], ['Baner', 'Pune'], ['Nanded City', 'Pune'], ['Model Colony', 'Pune'], ['Kalyani Nagar', 'Pune']].map(([name, city]) => ({ name, city }));
+    const shown = sel.clubs.slice(0, 6);
+    const M_ = M;
+    return {
+      wide: w >= 900, narrow: w < 780, wideNav: w >= 1060, narrowNav: w < 1060,
+      menu: S.menu, menuOpen: S.menu && w < 1060, menuIcon: S.menu ? '✕' : '☰',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      navBg: S.scrolled || S.menu ? 'rgba(13,14,13,.72)' : 'rgba(20,22,21,.28)',
+      liveDot: live.dot, liveShort: live.short,
+      showRail: this.props.rail ?? true,
+      rail: railSrc.concat(railSrc),
+      revCols: w >= 980 ? 'repeat(3,minmax(0,1fr))' : '1fr',
+      progCols: w >= 1100 ? 'repeat(4,minmax(0,1fr))' : w >= 620 ? 'repeat(2,minmax(0,1fr))' : '1fr',
+      programs: [
+        { t: 'Personal Training', tag: '1:1 coaching', d: 'One coach, one plan, measured every fortnight.', img: img('1571902943202-507ec2618e8f'), slot: 'v5-pg-pt', href: 'ABS-Service.dc.html?service=personal-training' },
+        { t: 'Strength Training', tag: 'Free weights', d: 'Racks, platforms and progressive programming from beginner to competition lifter.', img: img('1540497077202-7c8a3999166f'), slot: 'v5-pg-strength', href: 'ABS-Service.dc.html?service=strength' },
+        { t: 'Group Classes', tag: 'Morning & evening', d: 'HIIT, spin, Zumba and functional circuits at every club.', img: img('1518611012118-696072aa579a'), slot: 'v5-pg-group', href: 'ABS-Service.dc.html?service=group-classes' },
+        { t: '90-Day Challenge', tag: 'Coached block', d: 'One goal, 90 days. Body composition tracked, nutrition included.', img: img('1517836357463-d25dfeac3438'), slot: 'v5-pg-90', href: 'ABS-Service.dc.html?service=90-day' }
+      ],
+      cities: cities.map((c, i) => { const on = i === S.city; return { ...c, pick: () => this.setState({ city: i }), bg: on ? '#b8e600' : 'transparent', fg: on ? '#0d0e0d' : '#f2f2f3', border: on ? '#b8e600' : 'rgba(255,255,255,.22)' }; }),
+      ...(() => {
+        const nm = (S.name || '').trim(), up = nm.toUpperCase().replace(/[^A-Z ]/g, '').trim().replace(/\s+/g, '<');
+        const d = new Date(), e = new Date(d); e.setFullYear(d.getFullYear() + 1);
+        const f = x => String(x.getDate()).padStart(2, '0') + ' ' + x.toLocaleString('en', { month: 'short' }).toUpperCase() + ' ' + x.getFullYear();
+        const yy = x => String(x.getFullYear()).slice(2) + String(x.getMonth() + 1).padStart(2, '0') + String(x.getDate()).padStart(2, '0');
+        const rots = [-7, 5, -3, 8, -10, 4, -5, 6];
+        return {
+          ...(() => { const down = S.tap % 2 === 1, cl = sel.clubs, k = cl.length ? cl[Math.floor(S.tap / 2) % cl.length] : null; return { tapTf: down ? 'perspective(1200px) rotateX(18deg) rotate(-4deg) translateY(10px)' : 'perspective(1200px) rotateX(10deg) rotate(-7deg) translateY(-14px)', tapRing: down ? '#b8e600' : 'rgba(242,242,243,.35)', tapGlow: down ? 'rgba(184,230,0,.18)' : 'rgba(184,230,0,0)', tapClub: k ? k.name : sel.city }; })(),
+          ppName: nm || 'Your name', ppIssued: f(d), ppExpires: f(e),
+          ppMrz1: ('P<ABS' + (up || 'MEMBER') + '<<ALL<CLUBS').padEnd(44, '<').slice(0, 44),
+          ppMrz2: ('ABS0035IN<' + yy(d) + '<' + yy(e) + '<MH<PASSPORT').padEnd(44, '<').slice(0, 44),
+          stamps: cities.map((c, i) => { const on = i === S.city; return { city: c.city, count: c.count, on, pick: () => this.setState({ city: i }), radius: i % 3 === 1 ? '14px' : '50%', bg: on ? '#b8e600' : 'transparent', ink: on ? '#0d0e0d' : 'rgba(29,31,32,.7)', bd: on ? '#0d0e0d' : 'rgba(29,31,32,.45)', tf: 'rotate(' + rots[i % rots.length] + 'deg) scale(' + (on ? 1.06 : 1) + ')' }; })
+        };
+      })(),
+      sel, selClubs: shown, selMore: sel.clubs.length > shown.length, selMoreLabel: '+' + (sel.clubs.length - shown.length) + ' more',
+      selHref: 'ABS-Locations.dc.html?city=' + encodeURIComponent(sel.full),
+      creds: ['First Indian certified by ACSM', 'Founder President, UHFF', 'Member, IHRSA', 'ACE Fitness Professional of the Year nominee, 2003'],
+      batch: this._batch(),
+      phases: [
+        { d: 'Day 0', t: 'Assessment', x: 'Body composition, movement screen and a goal you both sign off on.' },
+        { d: '1–30', t: 'Foundation', x: 'Technique, routine and a nutrition plan that fits your week.' },
+        { d: '31–60', t: 'Build', x: 'Load goes up. Fortnightly measurements keep the plan honest.' },
+        { d: '61–90', t: 'Finish', x: 'Peak block, final measurements and a plan for day 91.' }
+      ].map((p, i, a) => ({ ...p, rule: i < a.length - 1 ? '1px solid rgba(255,255,255,.12)' : '0' })),
+      stats: [{ n: '35+', k: 'Clubs across Maharashtra' }, { n: '1,00,000+', k: 'Members trained' }, { n: '10 lakh', k: 'Sq ft of training floor' }, { n: '1000+', k: 'Certified professionals' }],
+      testimonials: [
+        { quote: 'I travel to Mumbai three weeks a month. The Passport means I never pay for a second gym. BKC on weekdays, Kharadi on weekends.', name: 'Imran Shaikh', role: 'ABS EON 2 Kharadi', ini: 'IS' },
+        { quote: 'Govind rebuilt my programme around a bad shoulder instead of telling me to rest. Two years in, I am lifting more than I did at 25.', name: 'Prasad Bhosale', role: 'ABS Nanded City', ini: 'PB' },
+        { quote: 'I joined for the 90-day challenge and stayed. The 6 AM class at Model Colony is the reason I get out of bed.', name: 'Aditi Rane', role: 'ABS Model Colony', ini: 'AR' }
+      ],
+      footCities: cities.map(c => ({ name: c.city, href: 'ABS-Locations.dc.html?city=' + encodeURIComponent(c.full) })),
+      clubOptions: (M ? M.CLUBS : []).map(c => ({ slug: c.slug, label: 'ABS ' + c.name + ' · ' + c.cityShort })),
+      fName: S.name, fPhone: S.phone, fClub: S.club,
+      fClubName: (M_ && M_.clubBySlug(S.club) || {}).name || '', firstName: S.name.trim().split(/\s+/)[0] || '',
+      onName: e => this.setState({ name: e.target.value, error: '' }),
+      onPhone: e => this.setState({ phone: e.target.value, error: '' }),
+      onClub: e => this.setState({ club: e.target.value, error: '' }),
+      nameBorder: S.error && S.name.trim().length < 2 ? '#ff9b8a' : 'rgba(255,255,255,.12)',
+      phoneBorder: S.error && !(M && M.validPhone(S.phone)) ? '#ff9b8a' : 'rgba(255,255,255,.12)',
+      clubBorder: S.error && !S.club ? '#ff9b8a' : 'rgba(255,255,255,.12)',
+      hasError: !!S.error, error: S.error, sent: S.sent, notSent: !S.sent,
+      send: () => {
+        let e = '';
+        if (S.name.trim().length < 2) e = 'Please enter your full name.';
+        else if (!(M && M.validPhone(S.phone))) e = 'Enter a valid 10-digit Indian mobile number.';
+        else if (!S.club) e = 'Choose the club you want to tour.';
+        this.setState(e ? { error: e } : { sent: true, error: '' });
+      },
+      reset: () => this.setState({ sent: false, name: '', phone: '', club: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

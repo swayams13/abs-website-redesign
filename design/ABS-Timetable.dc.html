@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Time Table — ABS Fitness &amp; Wellness Club</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#b8e600;text-decoration:none}
+a:hover{color:#cdf23c}
+h1,h2,h3,p{margin:0}
+</style>
+</helmet>
+
+<dc-import name="Nav" active="trainers" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d;min-height:80vh">
+  <section data-screen-label="Timetable" style="max-width:1320px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,44px)">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+      <div>
+        <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Time table</div>
+        <h1 style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(46px,7vw,100px);line-height:.88;color:#ffffff">This week at ABS</h1>
+        <p style="margin-top:18px;font-size:16px;line-height:1.6;max-width:52ch;color:rgba(242,242,243,.7)">Group classes are free for members. Clubs are open 5:00 AM – 11:00 PM. Timings can differ slightly by club, so check with the front desk.</p>
+      </div>
+      <label style="display:grid;gap:8px;min-width:240px">
+        <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.55)">Club</span>
+        <select value="{{ club }}" onChange="{{ onClub }}" style="background:#0d0e0d;border:1px solid rgba(242,242,243,.35);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:14px 16px;outline:0">
+          <sc-for list="{{ clubs }}" as="c" hint-placeholder-count="6"><option value="{{ c }}">{{ c }}</option></sc-for>
+        </select>
+      </label>
+    </div>
+
+    <div style="margin-top:clamp(32px,4vw,48px);display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border:1px solid rgba(242,242,243,.2)">
+      <sc-for list="{{ days }}" as="d" hint-placeholder-count="7">
+        <button type="button" onClick="{{ d.pick }}" style="background:{{ d.bg }};color:{{ d.fg }};border:0;border-right:1px solid rgba(242,242,243,.14);padding:14px 4px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(15px,1.6vw,20px);letter-spacing:.06em">{{ d.label }}<span style="display:block;font-family:Barlow,sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;margin-top:3px;opacity:.7">{{ d.sub }}</span></button>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ types }}" as="t" hint-placeholder-count="6">
+        <button type="button" onClick="{{ t.pick }}" style="font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:10px 14px;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer">{{ t.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:28px;border-top:1px solid rgba(242,242,243,.3)">
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+        <div style="display:grid;grid-template-columns:minmax(80px,120px) minmax(0,1fr) auto;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(242,242,243,.14);opacity:{{ r.op }}">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;line-height:1;color:{{ r.tc }}">{{ r.time }}</div>
+          <div style="min-width:0">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(20px,2vw,26px);line-height:1;color:#ffffff">{{ r.cls }}</div>
+            <div style="margin-top:6px;font-size:13.5px;color:rgba(242,242,243,.6)">{{ r.coach }} · {{ r.len }} min · {{ r.level }}</div>
+          </div>
+          <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:6px 10px;border:1px solid {{ r.tagBd }};color:{{ r.tagFg }}">{{ r.tag }}</span>
+        </div>
+      </sc-for>
+      <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:40px 0;font-size:15px;color:rgba(242,242,243,.6)">No {{ type }} classes on this day. Try another day or class type.</div>
+      </sc-if>
+    </div>
+    <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:14px 30px">
+      <a href="ABS-Service.dc.html?service=group-classes" style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:5px">About group classes →</a>
+      <a href="ABS-Home v4.dc.html#join" style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:5px">Book a free trial class →</a>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const CLASSES = {
+  HIIT: ['Functional HIIT', 45, 'All levels'], Yoga: ['Hatha Yoga', 60, 'All levels'], Spin: ['Spin', 45, 'Intermediate'],
+  Zumba: ['Zumba', 60, 'All levels'], Strength: ['Strength Basics', 60, 'Beginner'], Circuit: ['Functional Circuit', 45, 'All levels'],
+  Mobility: ['Mobility & Stretch', 45, 'All levels'], '90-Day': ['90-Day Batch', 60, 'Enrolled']
+};
+const COACHES = ['Govind Koli', 'Sana Merchant', 'Kiran Jadhav', 'Priya Deshmukh', 'Rohit Pawar', 'Neha Kulkarni'];
+const PLAN = [
+  ['6:00 AM', ['HIIT', 'Yoga', 'HIIT', 'Yoga', 'HIIT', 'Circuit', 'Yoga']],
+  ['7:00 AM', ['Spin', 'Strength', 'Spin', 'Strength', 'Spin', 'Zumba', 'Mobility']],
+  ['8:00 AM', ['90-Day', 'Mobility', '90-Day', 'Mobility', '90-Day', '90-Day', null]],
+  ['10:00 AM', ['Yoga', 'Zumba', 'Yoga', 'Zumba', 'Yoga', 'Yoga', null]],
+  ['5:30 PM', ['Zumba', 'HIIT', 'Zumba', 'HIIT', 'Zumba', 'Circuit', null]],
+  ['6:30 PM', ['Strength', 'Spin', 'Strength', 'Spin', 'Strength', null, null]],
+  ['7:30 PM', ['90-Day', 'Circuit', '90-Day', 'Circuit', '90-Day', null, null]],
+  ['8:30 PM', ['Mobility', 'Yoga', 'Mobility', 'Yoga', 'Mobility', null, null]]
+];
+const CLUBS = ['Magarpatta City', 'Nanded City', 'EON 2 Kharadi', 'Baner', 'Camp', 'Kalyani Nagar', 'Mumbai — BKC', 'Nashik', 'Kolhapur'];
+const toMin = t => { const [hm, ap] = t.split(' '); let [h, m] = hm.split(':').map(Number); if (ap === 'PM' && h !== 12) h += 12; return h * 60 + m; };
+class Component extends DCLogic {
+  state = { day: (new Date().getDay() + 6) % 7, type: 'All', club: CLUBS[0], now: Date.now() };
+  componentDidMount() { this._t = setInterval(() => this.setState({ now: Date.now() }), 60000); }
+  componentWillUnmount() { clearInterval(this._t); }
+  renderVals() {
+    const s = this.state, today = (new Date(s.now).getDay() + 6) % 7;
+    const d = new Date(s.now), nowMin = d.getHours() * 60 + d.getMinutes();
+    const pill = on => ({ bd: on ? '#b8e600' : 'rgba(242,242,243,.3)', bg: on ? '#b8e600' : 'transparent', fg: on ? '#0d0e0d' : '#f2f2f3' });
+    const seed = CLUBS.indexOf(s.club);
+    let rows = PLAN.map(([time, week], r) => {
+      const k = week[s.day]; if (!k) return null;
+      const [cls, len, level] = CLASSES[k], st = toMin(time);
+      const isToday = s.day === today, past = isToday && st + len <= nowMin, live = isToday && nowMin >= st && nowMin < st + len;
+      return { time, cls, len, level, k, coach: COACHES[(r + s.day + seed) % COACHES.length], op: past ? .4 : 1, tc: live ? '#b8e600' : '#ffffff', tag: live ? 'Live now' : k, tagBd: live ? '#b8e600' : 'rgba(242,242,243,.25)', tagFg: live ? '#b8e600' : 'rgba(242,242,243,.7)' };
+    }).filter(Boolean);
+    if (s.type !== 'All') rows = rows.filter(r => r.k === s.type);
+    return {
+      clubs: CLUBS, club: s.club, onClub: e => this.setState({ club: e.target.value }),
+      days: DAYS.map((label, i) => ({ label, sub: i === today ? 'Today' : '', bg: i === s.day ? '#b8e600' : 'transparent', fg: i === s.day ? '#0d0e0d' : '#f2f2f3', pick: () => this.setState({ day: i }) })),
+      types: ['All', ...Object.keys(CLASSES)].map(k => ({ label: k, ...pill(s.type === k), pick: () => this.setState({ type: k }) })),
+      rows, empty: rows.length === 0, type: s.type
+    };
+  }
+}
+</script>
+</body>
+</html>

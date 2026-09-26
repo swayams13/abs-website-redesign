@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#b8e600;text-decoration:none}
+  a:hover{color:#cdf23c}
+  ::selection{background:#b8e600;color:#0d0e0d}
+  :focus-visible{outline:2px solid #b8e600;outline-offset:3px}
+  h1,h2,h3,h4{margin:0}
+  p{text-wrap:pretty}
+  input::placeholder{color:rgba(242,242,243,.45)}
+</style>
+</helmet>
+
+<div data-progress="" style="position:fixed;top:0;left:0;height:2px;width:0%;background:#b8e600;z-index:90;pointer-events:none"></div>
+
+<sc-if value="{{ showAnnounce }}" hint-placeholder-val="{{ true }}">
+  <div style="background:#b8e600;color:#0d0e0d;padding:9px clamp(16px,4vw,44px);display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-align:center">
+    <span>90 Days. One Goal. Real Results.</span>
+    <a href="#challenge" style="color:#0d0e0d;border-bottom:1.5px solid #0d0e0d;padding-bottom:1px">Next batch starts {{ batchDate }} — Enrol →</a>
+  </div>
+</sc-if>
+
+<dc-import name="Nav" active="home" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d">
+
+  <section data-screen-label="Hero" style="position:relative;min-height:clamp(620px,calc(100svh - 70px),980px);display:flex;align-items:flex-end;overflow:hidden">
+    <div style="position:absolute;inset:0">
+      <image-slot id="v4-hero" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2400&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="HERO — wide shot of a club floor (from absfitnessclub.in gallery)"></image-slot>
+    </div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(96deg,rgba(13,14,13,.96) 0%,rgba(13,14,13,.84) 40%,rgba(13,14,13,.25) 100%)"></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(13,14,13,.95) 0%,rgba(13,14,13,0) 50%)"></div>
+
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <div data-hero="" style="position:absolute;right:clamp(16px,4vw,44px);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;white-space:nowrap;height:max-content;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(242,242,243,.5);display:flex;align-items:center;gap:18px">
+        <span style="width:1px;height:70px;background:rgba(242,242,243,.35)"></span>
+        Pune · Mumbai · Nashik · Kolhapur · Ahilyanagar · Ch. Sambhaji Nagar
+      </div>
+    </sc-if>
+
+    <div style="position:relative;width:100%;max-width:1320px;margin:0 auto;padding:clamp(90px,12vw,150px) clamp(60px,7vw,110px) clamp(36px,4vw,56px) clamp(16px,4vw,44px)">
+      <div data-hero="" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="width:34px;height:2px;background:#b8e600"></span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.26em;color:#b8e600">#ITSNOTGYMITSLIFE</span>
+        </div>
+        <span style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(242,242,243,.25);padding:7px 13px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.85)">
+          <i data-pulse="" style="width:7px;height:7px;border-radius:50%;background:{{ liveDot }}"></i>{{ liveLabel }}
+        </span>
+      </div>
+
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(50px,9vw,132px);line-height:.9;letter-spacing:-.015em;color:#ffffff">
+        <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block">Your body can</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block">achieve it.</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block">Your mind must</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-hero-line="" style="display:block;color:#b8e600">believe it.</span></span>
+      </h1>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px 48px;align-items:end;margin-top:30px">
+        <p data-hero="" style="margin:0;font-size:clamp(16px,1.5vw,19px);line-height:1.55;max-width:46ch;color:rgba(242,242,243,.82)">35+ clubs across Maharashtra. Over a lakh members. Twenty years of Abhimanyu Sable's ABS. One membership card opens every single club.</p>
+        <div data-hero="" style="display:flex;flex-wrap:wrap;gap:20px;justify-self:start">
+          <a href="#join" style="position:relative;background:#b8e600;color:#0d0e0d;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px;transition:background .25s" style-hover="background:#cdf23c">
+            Book a Free Club Tour
+            <i style="position:absolute;top:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+            <i style="position:absolute;top:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+            <i style="position:absolute;bottom:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+            <i style="position:absolute;bottom:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+          </a>
+          <a href="#clubs" style="border:1px solid rgba(242,242,243,.4);color:#f2f2f3;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px;transition:border-color .25s,background .25s" style-hover="border-color:#f2f2f3;background:rgba(242,242,243,.06)">Find Your Nearest Club</a>
+        </div>
+      </div>
+
+      <div data-hero="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 40px;margin-top:clamp(40px,5vw,64px);padding-top:24px;border-top:1px solid rgba(242,242,243,.18)">
+        <div style="display:flex;flex-wrap:wrap;gap:12px 40px">
+          <div style="display:flex;align-items:baseline;gap:9px"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#b8e600">35+</span><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.65)">Clubs</span></div>
+          <div style="display:flex;align-items:baseline;gap:9px"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#b8e600">1,00,000+</span><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.65)">Members</span></div>
+          <div style="display:flex;align-items:baseline;gap:9px"><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#b8e600">20</span><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.65)">Years of ABS</span></div>
+        </div>
+        <a href="#manifesto" style="display:flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.6)">Scroll <span data-scrollcue="" style="display:block;width:1px;height:34px;background:#b8e600"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showTicker }}" hint-placeholder-val="{{ true }}">
+    <div style="border-top:1px solid rgba(242,242,243,.18);border-bottom:1px solid rgba(242,242,243,.18);overflow:hidden;background:#0d0e0d">
+      <div data-marquee="" style="display:flex;width:max-content;align-items:center">
+        <sc-for list="{{ ticker }}" as="t" hint-placeholder-count="10">
+          <div style="display:flex;align-items:center;gap:28px;padding:18px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:22px;letter-spacing:.06em;text-transform:uppercase;color:{{ t.c }};white-space:nowrap">
+            {{ t.s }}<span style="width:6px;height:6px;background:#b8e600;transform:rotate(45deg)"></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <section id="manifesto" data-screen-label="Manifesto" style="background:#f2f2f3;color:#1d1f20;overflow:hidden">
+    <div data-kinetic="" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(90px,17vw,260px);line-height:.85;letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(29,31,32,.28);padding-top:clamp(40px,5vw,72px);will-change:transform">Believe it &nbsp; Believe it &nbsp; Believe it &nbsp; Believe it &nbsp;</div>
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(16px,4vw,44px) clamp(56px,8vw,112px);display:grid;gap:clamp(32px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:center">
+      <div data-reveal="">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+          <span style="width:34px;height:2px;background:#6d8a00"></span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#6d8a00">Since club one · Pune, 29 August 2005</span>
+        </div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5.2vw,68px);line-height:.95;letter-spacing:-.01em;max-width:14ch">It's not a gym. It's life.</h2>
+        <p style="margin:26px 0 0;font-size:clamp(16px,1.4vw,18.5px);line-height:1.6;max-width:50ch;color:rgba(29,31,32,.74)">Twenty years ago Abhimanyu Sable opened the first ABS club in Pune. Today ABS runs 35+ clubs across six cities in Maharashtra, ten lakh square feet of training floor and a team of 1000+ certified professionals, all on one membership and one idea: your body can achieve it, your mind must believe it.</p>
+        <div style="display:grid;gap:10px;margin-top:30px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+          <sc-for list="{{ creds }}" as="c" hint-placeholder-count="4">
+            <div style="display:flex;gap:12px;align-items:flex-start;border-top:1.5px solid #1d1f20;padding-top:12px">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;color:#6d8a00;flex-shrink:0">{{ c.no }}</span>
+              <span style="font-size:14px;line-height:1.45;font-weight:500;color:#1d1f20">{{ c.t }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px 36px;margin-top:34px">
+          <a href="ABS-Trainers-Programs.dc.html#roster" style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1d1f20;border-bottom:2px solid #b8e600;padding-bottom:5px">Meet the coaches →</a>
+          <a href="#passport" style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1d1f20;border-bottom:2px solid #b8e600;padding-bottom:5px">The Passport →</a>
+        </div>
+      </div>
+      <div data-reveal="" style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end">
+        <div style="position:relative;min-width:0;min-height:0;aspect-ratio:3/4;background:#e0e0e2"><image-slot id="v4-founder" src="assets/abhimanyu-sable.jpg" shape="rect" placeholder="Abhimanyu Sable" fit="cover" position="50% 20%"></image-slot></div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="position:relative;min-width:0;min-height:0;aspect-ratio:1;background:#e0e0e2"><image-slot id="v4-floor" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Club floor detail"></image-slot></div>
+          <div style="background:#0d0e0d;color:#f2f2f3;padding:18px 20px">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;line-height:1">Abhimanyu Sable</div>
+            <div style="margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">Founder, MD &amp; CEO</div>
+            <div style="margin-top:8px;font-size:12.5px;color:rgba(242,242,243,.6)">40 years in fitness · 20 years of ABS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Stats" style="border-bottom:1px solid rgba(242,242,243,.18)">
+    <div style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,44px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div data-reveal="" style="padding:clamp(30px,4vw,52px) 16px clamp(30px,4vw,52px) 0">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(42px,5.2vw,72px);line-height:1;color:#ffffff;font-variant-numeric:tabular-nums"><span data-count="{{ s.v }}" data-suffix="{{ s.suf }}">{{ s.n }}</span></div>
+            <div style="margin-top:10px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#b8e600">{{ s.k }}</div>
+            <div style="margin-top:6px;font-size:13px;color:rgba(242,242,243,.55)">{{ s.d }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="programs" data-screen-label="Programs" style="background:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(30px,4vw,48px)">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600;margin-bottom:14px">01 — Train</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:.98;letter-spacing:-.01em;max-width:16ch;color:#ffffff">Programs built around one goal at a time</h2>
+        </div>
+        <a href="ABS-Trainers-Programs.dc.html#programs" style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:5px">All programs →</a>
+      </div>
+
+      <sc-if value="{{ panelsWide }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:8px;height:min(580px,72vh)">
+          <sc-for list="{{ panels }}" as="p" hint-placeholder-count="4">
+            <a href="ABS-Trainers-Programs.dc.html#programs" onMouseEnter="{{ p.enter }}" onFocus="{{ p.enter }}" style="position:relative;overflow:hidden;min-width:0;flex:{{ p.flex }};transition:flex .75s cubic-bezier(.7,0,.2,1);border:1px solid rgba(242,242,243,.18);display:flex;flex-direction:column;justify-content:flex-end;color:#f2f2f3;background:#151716">
+              <div style="position:absolute;inset:0"><image-slot id="{{ p.slot }}" src="{{ p.src }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="{{ p.ph }}"></image-slot></div>
+              <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(13,14,13,.96) 0%,rgba(13,14,13,.55) 45%,rgba(13,14,13,.1) 100%)"></div>
+              <div style="position:absolute;top:24px;left:24px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.2em;color:#b8e600">{{ p.no }}</div>
+              <div style="position:absolute;top:0;left:0;height:3px;width:100%;background:#b8e600;transform:scaleX({{ p.bar }});transform-origin:left;transition:transform .75s cubic-bezier(.7,0,.2,1)"></div>
+              <div style="position:relative;padding:26px 24px 28px">
+                <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(26px,2.6vw,38px);line-height:1;letter-spacing:-.005em;color:#ffffff">{{ p.t }}</h3>
+                <div style="opacity:{{ p.op }};max-height:{{ p.mh }};overflow:hidden;transition:opacity .5s ease .15s,max-height .75s cubic-bezier(.7,0,.2,1)">
+                  <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:rgba(242,242,243,.78);max-width:44ch">{{ p.d }}</p>
+                  <div style="margin-top:20px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">{{ p.cta }} →</div>
+                </div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ panelsNarrow }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+          <sc-for list="{{ panels }}" as="p" hint-placeholder-count="4">
+            <a href="ABS-Trainers-Programs.dc.html#programs" data-reveal="" style="position:relative;overflow:hidden;min-height:340px;border:1px solid rgba(242,242,243,.18);display:flex;flex-direction:column;justify-content:flex-end;color:#f2f2f3;background:#151716" style-hover="border-color:#b8e600">
+              <div style="position:absolute;inset:0"><image-slot id="{{ p.slot }}" src="{{ p.src }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="{{ p.ph }}"></image-slot></div>
+              <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(13,14,13,.96) 0%,rgba(13,14,13,.5) 50%,rgba(13,14,13,.1) 100%)"></div>
+              <div style="position:absolute;top:20px;left:20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.2em;color:#b8e600">{{ p.no }}</div>
+              <div style="position:relative;padding:22px 20px 24px">
+                <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:30px;line-height:1;color:#ffffff">{{ p.t }}</h3>
+                <p style="margin:12px 0 0;font-size:14.5px;line-height:1.6;color:rgba(242,242,243,.78)">{{ p.d }}</p>
+                <div style="margin-top:18px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">{{ p.cta }} →</div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="challenge" data-screen-label="90-Day Challenge" style="position:relative;background:#151716;border-top:1px solid rgba(242,242,243,.14);border-bottom:1px solid rgba(242,242,243,.14);overflow:hidden">
+    <div style="position:absolute;inset:0;opacity:.35"><image-slot id="v4-challenge-bg" src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=2000&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="90-Day Challenge — measurement day / group photo"></image-slot></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(21,23,22,.98) 0%,rgba(21,23,22,.92) 55%,rgba(21,23,22,.6) 100%)"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,118px) clamp(16px,4vw,44px);display:grid;gap:clamp(32px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:start">
+      <div data-reveal="">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600;margin-bottom:14px">02 — The flagship program</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(44px,7vw,104px);line-height:.88;letter-spacing:-.015em;color:#ffffff">90 Days.<br>One Goal.<br><span style="color:#b8e600">Real Results.</span></h2>
+        <p style="margin:26px 0 0;font-size:clamp(16px,1.5vw,19px);line-height:1.55;max-width:44ch;color:rgba(242,242,243,.82)">Join the ABS Fitness 90 Days Weight Loss Challenge and become the best version of yourself. Lose weight. Gain strength. Stay consistent.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:28px">
+          <sc-for list="{{ challengeIncludes }}" as="x" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:rgba(242,242,243,.85)"><span style="width:6px;height:6px;background:#b8e600;transform:rotate(45deg);flex-shrink:0"></span>{{ x }}</div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px 32px;margin-top:36px">
+          <a href="#join" style="position:relative;background:#b8e600;color:#0d0e0d;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px;transition:background .25s" style-hover="background:#cdf23c">
+            Enrol for the next batch
+            <i style="position:absolute;top:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+            <i style="position:absolute;top:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+            <i style="position:absolute;bottom:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+            <i style="position:absolute;bottom:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+          </a>
+          <div>
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.55)">Next batch starts</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;line-height:1;color:#ffffff;margin-top:5px">{{ batchDate }} · <span style="color:#b8e600">{{ daysToBatch }}</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="" style="display:grid;gap:1px;background:rgba(242,242,243,.16);border:1px solid rgba(242,242,243,.16)">
+        <sc-for list="{{ phases }}" as="ph" hint-placeholder-count="4">
+          <div style="background:#0d0e0d;padding:clamp(18px,2.2vw,26px) clamp(18px,2.4vw,28px);display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:start">
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;line-height:1;color:#b8e600">{{ ph.days }}</div>
+              <div style="margin-top:6px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,242,243,.5)">Days</div>
+            </div>
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:22px;line-height:1;color:#ffffff">{{ ph.t }}</div>
+              <p style="margin:8px 0 0;font-size:14px;line-height:1.55;color:rgba(242,242,243,.68)">{{ ph.d }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="passport" data-screen-label="Passport" style="background:#b8e600;color:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,118px) clamp(16px,4vw,44px)">
+      <div style="display:grid;gap:clamp(32px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:start">
+        <div data-reveal="">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+            <span style="width:34px;height:2px;background:#0d0e0d"></span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase">03 — The differentiator</span>
+          </div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(40px,6.6vw,92px);line-height:.9;letter-spacing:-.015em">One card. Every club.</h2>
+          <p style="margin:26px 0 0;font-size:clamp(17px,1.7vw,21px);line-height:1.5;max-width:40ch;font-weight:500">The ABS Passport Program. Every member with a valid card gets guest access at any other ABS club. No second membership, no day-pass fee, no paperwork.</p>
+          <p style="margin:18px 0 0;font-size:15.5px;line-height:1.65;max-width:52ch;color:rgba(13,14,13,.75)">Travelling to Mumbai for the week? Want a change of floor and equipment in your own city? Tell your home club before you go and walk in. Pick a city to see what your card unlocks.</p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:34px">
+            <sc-for list="{{ cities }}" as="c" hint-placeholder-count="6">
+              <button type="button" onClick="{{ c.pick }}" style="font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:12px 18px;border:1.5px solid #0d0e0d;background:{{ c.bg }};color:{{ c.fg }};cursor:pointer;transition:background .25s,color .25s">{{ c.city }}</button>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:26px;border-top:1.5px solid #0d0e0d;padding-top:20px">
+            <div style="display:flex;align-items:baseline;gap:12px">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:44px;line-height:1">{{ selCity.city }}</span>
+              <span style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(13,14,13,.7)">{{ selCity.count }}</span>
+            </div>
+            <sc-if value="{{ selHasClubs }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px">
+                <sc-for list="{{ selClubs }}" as="k" hint-placeholder-count="6">
+                  <a href="ABS-Club.dc.html?club={{ k.slug }}" style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#0d0e0d" style-hover="text-decoration:underline"><span style="width:5px;height:5px;background:#0d0e0d;transform:rotate(45deg)"></span>{{ k.name }}</a>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ selNoClubs }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:14px 0 0;font-size:14.5px;color:rgba(13,14,13,.7)">Club addresses and hours are on the <a href="{{ selCityHref }}" style="color:#0d0e0d;border-bottom:1.5px solid #0d0e0d">Locations page</a>.</p>
+            </sc-if>
+          </div>
+        </div>
+
+        <div data-reveal="" style="position:relative;border:1.5px solid #0d0e0d;padding:clamp(24px,3vw,38px);background:rgba(255,255,255,.22)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:20px;border-bottom:1.5px solid #0d0e0d">
+            <div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase">ABS Fitness &amp; Wellness Club</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1;margin-top:8px;text-transform:uppercase">Passport</div>
+            </div>
+            <div style="text-align:right;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;line-height:1.7">Valid at<br>35+ clubs</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;padding-top:22px">
+            <sc-for list="{{ cities }}" as="pc" hint-placeholder-count="6">
+              <button type="button" onClick="{{ pc.pick }}" style="text-align:left;font-family:Barlow,sans-serif;border:1.5px solid {{ pc.cardBorder }};background:{{ pc.cardBg }};color:{{ pc.cardFg }};padding:14px 14px 12px;cursor:pointer;transition:background .3s,color .3s,border-color .3s">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:21px;line-height:1;text-transform:uppercase">{{ pc.city }}</div>
+                <div style="margin-top:6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.75">{{ pc.count }}</div>
+              </button>
+            </sc-for>
+          </div>
+          <div style="margin-top:26px;padding-top:18px;border-top:1px solid rgba(13,14,13,.35);display:flex;justify-content:space-between;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase">
+            <span>Member since</span><span>#ITSNOTGYMITSLIFE</span>
+          </div>
+          <div data-stamp="" style="position:absolute;right:clamp(120px,14vw,170px);top:-14px;width:96px;height:96px;border:3px double #0d0e0d;border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-14deg);pointer-events:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;line-height:1.05;padding:10px">
+            <div><div style="font-size:8.5px;letter-spacing:.2em;font-family:Barlow,sans-serif">Valid in</div><div style="font-size:15px;margin-top:3px">{{ selCity.city }}</div></div>
+          </div>
+          <i style="position:absolute;top:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(#0d0e0d,#0d0e0d) center/1px 100% no-repeat,linear-gradient(#0d0e0d,#0d0e0d) center/100% 1px no-repeat"></i>
+          <i style="position:absolute;top:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(#0d0e0d,#0d0e0d) center/1px 100% no-repeat,linear-gradient(#0d0e0d,#0d0e0d) center/100% 1px no-repeat"></i>
+          <i style="position:absolute;bottom:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(#0d0e0d,#0d0e0d) center/1px 100% no-repeat,linear-gradient(#0d0e0d,#0d0e0d) center/100% 1px no-repeat"></i>
+          <i style="position:absolute;bottom:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(#0d0e0d,#0d0e0d) center/1px 100% no-repeat,linear-gradient(#0d0e0d,#0d0e0d) center/100% 1px no-repeat"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="facilities" data-screen-label="Inside a club" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(30px,4vw,48px)">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#6d8a00;margin-bottom:14px">04 — Inside</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:.98;letter-spacing:-.01em;max-width:16ch">What every ABS club has on the floor</h2>
+        </div>
+        <p style="margin:0;font-size:15px;line-height:1.6;max-width:40ch;color:rgba(29,31,32,.7)">Ten lakh square feet of organised fitness space, built to the same standard in every city.</p>
+      </div>
+      <div data-reveal="" style="display:grid;gap:12px;grid-template-columns:{{ facCols }}">
+        <div style="position:relative;min-width:0;min-height:0;aspect-ratio:16/10;background:#e0e0e2;grid-column:{{ facSpan }}"><image-slot id="v4-fac-floor" src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1800&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Free-weight floor — wide"></image-slot></div>
+        <div style="position:relative;min-width:0;min-height:0;aspect-ratio:4/5;background:#e0e0e2"><image-slot id="v4-fac-cardio" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1000&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Cardio deck"></image-slot></div>
+        <div style="position:relative;min-width:0;min-height:0;aspect-ratio:4/5;background:#e0e0e2"><image-slot id="v4-fac-studio" src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=1000&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Group class studio"></image-slot></div>
+      </div>
+      <div style="display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:clamp(28px,3.6vw,48px);border-top:1.5px solid #1d1f20">
+        <sc-for list="{{ amenities }}" as="a" hint-placeholder-count="12">
+          <div data-reveal="" style="display:flex;gap:14px;align-items:baseline;padding:18px 20px 18px 0;border-bottom:1px solid rgba(29,31,32,.18)">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;color:#6d8a00;flex-shrink:0">{{ a.no }}</span>
+            <span style="font-size:15.5px;font-weight:600;color:#1d1f20">{{ a.t }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="clubs" data-screen-label="Clubs" style="background:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,44px)">
+      <div style="display:grid;gap:24px 48px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:end;margin-bottom:clamp(30px,4vw,48px)">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600;margin-bottom:14px">05 — Where</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:.98;letter-spacing:-.01em;max-width:15ch;color:#ffffff">Find your club</h2>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.6);margin-bottom:10px">Search by area or city</label>
+          <div style="display:flex;align-items:center;gap:14px;border-bottom:2px solid rgba(242,242,243,.35)" style-focus="border-color:#b8e600">
+            <input type="text" value="{{ q }}" onChange="{{ onQ }}" placeholder="Kharadi, Baner, Mumbai…" style="flex:1;min-width:0;background:transparent;border:0;outline:0;color:#f2f2f3;font-family:'Barlow Condensed',sans-serif;font-size:clamp(26px,3vw,36px);font-weight:600;padding:8px 0;text-transform:uppercase;letter-spacing:.01em">
+            <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.55);white-space:nowrap">{{ matchLabel }}</span>
+          </div>
+        </div>
+      </div>
+
+      <sc-if value="{{ hasFeatured }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+          <sc-for list="{{ featured }}" as="c" hint-placeholder-count="6">
+            <a href="ABS-Club.dc.html?club={{ c.slug }}" data-reveal="" style="position:relative;display:flex;flex-direction:column;border:1px solid rgba(242,242,243,.2);color:#f2f2f3;transition:border-color .3s,transform .4s cubic-bezier(.22,.7,.3,1)" style-hover="border-color:#b8e600;transform:translateY(-4px)">
+              <div style="position:relative;min-width:0;height:200px;background:#151716;overflow:hidden">
+                <image-slot id="{{ c.slot }}" src="{{ c.src }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="{{ c.ph }}"></image-slot>
+                <span style="position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:7px;background:rgba(13,14,13,.85);padding:6px 10px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;pointer-events:none"><i style="width:6px;height:6px;border-radius:50%;background:{{ c.dot }}"></i>{{ c.status }}</span>
+              </div>
+              <div style="padding:22px 22px 24px;display:flex;flex-direction:column;flex:1">
+                <div style="font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b8e600">{{ c.city }}</div>
+                <h3 style="margin:10px 0 0;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;line-height:1.04;color:#ffffff">{{ c.name }}</h3>
+                <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:rgba(242,242,243,.6)">{{ c.addr }}</p>
+                <div style="margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+                  <span style="font-size:12.5px;color:rgba(242,242,243,.55)">{{ c.hours }}</span>
+                  <span style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8e600">View club →</span>
+                </div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hasOthers }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top:clamp(26px,3vw,40px);padding-top:26px;border-top:1px solid rgba(242,242,243,.18);display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px">
+          <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.55);margin-right:8px">Also</span>
+          <sc-for list="{{ others }}" as="o" hint-placeholder-count="8">
+            <a href="{{ o.href }}" style="display:flex;align-items:baseline;gap:8px;border:1px solid rgba(242,242,243,.25);padding:10px 14px;color:#f2f2f3;font-size:14px;font-weight:600;transition:border-color .25s" style-hover="border-color:#b8e600">{{ o.name }}<span style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.5)">{{ o.city }}</span></a>
+          </sc-for>
+          <a href="ABS-Locations.dc.html" style="margin-left:auto;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:5px">View all 35+ locations →</a>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ noMatch }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid rgba(242,242,243,.2);padding:clamp(28px,4vw,48px);text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:30px;color:#ffffff">No club matches “{{ q }}” yet</div>
+          <p style="margin:12px 0 0;font-size:15px;color:rgba(242,242,243,.65)">Call <a href="tel:+919763215051">+91 97632 15051</a> and we'll point you to the nearest one, or <a href="ABS-Locations.dc.html">browse all 35+ locations</a>.</p>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="timetable" data-screen-label="Today at ABS" style="background:#0d0e0d;border-top:1px solid rgba(242,242,243,.14)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,44px);display:grid;gap:clamp(30px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start">
+      <div data-reveal="">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600;margin-bottom:14px">06 — Today</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:.98;letter-spacing:-.01em;color:#ffffff;max-width:14ch">Group classes, morning to night</h2>
+        <p style="margin:22px 0 0;font-size:16px;line-height:1.6;max-width:44ch;color:rgba(242,242,243,.72)">Functional HIIT, yoga, strength basics, spin, Zumba and the 90-Day block, running at every club. Below is the ABS Magarpatta City floor; timetables vary by club.</p>
+        <div style="margin-top:28px;display:flex;align-items:center;gap:14px">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(40px,4.6vw,60px);line-height:1;color:#ffffff;font-variant-numeric:tabular-nums">{{ istClock }}</span>
+          <span style="font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,242,243,.55);line-height:1.6">IST<br>{{ istDay }}</span>
+        </div>
+        <a href="ABS-Club.dc.html?club=magarpatta-city" style="display:inline-block;margin-top:28px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:5px">Full timetable at Magarpatta →</a>
+      </div>
+      <div data-reveal="" style="border-top:1px solid rgba(242,242,243,.3)">
+        <sc-for list="{{ timetable }}" as="r" hint-placeholder-count="7">
+          <div style="display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid rgba(242,242,243,.14);opacity:{{ r.op }}">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;line-height:1;color:{{ r.tc }};font-variant-numeric:tabular-nums">{{ r.time }}</div>
+            <div style="min-width:0">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;font-size:19px;line-height:1.05;color:#ffffff">{{ r.cls }}</div>
+              <div style="margin-top:4px;font-size:13px;color:rgba(242,242,243,.6)">{{ r.coach }} · {{ r.days }}</div>
+            </div>
+            <sc-if value="{{ r.next }}" hint-placeholder-val="{{ false }}">
+              <span style="background:#b8e600;color:#0d0e0d;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 10px">Up next</span>
+            </sc-if>
+            <sc-if value="{{ r.live }}" hint-placeholder-val="{{ false }}">
+              <span style="display:inline-flex;align-items:center;gap:7px;border:1px solid #b8e600;color:#b8e600;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:5px 10px"><i style="width:6px;height:6px;border-radius:50%;background:#b8e600"></i>In session</span>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="results" data-screen-label="Results" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,44px)">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#6d8a00;margin-bottom:14px">07 — Proof</div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:.98;letter-spacing:-.01em;max-width:18ch">Transformations from the floor</h2>
+      <p style="margin:20px 0 0;font-size:16px;line-height:1.6;max-width:58ch;color:rgba(29,31,32,.7)">Every result below came out of a coached 90-day block at an ABS club, measured, programmed and supervised. Drag the handle to compare.</p>
+
+      <div style="display:grid;gap:clamp(16px,2vw,26px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:clamp(34px,4vw,54px)">
+        <sc-for list="{{ transformations }}" as="t" hint-placeholder-count="2">
+          <div data-reveal="" style="position:relative;border:1px solid rgba(29,31,32,.2);padding:14px">
+            <div style="position:relative;aspect-ratio:4/3;background:#e0e0e2;overflow:hidden;user-select:none">
+              <div style="position:absolute;inset:0"><image-slot id="{{ t.slotA }}" src="{{ t.srcA }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Before"></image-slot></div>
+              <div style="position:absolute;inset:0;clip-path:inset(0 0 0 {{ t.pct }}%);background:#d2d2d5"><image-slot id="{{ t.slotB }}" src="{{ t.srcB }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="After"></image-slot></div>
+              <span style="position:absolute;top:0;left:0;background:#0d0e0d;color:#f2f2f3;font-size:10px;font-weight:700;letter-spacing:.18em;padding:6px 10px;pointer-events:none">BEFORE</span>
+              <span style="position:absolute;top:0;right:0;background:#b8e600;color:#0d0e0d;font-size:10px;font-weight:700;letter-spacing:.18em;padding:6px 10px;pointer-events:none">AFTER</span>
+              <div onPointerDown="{{ t.down }}" onPointerMove="{{ t.move }}" onPointerUp="{{ t.up }}" style="position:absolute;top:0;bottom:0;left:{{ t.pct }}%;width:44px;margin-left:-22px;cursor:ew-resize;touch-action:none;display:flex;align-items:center;justify-content:center">
+                <span style="position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;background:#b8e600"></span>
+                <span style="position:relative;width:40px;height:40px;border-radius:50%;background:#b8e600;color:#0d0e0d;display:grid;place-items:center;font-size:13px;font-weight:700;letter-spacing:-.05em;box-shadow:0 6px 18px rgba(13,14,13,.35)">◂▸</span>
+              </div>
+            </div>
+            <div style="padding:20px 8px 6px">
+              <div style="display:flex;align-items:baseline;gap:10px">
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:38px;line-height:1;color:#1d1f20">{{ t.metric }}</span>
+                <span style="font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#6d8a00">{{ t.metricLabel }}</span>
+              </div>
+              <div style="margin-top:12px;font-size:15px;font-weight:600">{{ t.name }}</div>
+              <div style="margin-top:3px;font-size:13.5px;color:rgba(29,31,32,.6)">{{ t.meta }}</div>
+            </div>
+          </div>
+        </sc-for>
+
+        <figure data-reveal="" onMouseEnter="{{ qPause }}" onMouseLeave="{{ qResume }}" style="position:relative;margin:0;background:#0d0e0d;color:#f2f2f3;padding:clamp(26px,3vw,36px);display:flex;flex-direction:column;min-height:360px;overflow:hidden">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-size:13px;letter-spacing:.14em;color:#b8e600">★★★★★</div>
+            <div style="font-size:11px;letter-spacing:.16em;color:rgba(242,242,243,.5)">{{ qIndex }}</div>
+          </div>
+          <blockquote key="{{ qKey }}" data-quote="" style="margin:22px 0 0;font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:clamp(22px,2.2vw,28px);line-height:1.28;color:#f2f2f3">“{{ qCur.quote }}”</blockquote>
+          <figcaption style="margin-top:auto;padding-top:26px;display:flex;align-items:center;justify-content:space-between;gap:14px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="position:relative;width:46px;height:46px;flex-shrink:0;background:#151716"><image-slot id="{{ qCur.slot }}" src="{{ qCur.src }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder=""></image-slot></div>
+              <div>
+                <div style="font-size:14.5px;font-weight:700;color:#ffffff">{{ qCur.name }}</div>
+                <div style="margin-top:2px;font-size:13px;color:rgba(242,242,243,.6)">{{ qCur.role }}</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button type="button" onClick="{{ qPrev }}" aria-label="Previous" style="width:40px;height:40px;border:1px solid rgba(242,242,243,.3);background:transparent;color:#f2f2f3;cursor:pointer;font-size:16px" style-hover="border-color:#b8e600;color:#b8e600">←</button>
+              <button type="button" onClick="{{ qNext }}" aria-label="Next" style="width:40px;height:40px;border:1px solid rgba(242,242,243,.3);background:transparent;color:#f2f2f3;cursor:pointer;font-size:16px" style-hover="border-color:#b8e600;color:#b8e600">→</button>
+            </div>
+          </figcaption>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(242,242,243,.12)"><div data-qbar="" style="height:100%;width:100%;background:#b8e600;transform:scaleX(0);transform-origin:left"></div></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Team" style="background:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(32px,4vw,52px)">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b8e600;margin-bottom:14px">08 — Who</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:.98;letter-spacing:-.01em;color:#ffffff;max-width:16ch">The people on the floor with you</h2>
+        </div>
+        <a href="ABS-Trainers-Programs.dc.html#roster" style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:5px">Meet the full team →</a>
+      </div>
+      <div style="display:grid;gap:clamp(14px,1.8vw,22px);grid-template-columns:repeat(auto-fit,minmax(210px,1fr))">
+        <sc-for list="{{ trainers }}" as="t" hint-placeholder-count="4">
+          <a href="ABS-Trainers-Programs.dc.html#roster" data-reveal="" style="position:relative;display:block;overflow:hidden;border:1px solid rgba(242,242,243,.2);transition:border-color .3s" style-hover="border-color:#b8e600">
+            <div style="position:relative;min-width:0;min-height:0;aspect-ratio:4/5;background:#151716">
+              <image-slot id="{{ t.slot }}" src="{{ t.src }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Trainer portrait"></image-slot>
+              <div style="position:absolute;inset:auto 0 0 0;height:50%;pointer-events:none;background:linear-gradient(0deg,rgba(13,14,13,.9),rgba(13,14,13,0))"></div>
+            </div>
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:18px 18px 20px">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:24px;line-height:1.05;color:#ffffff">{{ t.name }}</div>
+              <div style="margin-top:7px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">{{ t.role }}</div>
+              <div style="margin-top:8px;font-size:13.5px;color:rgba(242,242,243,.7)">{{ t.spec }}</div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Community" style="background:#0d0e0d;border-top:1px solid rgba(242,242,243,.14)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,6vw,88px) clamp(16px,4vw,44px) 0;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4vw,54px);line-height:1;letter-spacing:-.01em;color:#b8e600">#ITSNOTGYMITSLIFE</h2>
+      <a href="https://instagram.com" style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f2f2f3;border-bottom:2px solid #b8e600;padding-bottom:5px">Follow ABS on Instagram →</a>
+    </div>
+    <div style="display:grid;gap:4px;grid-template-columns:{{ galCols }};padding:clamp(24px,3vw,40px) 4px 4px">
+      <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="6">
+        <div style="position:relative;min-width:0;min-height:0;aspect-ratio:1;background:#151716"><image-slot id="{{ g.slot }}" src="{{ g.src }}" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="{{ g.ph }}"></image-slot></div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="faq" data-screen-label="FAQ" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,44px);display:grid;gap:clamp(30px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start">
+      <div data-reveal="">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#6d8a00;margin-bottom:14px">09 — Questions</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:.98;letter-spacing:-.01em;max-width:12ch">Before you walk in</h2>
+        <p style="margin:22px 0 0;font-size:16px;line-height:1.6;max-width:40ch;color:rgba(29,31,32,.7)">Anything else, call <a href="tel:+919763215051" style="color:#1d1f20;border-bottom:2px solid #b8e600">+91 97632 15051</a> or ask at the desk of any club.</p>
+      </div>
+      <div data-reveal="" style="border-top:1.5px solid #1d1f20">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+          <div style="border-bottom:1px solid rgba(29,31,32,.22)">
+            <button type="button" onClick="{{ f.toggle }}" aria-expanded="{{ f.open }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;text-align:left;background:transparent;border:0;padding:20px 0;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(20px,2vw,25px);line-height:1.1;color:#1d1f20;text-transform:uppercase">
+              {{ f.q }}
+              <span style="flex-shrink:0;width:30px;height:30px;border:1.5px solid #1d1f20;display:grid;place-items:center;font-family:Barlow,sans-serif;font-size:18px;font-weight:500;transform:rotate({{ f.rot }});transition:transform .3s">+</span>
+            </button>
+            <div style="display:grid;grid-template-rows:{{ f.rows }};transition:grid-template-rows .35s cubic-bezier(.22,.7,.3,1)">
+              <div style="overflow:hidden"><p style="margin:0 0 22px;font-size:15.5px;line-height:1.65;max-width:60ch;color:rgba(29,31,32,.74)">{{ f.a }}</p></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" data-screen-label="Join" style="background:#0d0e0d;border-top:1px solid rgba(242,242,243,.18)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(16px,4vw,44px) 0">
+      <div style="display:grid;gap:1px;background:rgba(242,242,243,.16);border:1px solid rgba(242,242,243,.16);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+          <div data-reveal="" style="background:#0d0e0d;padding:clamp(22px,2.6vw,32px)">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.2em;color:#b8e600">{{ s.no }}</div>
+            <div style="margin-top:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;line-height:1;color:#ffffff">{{ s.t }}</div>
+            <p style="margin:10px 0 0;font-size:14.5px;line-height:1.55;color:rgba(242,242,243,.65)">{{ s.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(16px,4vw,44px) clamp(56px,8vw,110px);display:grid;gap:clamp(30px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:center">
+      <div data-reveal="">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(40px,6.4vw,88px);line-height:.9;letter-spacing:-.015em;color:#ffffff">Walk in once.<br><span style="color:#b8e600">Stay for years.</span></h2>
+        <p style="margin:24px 0 0;font-size:16.5px;line-height:1.6;max-width:46ch;color:rgba(242,242,243,.72)">Book a free tour at any ABS club. No card, no commitment. A coach walks you through the floor, the programs and the plan that fits your goal.</p>
+        <a href="tel:+919763215051" style="display:inline-block;margin-top:28px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:600;color:#ffffff;letter-spacing:.01em;border-bottom:2px solid #b8e600" style-hover="color:#b8e600">+91 97632 15051</a>
+        <div style="margin-top:8px;font-size:12.5px;color:rgba(242,242,243,.5)">We answer 7 days a week. Or WhatsApp <a href="https://wa.me/919763215051">the same number</a>.</div>
+      </div>
+      <div data-reveal="" style="position:relative;border:1px solid rgba(242,242,243,.24);padding:clamp(26px,3vw,40px);background:rgba(242,242,243,.02)">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ intents }}" as="it" hint-placeholder-count="2">
+                <button type="button" onClick="{{ it.pick }}" style="font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:9px 14px;border:1px solid {{ it.bd }};background:{{ it.bg }};color:{{ it.fg }};cursor:pointer;transition:all .25s">{{ it.t }}</button>
+              </sc-for>
+            </div>
+            <div style="display:grid;gap:12px;margin-top:22px">
+              <input type="text" value="{{ fName }}" onChange="{{ onName }}" placeholder="Full name" style="width:100%;background:transparent;border:1px solid {{ nameBorder }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0;transition:border-color .2s" style-focus="border-color:#b8e600">
+              <input type="tel" value="{{ fPhone }}" onChange="{{ onPhone }}" placeholder="Mobile number" style="width:100%;background:transparent;border:1px solid {{ phoneBorder }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0;transition:border-color .2s" style-focus="border-color:#b8e600">
+              <select value="{{ fClub }}" onChange="{{ onClub }}" style="width:100%;background:#0d0e0d;border:1px solid {{ clubBorder }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+                <option value="">Choose your club</option>
+                <sc-for list="{{ clubOptions }}" as="o" hint-placeholder-count="10">
+                  <option value="{{ o.slug }}">{{ o.label }}</option>
+                </sc-for>
+              </select>
+              <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;color:#ff9b8a">{{ error }}</div>
+              </sc-if>
+              <button type="button" onClick="{{ send }}" style="width:100%;background:#b8e600;color:#0d0e0d;border:0;font-family:Barlow,sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:18px;cursor:pointer;transition:background .25s" style-hover="background:#cdf23c">{{ sendLabel }}</button>
+              <div style="font-size:12px;color:rgba(242,242,243,.45);text-align:center">No spam. A coach calls you once to fix a time.</div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="min-height:300px;display:flex;flex-direction:column;justify-content:center">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Request received</div>
+            <div style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,3.4vw,44px);line-height:.95;color:#ffffff">See you on the floor, {{ firstName }}.</div>
+            <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:rgba(242,242,243,.7)">A coach from ABS {{ fClubName }} will call {{ fPhone }} about your {{ intentLabel }}.</p>
+            <a href="ABS-Club.dc.html?club={{ fClub }}" style="display:inline-block;margin-top:18px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">See the club →</a>
+            <button type="button" onClick="{{ reset }}" style="align-self:flex-start;margin-top:24px;background:transparent;border:1px solid rgba(242,242,243,.3);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:12px 18px;cursor:pointer" style-hover="border-color:#b8e600">Book another</button>
+          </div>
+        </sc-if>
+        <i style="position:absolute;top:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;top:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+
+<sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:1px;background:rgba(242,242,243,.2);border-top:1px solid rgba(242,242,243,.2)">
+    <a href="tel:+919763215051" style="flex:1;background:#0d0e0d;color:#f2f2f3;text-align:center;padding:16px 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Call</a>
+    <a href="#join" style="flex:2;background:#b8e600;color:#0d0e0d;text-align:center;padding:16px 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Book a Free Tour</a>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;ticker&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;announcement&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;programLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;panels&quot;,&quot;grid&quot;],&quot;default&quot;:&quot;panels&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, now: Date.now(), panel: 0, city: 0, q: '', quote: 0, cmp: [50, 50], sent: false, D: null, name: '', phone: '', club: '', error: '', faq: 0, intent: 0 };
+
+  componentDidMount() {
+    const pre = new URLSearchParams(window.location.search).get('club') || '';
+    import('./abs-data.js').then(m => this.setState({ D: m, club: m.clubBySlug(pre) ? pre : '' }));
+    this._r = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._r);
+    this._clock = setInterval(() => this.setState({ now: Date.now() }), 15000);
+    this._onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const bar = document.querySelector('[data-progress]');
+      if (bar) bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+      const k = document.querySelector('[data-kinetic]');
+      if (k) { const r = k.getBoundingClientRect(); k.style.transform = 'translateX(' + Math.min(0, -(window.innerHeight - r.top) * 0.28) + 'px)'; }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+    if (this._motion()) { this._hero(); this._marquee(); this._counters(); this._pulse(); }
+    else { document.querySelectorAll('[data-count]').forEach(el => el.setAttribute('data-count-done', '')); }
+    this._reveal();
+    this._qStart();
+    this._qBar();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._r);
+    window.removeEventListener('scroll', this._onScroll);
+    clearInterval(this._clock); clearInterval(this._qt);
+    if (this._io) this._io.disconnect();
+    if (this._cio) this._cio.disconnect();
+  }
+  componentDidUpdate() {
+    this._reveal();
+    const S = this.state;
+    if (this._lastQuote !== undefined && this._lastQuote !== S.quote) { this._qBar(); this._qIn(); }
+    if (this._lastCity !== undefined && this._lastCity !== S.city) this._stamp();
+    this._lastQuote = S.quote; this._lastCity = S.city;
+    if (this._motion() && !this._marqueeStarted) this._marquee();
+  }
+
+  _motion() { return (this.props.motion ?? true) && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+
+  _hero() {
+    const ease = 'cubic-bezier(.22,.7,.3,1)';
+    document.querySelectorAll('[data-hero-line]').forEach((el, i) => el.animate([{ transform: 'translateY(110%)' }, { transform: 'none' }], { duration: 1000, delay: 180 + i * 110, easing: ease, fill: 'both' }));
+    document.querySelectorAll('[data-hero]').forEach((el, i) => el.animate([{ opacity: 0, transform: 'translateY(22px)' }, { opacity: 1, transform: 'none' }], { duration: 900, delay: 520 + i * 120, easing: ease, fill: 'both' }));
+    const cue = document.querySelector('[data-scrollcue]');
+    if (cue) cue.animate([{ transform: 'scaleY(0)', transformOrigin: 'top' }, { transform: 'scaleY(1)', transformOrigin: 'top', offset: .5 }, { transform: 'scaleY(0)', transformOrigin: 'bottom' }], { duration: 1800, iterations: Infinity, easing: 'ease-in-out' });
+  }
+  _pulse() {
+    const d = document.querySelector('[data-pulse]');
+    if (d) d.animate([{ boxShadow: '0 0 0 0 rgba(184,230,0,.6)' }, { boxShadow: '0 0 0 8px rgba(184,230,0,0)' }], { duration: 1600, iterations: Infinity });
+  }
+  _marquee() {
+    const t = document.querySelector('[data-marquee]');
+    if (!t || !t.children.length) return;
+    this._marqueeStarted = true;
+    t.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 30000, iterations: Infinity, easing: 'linear' });
+  }
+  _counters() {
+    if (!('IntersectionObserver' in window)) return;
+    this._cio = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        this._cio.unobserve(e.target);
+        const el = e.target, target = parseFloat(el.getAttribute('data-count')), suf = el.getAttribute('data-suffix') || '';
+        if (isNaN(target)) return;
+        const t0 = performance.now(), dur = 1500;
+        const step = (t) => {
+          const p = Math.min(1, (t - t0) / dur), v = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          el.textContent = v.toLocaleString('en-IN') + suf;
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('[data-count]').forEach(el => { el.textContent = '0' + (el.getAttribute('data-suffix') || ''); this._cio.observe(el); });
+  }
+  _reveal() {
+    if (!('IntersectionObserver' in window) || !this._motion()) return;
+    if (!this._io) {
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this._io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    }
+    document.querySelectorAll('[data-reveal]:not([data-reveal-init])').forEach((el, i) => {
+      el.setAttribute('data-reveal-init', '');
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.94) return;
+      el.style.opacity = '0'; el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity .7s cubic-bezier(.22,.7,.3,1) ' + ((i % 6) * 60) + 'ms, transform .7s cubic-bezier(.22,.7,.3,1) ' + ((i % 6) * 60) + 'ms';
+      this._io.observe(el);
+    });
+  }
+  _stamp() {
+    const s = document.querySelector('[data-stamp]');
+    if (s && this._motion()) s.animate([{ transform: 'rotate(-14deg) scale(1.5)', opacity: 0 }, { transform: 'rotate(-14deg) scale(1)', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.2,1.4,.4,1)' });
+  }
+  _qStart() { clearInterval(this._qt); this._qt = setInterval(() => this._qStep(1), 6500); }
+  _qStep(d) { const n = this._data().testimonials.length; this.setState(s => ({ quote: (s.quote + d + n) % n })); }
+  _qBar() {
+    const b = document.querySelector('[data-qbar]');
+    if (!b) return;
+    if (this._qa) this._qa.cancel();
+    this._qa = b.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 6500, fill: 'forwards', easing: 'linear' });
+  }
+  _qIn() {
+    const q = document.querySelector('[data-quote]');
+    if (q && this._motion()) q.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 500, easing: 'cubic-bezier(.22,.7,.3,1)' });
+  }
+
+  _ist() {
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: 'numeric', weekday: 'long', hour12: false }).formatToParts(new Date(this.state.now));
+    const g = (t) => parts.find(p => p.type === t).value;
+    const h = +g('hour') % 24, m = +g('minute');
+    return { min: h * 60 + m, day: g('weekday'), clock: ((h % 12) || 12) + ':' + String(m).padStart(2, '0') + ' ' + (h < 12 ? 'AM' : 'PM') };
+  }
+  _parseT(s) { const m = s.trim().match(/(\d+):(\d+)\s*(AM|PM)/i); let h = +m[1] % 12; if (/pm/i.test(m[3])) h += 12; return h * 60 + (+m[2]); }
+  _status(hours) {
+    const [o, c] = hours.split(/\s[–-]\s/), now = this._ist().min, open = now >= this._parseT(o) && now < this._parseT(c);
+    return { open, label: open ? 'Open now · closes ' + c : 'Closed · opens ' + o, dot: open ? '#b8e600' : 'rgba(242,242,243,.45)' };
+  }
+  _batch() {
+    // First Monday of next month, IST
+    const d = new Date(this.state.now + 5.5 * 3600e3);
+    const y = d.getUTCFullYear(), mo = d.getUTCMonth() + 1;
+    const first = new Date(Date.UTC(y, mo, 1));
+    const add = (8 - first.getUTCDay()) % 7;
+    const b = new Date(Date.UTC(y, mo, 1 + add));
+    const days = Math.max(0, Math.ceil((b - Date.UTC(y, d.getUTCMonth(), d.getUTCDate())) / 864e5));
+    return { label: b.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', timeZone: 'UTC' }), days: days + (days === 1 ? ' day to go' : ' days to go') };
+  }
+
+  _data() {
+    return {
+      creds: [
+        { no: '01', t: 'First Indian certified by the American College of Sports Medicine' },
+        { no: '02', t: 'Founder President, UHFF — India\u2019s first registered association of fitness club owners' },
+        { no: '03', t: 'Member and international representative, IHRSA · nominated for ACE Fitness Professional of the Year, 2003' },
+        { no: '04', t: '1000+ certified professionals trained and employed across ABS' }
+      ],
+      stats: [
+        { n: '35+', v: 35, suf: '+', k: 'Clubs', d: 'Six cities across Maharashtra' },
+        { n: '1,00,000+', v: 100000, suf: '+', k: 'Members', d: 'Training with ABS today' },
+        { n: '10 lakh', v: 10, suf: ' lakh', k: 'Sq ft of floor', d: 'Organised fitness space' },
+        { n: '1000+', v: 1000, suf: '+', k: 'Certified pros', d: 'Coaches, trainers and staff' }
+      ],
+      programs: [
+        { no: '01', t: 'Personal Training', d: 'One coach, one plan, measured every fortnight. Built for people who have tried gyms before and stopped.', cta: 'Get fitness advice', slot: 'v4-pg-pt', src: 'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=1400&q=80', ph: 'Personal training — coach with client' },
+        { no: '02', t: 'Strength Training', d: 'Full free-weight floors, platforms and racks. Progressive programming from beginner to competition lifter.', cta: 'Join this program', slot: 'v4-pg-strength', src: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=1400&q=80', ph: 'Strength — racks and platforms' },
+        { no: '03', t: 'Group Classes', d: 'HIIT, spin, Zumba, yoga and functional circuits running morning and evening at every club.', cta: 'See the timetable', slot: 'v4-pg-group', src: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=1400&q=80', ph: 'Group class in session' },
+        { no: '04', t: '90-Day Challenge', d: 'One goal, 90 days, coached start to finish. Body composition tracked, nutrition included.', cta: 'Enrol now', slot: 'v4-pg-90', src: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1400&q=80', ph: '90-day challenge — measurement day' }
+      ],
+      challengeIncludes: ['Dedicated coach', 'Nutrition plan', 'Fortnightly measurements', 'All group classes', 'Passport access'],
+      phases: [
+        { days: '0', t: 'Assessment', d: 'Body composition, mobility screen and a goal set with your coach. This is the number you beat.' },
+        { days: '1–30', t: 'Foundation', d: 'Strength basics three times a week, a nutrition plan you can actually follow, habits tracked daily.' },
+        { days: '31–60', t: 'Build', d: 'Progressive load, conditioning added, measurements every fortnight. This is where the photos change.' },
+        { days: '61–90', t: 'Finish', d: 'Peak block, final scan and a maintenance plan so day 91 looks like day 90.' }
+      ],
+      amenities: ['Fully air-conditioned floor', 'Free-weight floor', 'Olympic lifting platforms', 'Functional training rig', 'Cardio deck', 'Group class studio', 'Dedicated ladies section', 'Hot & cold showers', 'Steam room', 'Personal lockers', 'Nutrition counselling desk', 'Protein bar & supplements'].map((t, i) => ({ no: String(i + 1).padStart(2, '0'), t })),
+      cities: this._cities(),
+      featured: [
+        { slug: 'magarpatta-city', city: 'Pune', name: 'Magarpatta City', addr: 'Destination Centre, Magarpatta City, Hadapsar', hours: '5:00 AM – 11:00 PM', slot: 'v4-club-magarpatta', src: 'https://images.unsplash.com/photo-1593079831268-3381b0db4a77?auto=format&fit=crop&w=1000&q=80', ph: 'Magarpatta City club — exterior or floor' },
+        { slug: 'eon-2-kharadi', city: 'Pune', name: 'EON 2 Kharadi', addr: 'EON Free Zone Phase 2, Kharadi', hours: '5:00 AM – 11:00 PM', slot: 'v4-club-kharadi', src: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80', ph: 'EON 2 Kharadi club' },
+        { slug: 'baner', city: 'Pune', name: 'Baner', addr: 'Baner Road, opposite Balewadi High Street', hours: '5:30 AM – 10:30 PM', slot: 'v4-club-baner', src: 'https://images.unsplash.com/photo-1567598508481-65985588e295?auto=format&fit=crop&w=1000&q=80', ph: 'Baner club' },
+        { slug: 'bkc', city: 'Mumbai', name: 'BKC', addr: 'Bandra Kurla Complex, Bandra East', hours: '5:30 AM – 11:00 PM', slot: 'v4-club-bkc', src: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1000&q=80', ph: 'BKC club' },
+        { slug: 'nanded-city', city: 'Pune', name: 'Nanded City', addr: 'Nanded City, Sinhagad Road', hours: '5:30 AM – 10:30 PM', slot: 'v4-club-nanded', src: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1000&q=80', ph: 'Nanded City club' },
+        { slug: 'college-road', city: 'Nashik', name: 'College Road', addr: 'College Road, Nashik', hours: '6:00 AM – 10:30 PM', slot: 'v4-club-nashik', src: 'https://images.unsplash.com/photo-1581122584612-713f89daa8eb?auto=format&fit=crop&w=1000&q=80', ph: 'Nashik College Road club' }
+      ],
+      others: this._others(),
+      timetable: [
+        { time: '6:00 AM', cls: 'Functional HIIT', coach: 'Govind Koli', days: 'Mon · Wed · Fri' },
+        { time: '7:00 AM', cls: 'Hatha Yoga', coach: 'Sana Merchant', days: 'Tue · Thu · Sat' },
+        { time: '8:00 AM', cls: 'Strength Basics', coach: 'Kiran Jadhav', days: 'Mon – Fri' },
+        { time: '10:30 AM', cls: 'Ladies-only Circuit', coach: 'Roma Vidhate', days: 'Mon · Wed · Fri' },
+        { time: '6:30 PM', cls: 'Spin', coach: 'Nikhil Pawar', days: 'Mon – Sat' },
+        { time: '7:30 PM', cls: 'Zumba', coach: 'Nikhil Pawar', days: 'Tue · Thu' },
+        { time: '8:30 PM', cls: '90-Day Challenge Block', coach: 'Abhimanyu Sable', days: 'Mon · Thu' }
+      ],
+      transformations: [
+        { slotA: 'v4-tr1-before', slotB: 'v4-tr1-after', srcA: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=1000&q=80', srcB: 'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=1000&q=80', metric: '−18 kg', metricLabel: 'in 90 days', name: 'Rahul Deshpande', meta: 'ABS Magarpatta City · 90-Day Challenge, 2025' },
+        { slotA: 'v4-tr2-before', slotB: 'v4-tr2-after', srcA: 'https://images.unsplash.com/photo-1434682881908-b43d0467b798?auto=format&fit=crop&w=1000&q=80', srcB: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=1000&q=80', metric: '−12 kg', metricLabel: 'in 90 days', name: 'Sneha Kulkarni', meta: 'ABS Baner · Personal Training with Govind Koli' }
+      ],
+      testimonials: [
+        { quote: 'I travel to Mumbai three weeks a month. The Passport means I never pay for a second gym. BKC on weekdays, Kharadi on weekends.', name: 'Imran Shaikh', role: 'Member since 2023 · ABS EON 2 Kharadi', slot: 'v4-t1', src: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?auto=format&fit=crop&w=400&q=80' },
+        { quote: 'Govind rebuilt my programme around a bad shoulder instead of telling me to rest. Two years in, I am lifting more than I did at 25.', name: 'Prasad Bhosale', role: 'Member since 2022 · ABS Nanded City', slot: 'v4-t2', src: 'https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?auto=format&fit=crop&w=400&q=80' },
+        { quote: 'ABS keeps me challenged, confident, and always leveling up. If I had to describe my journey in one word: unapologetic.', name: 'Manisha', role: 'Member · ABS Fitness', slot: 'v4-t3', src: 'https://images.unsplash.com/photo-1559595500-e15296bdbb48?auto=format&fit=crop&w=400&q=80' },
+        { quote: 'I joined for the 90-day challenge and stayed. The 6 AM class at Model Colony is the reason I get out of bed.', name: 'Aditi Rane', role: 'Member since 2024 · ABS Model Colony', slot: 'v4-t4', src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=400&q=80' }
+      ],
+      trainers: [
+        { name: 'Abhimanyu Sable', role: 'Founder & Head Coach', spec: 'Strength & transformation', slot: 'v4-tr-abhimanyu', src: 'https://images.unsplash.com/photo-1519505907962-0a6cb0167c73?auto=format&fit=crop&w=900&q=80' },
+        { name: 'Govind Koli', role: 'Senior Trainer', spec: 'Functional training & fat loss', slot: 'v4-tr-govind', src: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80' },
+        { name: 'Sana Merchant', role: 'Yoga & Wellness Lead', spec: 'Hatha, vinyasa, mobility', slot: 'v4-tr-sana', src: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=900&q=80' },
+        { name: 'Kiran Jadhav', role: 'Strength Coach', spec: 'Powerlifting & Olympic lifting', slot: 'v4-tr-kiran', src: 'https://images.unsplash.com/photo-1620188467120-5042ed1eb5da?auto=format&fit=crop&w=900&q=80' }
+      ],
+      gallery: ['Members on the floor', 'Group class', 'Deadlift platform', 'Founder with members', 'Ladies section', 'Evening spin'].map((ph, i) => ({ slot: 'v4-ig-' + (i + 1), ph: 'Instagram — ' + ph, src: ["https://images.unsplash.com/photo-1550259979-ed79b48d2a30?auto=format&fit=crop&w=700&q=80","https://images.unsplash.com/photo-1590487988256-9ed24133863e?auto=format&fit=crop&w=700&q=80","https://images.unsplash.com/photo-1549060279-7e168fcee0c2?auto=format&fit=crop&w=700&q=80","https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=700&q=80","https://images.unsplash.com/photo-1616279969856-759f316a5ac1?auto=format&fit=crop&w=700&q=80","https://images.unsplash.com/photo-1522898467493-49726bf28798?auto=format&fit=crop&w=700&q=80"][i] })),
+      faqs: [
+        { q: 'Can I use my membership at other ABS clubs?', a: 'Yes. The ABS Passport Program gives every member with a valid card guest access at any other ABS club, whether you are travelling to another city or want a change of floor in your own. Inform your home club before you go.' },
+        { q: 'Do I need to book the free tour?', a: 'No, you can walk in any time the club is open. Booking guarantees a coach is free to walk you through the floor, the programs and a plan for your goal.' },
+        { q: 'How does the 90-Day Challenge work?', a: 'You start with a body-composition assessment and a goal. A coach programs your training and nutrition for 90 days, measures you every fortnight and hands you a maintenance plan at the end. New batches start on the first Monday of every month.' },
+        { q: 'Is there a ladies-only section?', a: 'Most clubs have a dedicated ladies section with its own equipment and a ladies-only circuit class. Baner also runs ladies-only hours.' },
+        { q: 'What are the club timings?', a: 'Most clubs open 5:00 or 5:30 AM and close between 10:00 and 11:00 PM, Monday to Saturday. Sundays are 6:00 AM to 2:00 PM. Exact hours are on each club page.' },
+        { q: 'Can I transfer my membership to someone else?', a: 'Memberships are personal and cannot be transferred between members. The Passport covers using other ABS clubs yourself. For freezes during travel or injury, speak to your club manager.' }
+      ],
+      steps: [
+        { no: '01', t: 'Book a free tour', d: 'Pick a club below or just walk in. Takes two minutes.' },
+        { no: '02', t: 'Meet your coach', d: 'A 20-minute conversation about your goal, your schedule and your starting point.' },
+        { no: '03', t: 'Start on the floor', d: 'Your card is active the same day, at your club and every other ABS club.' }
+      ],
+      intents: ['Free club tour', '90-Day Challenge']
+    };
+  }
+
+  _cities() {
+    const M = this.state.D;
+    const fallback = [['Pune', 21], ['Mumbai', 2], ['Nashik', 2], ['Kolhapur', 2], ['Ahilyanagar', 1], ['Chhatrapati Sambhaji Nagar', 2]];
+    return fallback.map(([city, n]) => {
+      const clubs = M ? M.clubsInCity(city).map(c => ({ name: c.name, slug: c.slug })) : [];
+      const count = M ? clubs.length : n;
+      return { city: city === 'Chhatrapati Sambhaji Nagar' ? 'Ch. Sambhaji Nagar' : city, fullCity: city, count: count + (count === 1 ? ' club' : ' clubs'), clubs };
+    });
+  }
+  _others() {
+    const M = this.state.D, featured = ['magarpatta-city', 'eon-2-kharadi', 'baner', 'bkc', 'nanded-city', 'college-road'];
+    if (!M) return [];
+    const pune = M.clubsInCity('Pune').filter(c => !featured.includes(c.slug)).slice(0, 6).map(c => ({ name: c.name, city: 'Pune', href: 'ABS-Club.dc.html?club=' + c.slug }));
+    const cities = M.CITIES.filter(c => c !== 'Pune').map(city => { const n = M.clubsInCity(city).length; return { name: city === 'Chhatrapati Sambhaji Nagar' ? 'Ch. Sambhaji Nagar' : city, city: n + (n === 1 ? ' club' : ' clubs'), href: 'ABS-Locations.dc.html?city=' + encodeURIComponent(city) }; });
+    return pune.concat(cities);
+  }
+
+  renderVals() {
+    const D = this._data(), S = this.state, M = S.D;
+    const wide = S.w >= 900, layout = this.props.programLayout ?? 'panels';
+    const live = this._status('5:00 AM – 11:00 PM');
+    const ist = this._ist(), batch = this._batch();
+    const q = S.q.trim().toLowerCase();
+    const hit = (s) => !q || s.toLowerCase().includes(q);
+    const featured = D.featured.filter(c => hit(c.name) || hit(c.city) || hit(c.addr)).map(c => { const st = this._status(c.hours); return { ...c, status: st.label, dot: st.dot }; });
+    const others = D.others.filter(o => hit(o.name) || hit(o.city));
+    const total = featured.length + others.length;
+    const sel = D.cities[S.city];
+    const tick = ['#ITSNOTGYMITSLIFE', '35+ clubs', 'One membership', '6 cities', 'Free club tour', 'Your body can achieve it', 'Your mind must believe it', '90-day challenge'];
+    const ticker = tick.concat(tick).map((s, i) => ({ s, c: i % 4 === 0 ? '#b8e600' : 'rgba(242,242,243,.85)' }));
+    const cmp = (i) => ({
+      down: (e) => { e.preventDefault(); e.currentTarget.setPointerCapture(e.pointerId); this._drag = { i, box: e.currentTarget.parentElement.getBoundingClientRect() }; },
+      move: (e) => { if (!this._drag || this._drag.i !== i) return; const p = Math.max(4, Math.min(96, ((e.clientX - this._drag.box.left) / this._drag.box.width) * 100)); this.setState(s => { const c = s.cmp.slice(); c[i] = p; return { cmp: c }; }); },
+      up: () => { this._drag = null; }
+    });
+    // timetable: mark the class in session (60 min) and the next one up
+    let nextIdx = -1;
+    const tt = D.timetable.map(r => ({ ...r, start: this._parseT(r.time) }));
+    tt.forEach((r, i) => { if (nextIdx === -1 && r.start > ist.min) nextIdx = i; });
+    const liveIdx = tt.findIndex(r => ist.min >= r.start && ist.min < r.start + 60);
+    const timetable = tt.map((r, i) => {
+      const past = r.start + 60 <= ist.min, next = i === nextIdx && liveIdx !== i, lv = i === liveIdx;
+      return { ...r, next, live: lv, op: past ? .45 : 1, tc: (next || lv) ? '#b8e600' : '#ffffff' };
+    });
+    const intentLabel = S.intent === 1 ? '90-Day Challenge enrolment' : 'free club tour';
+    return {
+      wide, narrow: S.w < 780,
+      facCols: S.w >= 700 ? '2fr 1fr 1fr' : '1fr 1fr', facSpan: S.w >= 700 ? 'auto' : 'span 2',
+      galCols: S.w >= 900 ? 'repeat(6,minmax(0,1fr))' : S.w >= 480 ? 'repeat(3,minmax(0,1fr))' : 'repeat(2,minmax(0,1fr))',
+      showTicker: this.props.ticker ?? true, showAnnounce: this.props.announcement ?? true,
+      liveDot: live.dot, liveLabel: live.label,
+      istClock: ist.clock, istDay: ist.day,
+      batchDate: batch.label, daysToBatch: batch.days,
+      ticker, creds: D.creds, stats: D.stats, amenities: D.amenities, phases: D.phases, challengeIncludes: D.challengeIncludes, gallery: D.gallery, steps: D.steps, timetable,
+      panelsWide: wide && layout === 'panels', panelsNarrow: !(wide && layout === 'panels'),
+      panels: D.programs.map((p, i) => ({ ...p, enter: () => this.setState({ panel: i }), flex: i === S.panel ? '3 1 0%' : '1 1 0%', op: i === S.panel ? 1 : 0, mh: i === S.panel ? '220px' : '0px', bar: i === S.panel ? 1 : 0 })),
+      cities: D.cities.map((c, i) => { const on = i === S.city; return { ...c, pick: () => this.setState({ city: i }), bg: on ? '#0d0e0d' : 'transparent', fg: on ? '#b8e600' : '#0d0e0d', cardBg: on ? '#0d0e0d' : 'transparent', cardFg: on ? '#b8e600' : '#0d0e0d', cardBorder: on ? '#0d0e0d' : 'rgba(13,14,13,.3)' }; }),
+      selCity: sel, selClubs: sel.clubs, selHasClubs: sel.clubs.length > 0, selNoClubs: sel.clubs.length === 0, selCityHref: 'ABS-Locations.dc.html?city=' + encodeURIComponent(sel.fullCity),
+      q: S.q, onQ: (e) => this.setState({ q: e.target.value }),
+      matchLabel: q ? total + ' match' + (total === 1 ? '' : 'es') : '35+ clubs',
+      featured, others, hasFeatured: featured.length > 0, hasOthers: others.length > 0, noMatch: total === 0,
+      transformations: D.transformations.map((t, i) => ({ ...t, pct: S.cmp[i], ...cmp(i) })),
+      qCur: D.testimonials[S.quote], qKey: S.quote, qIndex: (S.quote + 1) + ' / ' + D.testimonials.length,
+      qPrev: () => { this._qStep(-1); this._qStart(); }, qNext: () => { this._qStep(1); this._qStart(); },
+      qPause: () => { clearInterval(this._qt); if (this._qa) this._qa.pause(); },
+      qResume: () => { this._qStart(); if (this._qa) this._qa.play(); },
+      trainers: D.trainers,
+      faqs: D.faqs.map((f, i) => { const open = S.faq === i; return { ...f, open, toggle: () => this.setState({ faq: open ? -1 : i }), rot: open ? '45deg' : '0deg', rows: open ? '1fr' : '0fr' }; }),
+      intents: D.intents.map((t, i) => { const on = S.intent === i; return { t, pick: () => this.setState({ intent: i }), bg: on ? '#b8e600' : 'transparent', fg: on ? '#0d0e0d' : '#f2f2f3', bd: on ? '#b8e600' : 'rgba(242,242,243,.3)' }; }),
+      intentLabel, sendLabel: S.intent === 1 ? 'Enrol me for ' + batch.label : 'Book my free tour',
+      clubOptions: (M ? M.CLUBS : []).map(c => ({ slug: c.slug, label: 'ABS ' + c.name + ' · ' + c.cityShort })),
+      fName: S.name, fPhone: S.phone, fClub: S.club, fClubName: (M && M.clubBySlug(S.club) || {}).name || '', firstName: S.name.trim().split(/\s+/)[0] || '',
+      onName: e => this.setState({ name: e.target.value, error: '' }), onPhone: e => this.setState({ phone: e.target.value, error: '' }), onClub: e => this.setState({ club: e.target.value, error: '' }),
+      nameBorder: S.error && S.name.trim().length < 2 ? '#ff9b8a' : 'rgba(242,242,243,.28)',
+      phoneBorder: S.error && !(M && M.validPhone(S.phone)) ? '#ff9b8a' : 'rgba(242,242,243,.28)',
+      clubBorder: S.error && !S.club ? '#ff9b8a' : 'rgba(242,242,243,.28)',
+      hasError: !!S.error, error: S.error,
+      sent: S.sent, notSent: !S.sent,
+      send: () => {
+        let e = '';
+        if (S.name.trim().length < 2) e = 'Please enter your full name.';
+        else if (!(M && M.validPhone(S.phone))) e = 'Enter a valid 10-digit Indian mobile number.';
+        else if (!S.club) e = 'Choose the club you want to tour.';
+        if (e) this.setState({ error: e }); else this.setState({ sent: true, error: '' });
+      },
+      reset: () => this.setState({ sent: false, name: '', phone: '', club: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

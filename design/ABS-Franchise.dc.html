@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABS Gym Franchise — ABS Fitness &amp; Wellness Club</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#b8e600;text-decoration:none}
+a:hover{color:#cdf23c}
+h1,h2,h3,p{margin:0}
+::placeholder{color:rgba(242,242,243,.4)}
+</style>
+</helmet>
+
+<dc-import name="Nav" active="franchise" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d">
+
+  <section data-screen-label="Franchise Hero" style="position:relative;min-height:clamp(560px,calc(100svh - 70px),900px);display:flex;align-items:flex-end;overflow:hidden">
+    <div style="position:absolute;inset:0">
+      <image-slot id="fr-hero" src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=2400&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Flagship club interior"></image-slot>
+    </div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(96deg,rgba(13,14,13,.97) 0%,rgba(13,14,13,.86) 45%,rgba(13,14,13,.3) 100%)"></div>
+    <div style="position:relative;width:100%;max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,120px) clamp(16px,4vw,44px) clamp(40px,5vw,64px)">
+      <div style="display:flex;align-items:center;gap:12px;font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600"><span style="width:28px;height:2px;background:#b8e600"></span>ABS Gym Franchise</div>
+      <h1 style="margin-top:22px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(48px,8.4vw,124px);line-height:.88;letter-spacing:-.015em;color:#ffffff;max-width:12ch">Own an ABS club<span style="color:#b8e600">.</span></h1>
+      <p style="margin-top:26px;font-size:clamp(16px,1.5vw,19px);line-height:1.55;max-width:50ch;color:rgba(242,242,243,.82);text-wrap:pretty">Partner with ABS Fitness, a fast-growing premium fitness brand known for discipline, results, and strong member retention. Turn your passion into a successful gym business with our proven franchise model.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;margin-top:34px">
+        <a href="#apply" style="position:relative;background:#b8e600;color:#0d0e0d;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px" style-hover="background:#cdf23c;color:#0d0e0d">
+          Apply for a franchise
+          <i style="position:absolute;top:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+          <i style="position:absolute;top:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+          <i style="position:absolute;bottom:-5px;left:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+          <i style="position:absolute;bottom:-5px;right:-5px;width:10px;height:10px;background:linear-gradient(#b8e600,#b8e600) center/1px 100% no-repeat,linear-gradient(#b8e600,#b8e600) center/100% 1px no-repeat"></i>
+        </a>
+        <a href="#model" style="border:1px solid rgba(242,242,243,.4);color:#f2f2f3;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:19px 32px" style-hover="border-color:#b8e600;color:#f2f2f3">See the model</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;margin-top:clamp(44px,6vw,80px);border-top:1px solid rgba(242,242,243,.2)">
+        <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="4">
+          <div style="padding:20px 20px 0 0">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,44px);line-height:1;color:#ffffff">{{ s.v }}</div>
+            <div style="margin-top:8px;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,242,243,.6)">{{ s.l }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Why ABS" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px);display:grid;gap:clamp(36px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));align-items:start">
+      <div>
+        <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#4d5a00">Why our franchise</div>
+        <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;letter-spacing:-.01em;color:#0d0e0d;max-width:14ch">Twenty years of running clubs. Now yours to run.</h2>
+        <p style="margin-top:22px;font-size:16.5px;line-height:1.65;max-width:52ch;color:rgba(29,31,32,.8);text-wrap:pretty">Abs Fitness Pvt. Ltd. is an organization focused on promoting fitness and wellness with Abs Clubs throughout India. Abs Fitness has proven experience in consulting and managing world-class facilities with cutting-edge expertise and personal touch. Abs Fitness aims to set up fitness centers and wellness clubs of Abs in active partnerships with interested organizations and individuals.</p>
+        <div style="margin-top:34px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;border-top:1.5px solid #1d1f20;padding-top:22px">
+          <div style="position:relative;width:76px;height:96px;background:#e0e0e2;overflow:hidden"><image-slot id="fr-founder" src="assets/abhimanyu-sable.jpg" shape="rect" placeholder="Abhimanyu Sable" fit="cover" position="50% 20%"></image-slot></div>
+          <p style="font-size:14.5px;line-height:1.6;color:rgba(29,31,32,.8)"><strong style="color:#0d0e0d">Abhimanyu Sable</strong>, founder of ABS Fitness and Founder President of UHFF, India’s first registered association of fitness club owners. 35+ years in the fitness industry.</p>
+        </div>
+      </div>
+      <div style="display:grid;border-top:1.5px solid #1d1f20">
+        <sc-for list="{{ why }}" as="w" hint-placeholder-count="5">
+          <div style="display:grid;grid-template-columns:56px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid rgba(29,31,32,.18)">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.18em;color:#4d5a00">{{ w.no }}</div>
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(22px,2.2vw,28px);line-height:1;color:#0d0e0d">{{ w.t }}</div>
+              <p style="margin-top:8px;font-size:14.5px;line-height:1.55;color:rgba(29,31,32,.72)">{{ w.d }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="model" data-screen-label="Investment" style="background:#0d0e0d;border-bottom:1px solid rgba(242,242,243,.14)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+        <div>
+          <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Franchise cost &amp; investment</div>
+          <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;color:#ffffff;max-width:15ch">The numbers, up front.</h2>
+        </div>
+        <div style="display:flex;border:1px solid rgba(242,242,243,.3)">
+          <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+            <button type="button" onClick="{{ t.pick }}" style="font-family:Barlow,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:13px 18px;border:0;background:{{ t.bg }};color:{{ t.fg }};cursor:pointer;transition:background .25s">{{ t.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="margin-top:clamp(32px,4vw,52px);display:grid;gap:1px;background:rgba(242,242,243,.16);border:1px solid rgba(242,242,243,.16);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+        <sc-for list="{{ specs }}" as="s" hint-placeholder-count="6">
+          <div style="background:#0d0e0d;padding:clamp(24px,2.8vw,36px)">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,243,.55)">{{ s.l }}</div>
+            <div style="margin-top:14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,3.2vw,44px);line-height:1;color:{{ s.c }}">{{ s.v }}</div>
+            <sc-if value="{{ s.hasNote }}" hint-placeholder-val="{{ false }}">
+              <p style="margin-top:10px;font-size:13.5px;line-height:1.5;color:rgba(242,242,243,.6)">{{ s.n }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin-top:18px;font-size:12.5px;line-height:1.6;color:rgba(242,242,243,.45);max-width:80ch">Figures are indicative and vary with city, site size and fit-out. Final terms are shared after the site evaluation and signed in the standard ABS franchise agreement.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="ABS Advantage" style="background:#151716">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px);display:grid;gap:clamp(36px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+      <div>
+        <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">The ABS advantage</div>
+        <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;color:#ffffff;max-width:13ch">From site selection to opening day.</h2>
+        <p style="margin-top:22px;font-size:16px;line-height:1.65;max-width:46ch;color:rgba(242,242,243,.72)">Full support and backing from acclaimed professionals in the fitness business, with complete assistance in setting up a fitness facility right from selection of the site to the final functioning of the club.</p>
+        <div style="position:relative;margin-top:34px;aspect-ratio:16/10;background:#0d0e0d;overflow:hidden"><image-slot id="fr-support" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1400&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="Club fit-out / training session"></image-slot></div>
+      </div>
+      <div style="display:grid;gap:10px;align-content:start">
+        <sc-for list="{{ adv }}" as="a" hint-placeholder-count="6">
+          <button type="button" onClick="{{ a.toggle }}" style="text-align:left;width:100%;background:{{ a.bg }};border:1px solid {{ a.bd }};color:#f2f2f3;padding:22px 24px;cursor:pointer;font-family:Barlow,sans-serif;transition:background .25s,border-color .25s">
+            <div style="display:grid;grid-template-columns:48px 1fr 20px;gap:12px;align-items:center">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.18em;color:#b8e600">{{ a.no }}</span>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(20px,2vw,25px);line-height:1.05;color:#ffffff">{{ a.t }}</span>
+              <span style="font-size:20px;line-height:1;color:#b8e600">{{ a.sign }}</span>
+            </div>
+            <sc-if value="{{ a.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:12px 0 0 60px;font-size:14.5px;line-height:1.6;color:rgba(242,242,243,.72)">{{ a.d }}</p>
+            </sc-if>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Franchisee Profile" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px)">
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#4d5a00">Franchisee profile</div>
+      <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;color:#0d0e0d;max-width:18ch">Who we’re looking for.</h2>
+      <div style="margin-top:clamp(32px,4vw,52px);display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));border-top:1.5px solid #1d1f20">
+        <sc-for list="{{ profile }}" as="p" hint-placeholder-count="4">
+          <div style="padding:26px 24px 26px 0;border-bottom:1px solid rgba(29,31,32,.18)">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:44px;line-height:1;color:#b8e600;-webkit-text-stroke:1px #1d1f20">{{ p.no }}</div>
+            <p style="margin-top:14px;font-size:15.5px;line-height:1.55;color:#1d1f20;text-wrap:pretty">{{ p.t }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Expansion" style="background:#0d0e0d;border-bottom:1px solid rgba(242,242,243,.14)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,44px);display:grid;gap:clamp(36px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));align-items:start">
+      <div>
+        <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Expansion plans</div>
+        <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;color:#ffffff;max-width:13ch">Open across India.</h2>
+        <p style="margin-top:22px;font-size:16px;line-height:1.65;max-width:46ch;color:rgba(242,242,243,.72)">Franchise outlets are offered PAN India, in Tier 1 and Tier 2 cities and in urban and suburban areas. Pick a region to see the states we are opening in.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:30px">
+          <sc-for list="{{ regions }}" as="r" hint-placeholder-count="6">
+            <button type="button" onClick="{{ r.pick }}" style="font-family:Barlow,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:11px 16px;border:1px solid {{ r.bd }};background:{{ r.bg }};color:{{ r.fg }};cursor:pointer;transition:all .25s">{{ r.name }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="border:1px solid rgba(242,242,243,.2);padding:clamp(24px,3vw,40px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:1px solid rgba(242,242,243,.2);padding-bottom:16px">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3vw,40px);line-height:1;color:#ffffff">{{ regionName }}</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#b8e600">{{ regionCount }}</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:22px">
+          <sc-for list="{{ regionStates }}" as="s" hint-placeholder-count="6">
+            <span style="display:flex;align-items:center;gap:9px;font-size:16px;font-weight:500;color:#f2f2f3"><span style="width:6px;height:6px;background:#b8e600"></span>{{ s }}</span>
+          </sc-for>
+        </div>
+        <div style="margin-top:28px;padding-top:18px;border-top:1px solid rgba(242,242,243,.12);font-size:13.5px;line-height:1.6;color:rgba(242,242,243,.6)">Home base: 35+ ABS clubs across Pune, Mumbai, Nashik, Kolhapur, Ahilyanagar and Chhatrapati Sambhaji Nagar.</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Agreement FAQ" style="background:#0d0e0d">
+    <div style="max-width:1000px;margin:0 auto;padding:clamp(64px,9vw,120px) clamp(16px,4vw,44px)">
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Agreement &amp; training</div>
+      <h2 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,4.6vw,60px);line-height:.94;color:#ffffff">Common questions</h2>
+      <div style="margin-top:36px;border-top:1px solid rgba(242,242,243,.3)">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+          <div style="border-bottom:1px solid rgba(242,242,243,.18)">
+            <button type="button" onClick="{{ f.toggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;background:transparent;border:0;color:#ffffff;padding:22px 0;cursor:pointer;text-align:left;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:.01em">{{ f.q }}<span style="flex-shrink:0;font-size:22px;color:#b8e600">{{ f.sign }}</span></button>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+              <p style="padding:0 40px 24px 0;font-size:15.5px;line-height:1.65;color:rgba(242,242,243,.72)">{{ f.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply" data-screen-label="Apply" style="background:#0d0e0d;border-top:1px solid rgba(242,242,243,.18)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(16px,4vw,44px);display:grid;gap:clamp(30px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));align-items:start">
+      <div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(40px,6.4vw,88px);line-height:.9;letter-spacing:-.015em;color:#ffffff">Build your club.<br><span style="color:#b8e600">Build with ABS.</span></h2>
+        <p style="margin-top:24px;font-size:16.5px;line-height:1.6;max-width:46ch;color:rgba(242,242,243,.72)">Share a few details and the ABS franchise team will call you to discuss your city, site and investment.</p>
+        <div style="margin-top:32px;display:grid;gap:1px;background:rgba(242,242,243,.16);border:1px solid rgba(242,242,243,.16)">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+            <div style="background:#0d0e0d;padding:18px 20px;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:baseline">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.2em;color:#b8e600">{{ s.no }}</span>
+              <span><span style="display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:21px;line-height:1;color:#ffffff">{{ s.t }}</span><span style="display:block;margin-top:6px;font-size:14px;line-height:1.5;color:rgba(242,242,243,.62)">{{ s.d }}</span></span>
+            </div>
+          </sc-for>
+        </div>
+        <a href="tel:+919763215051" style="display:inline-block;margin-top:28px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:600;color:#ffffff;border-bottom:2px solid #b8e600" style-hover="color:#b8e600">+91 97632 15051</a>
+        <div style="margin-top:8px;font-size:12.5px;color:rgba(242,242,243,.5)">Or write to <a href="mailto:info@absfitnessclub.in">info@absfitnessclub.in</a></div>
+      </div>
+
+      <div style="position:relative;border:1px solid rgba(242,242,243,.24);padding:clamp(26px,3vw,40px);background:rgba(242,242,243,.02)">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;gap:12px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600;margin-bottom:6px">Franchise enquiry</div>
+            <input type="text" value="{{ f.name }}" onChange="{{ on.name }}" placeholder="Full name *" style="width:100%;background:transparent;border:1px solid {{ bd.name }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+            <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+              <input type="tel" value="{{ f.phone }}" onChange="{{ on.phone }}" placeholder="Mobile number *" style="width:100%;background:transparent;border:1px solid {{ bd.phone }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+              <input type="email" value="{{ f.email }}" onChange="{{ on.email }}" placeholder="Email *" style="width:100%;background:transparent;border:1px solid {{ bd.email }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+            </div>
+            <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+              <select value="{{ f.state }}" onChange="{{ on.state }}" style="width:100%;background:#0d0e0d;border:1px solid {{ bd.state }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0">
+                <option value="">State *</option>
+                <sc-for list="{{ allStates }}" as="s" hint-placeholder-count="10">
+                  <option value="{{ s }}">{{ s }}</option>
+                </sc-for>
+              </select>
+              <input type="text" value="{{ f.city }}" onChange="{{ on.city }}" placeholder="City *" style="width:100%;background:transparent;border:1px solid {{ bd.city }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+            </div>
+            <select value="{{ f.invest }}" onChange="{{ on.invest }}" style="width:100%;background:#0d0e0d;border:1px solid {{ bd.invest }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0">
+              <option value="">Investment range *</option>
+              <sc-for list="{{ investOpts }}" as="o" hint-placeholder-count="4">
+                <option value="{{ o }}">{{ o }}</option>
+              </sc-for>
+            </select>
+            <div>
+              <div style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,242,243,.6);margin:6px 0 10px">Do you have a property?</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ propOpts }}" as="p" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ p.pick }}" style="font-family:Barlow,sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:10px 14px;border:1px solid {{ p.bd }};background:{{ p.bg }};color:{{ p.fg }};cursor:pointer">{{ p.t }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <textarea value="{{ f.msg }}" onChange="{{ on.msg }}" rows="3" placeholder="Anything else? Site size, experience, timeline" style="width:100%;background:transparent;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0;resize:vertical" style-focus="border-color:#b8e600"></textarea>
+            <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:13px;color:#ff9b8a">{{ error }}</div>
+            </sc-if>
+            <button type="button" onClick="{{ send }}" style="width:100%;background:#b8e600;color:#0d0e0d;border:0;font-family:Barlow,sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:18px;cursor:pointer" style-hover="background:#cdf23c">{{ sendLabel }}</button>
+            <div style="font-size:12px;color:rgba(242,242,243,.45);text-align:center">Your details go only to the ABS franchise team.</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="min-height:360px;display:flex;flex-direction:column;justify-content:center">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Enquiry received</div>
+            <div style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,3.4vw,44px);line-height:.95;color:#ffffff">Thank you, {{ firstName }}.</div>
+            <p style="margin-top:16px;font-size:15px;line-height:1.6;color:rgba(242,242,243,.7)">The ABS franchise team will call {{ f.phone }} to discuss a club in {{ f.city }}, {{ f.state }}. A copy of your enquiry is on its way to {{ f.email }}.</p>
+            <button type="button" onClick="{{ reset }}" style="align-self:flex-start;margin-top:24px;background:transparent;border:1px solid rgba(242,242,243,.3);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:12px 18px;cursor:pointer" style-hover="border-color:#b8e600">Send another</button>
+          </div>
+        </sc-if>
+        <i style="position:absolute;top:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;top:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-6px;left:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+        <i style="position:absolute;bottom:-6px;right:-6px;width:11px;height:11px;background:linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/1px 100% no-repeat,linear-gradient(rgba(242,242,243,.55),rgba(242,242,243,.55)) center/100% 1px no-repeat"></i>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const REGIONS = [
+  ['West', ['Maharashtra', 'Gujarat', 'Rajasthan', 'Goa']],
+  ['North', ['Delhi', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Punjab', 'Uttarakhand']],
+  ['South', ['Karnataka', 'Kerala', 'Tamil Nadu']],
+  ['Central', ['Madhya Pradesh', 'Chhattisgarh', 'Bihar', 'Jharkhand']],
+  ['East', ['West Bengal', 'Odisha', 'Assam', 'Sikkim', 'Meghalaya', 'Tripura', 'Mizoram', 'Manipur', 'Nagaland', 'Arunachal Pradesh']],
+  ['Union Territories', ['Chandigarh', 'Pondicherry', 'Daman and Diu', 'Andaman and Nicobar', 'Lakshadweep']]
+];
+const ALL_STATES = [...new Set(REGIONS.flatMap(r => r[1]).concat(['Andhra Pradesh', 'Telangana', 'Uttar Pradesh']))].sort();
+const EMPTY = { name: '', phone: '', email: '', state: '', city: '', invest: '', prop: '', msg: '' };
+const SPECS = {
+  investment: [
+    ['Total investment', '₹50 L – 1 Cr', 'Covers fit-out, equipment and launch. Depends on site size and city.'],
+    ['Franchise / brand fee', '₹10,00,000', 'One-time fee for the ABS brand, systems and setup support.'],
+    ['Anticipated ROI', '60%', 'Anticipated percentage return on investment.', true],
+    ['Payback period', '2 – 3 years', 'Likely payback of capital for a unit franchise.', true]
+  ],
+  property: [
+    ['Floor area', '1,000 – 2,000 sq ft'],
+    ['Property type', 'Domestic', 'Commercial or mixed-use premises within the city.'],
+    ['Preferred location', 'PAN India', 'Tier 1 and Tier 2 cities, urban and suburban areas.']
+  ],
+  agreement: [
+    ['Franchise term', '5 years', 'Renewable at the end of the term.', true],
+    ['Agreement', 'Standard', 'A standard ABS franchise agreement for every partner.'],
+    ['Training', 'Head office', 'Pune head office, with field assistance at your club.'],
+    ['Brand since', '2005', 'Franchising since 2014.']
+  ]
+};
+
+class Component extends DCLogic {
+  state = { tab: 'investment', adv: 0, region: 0, faq: 0, f: { ...EMPTY }, tried: false, sending: false, sent: false };
+
+  set(k, v) { this.setState(s => ({ f: { ...s.f, [k]: v } })); }
+
+  errors() {
+    const f = this.state.f, e = {};
+    if (f.name.trim().length < 2) e.name = 1;
+    if (!/^(\+?91[\s-]?)?[6-9]\d{9}$/.test(f.phone.replace(/[\s-]/g, ''))) e.phone = 1;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) e.email = 1;
+    if (!f.state) e.state = 1;
+    if (f.city.trim().length < 2) e.city = 1;
+    if (!f.invest) e.invest = 1;
+    return e;
+  }
+
+  send() {
+    const e = this.errors();
+    this.setState({ tried: true });
+    if (Object.keys(e).length) return;
+    this.setState({ sending: true });
+    try {
+      const list = JSON.parse(localStorage.getItem('abs-franchise-enquiries') || '[]');
+      list.push({ ...this.state.f, at: new Date().toISOString() });
+      localStorage.setItem('abs-franchise-enquiries', JSON.stringify(list));
+    } catch (_) {}
+    setTimeout(() => this.setState({ sending: false, sent: true }), 700);
+  }
+
+  renderVals() {
+    const s = this.state, f = s.f;
+    const e = s.tried ? this.errors() : {};
+    const border = k => e[k] ? '#ff9b8a' : 'rgba(242,242,243,.28)';
+    const pill = on => ({ bd: on ? '#b8e600' : 'rgba(242,242,243,.3)', bg: on ? '#b8e600' : 'transparent', fg: on ? '#0d0e0d' : '#f2f2f3' });
+    const on = {};
+    Object.keys(EMPTY).forEach(k => { on[k] = ev => this.set(k, ev.target.value); });
+    const region = REGIONS[s.region];
+    const nErr = Object.keys(e).length;
+
+    return {
+      heroStats: [['35+', 'ABS clubs'], ['1,00,000+', 'Members served'], ['20 yrs', 'Brand since 2005'], ['2–3 yrs', 'Likely payback']].map(([v, l]) => ({ v, l })),
+      why: [
+        ['Proven business formula', 'A club format refined across 35+ ABS locations and more than a lakh members.'],
+        ['Easy to handle the business', 'Tried and tested club management systems and programs, handed over from day one.'],
+        ['Reputed brand name', 'Open under a name Maharashtra already trusts. #ItsNotGymItsLife.'],
+        ['Low investment model', 'A club sized for 1,000 – 2,000 sq ft, with equipment bought at ABS network pricing.'],
+        ['Highly profitable business', 'An anticipated 60% return on investment, with payback in 2 – 3 years.']
+      ].map(([t, d], i) => ({ no: String(i + 1).padStart(2, '0'), t, d })),
+      tabs: [['investment', 'Investment'], ['property', 'Property'], ['agreement', 'Agreement']].map(([k, label]) => {
+        const a = s.tab === k;
+        return { label, bg: a ? '#b8e600' : 'transparent', fg: a ? '#0d0e0d' : '#f2f2f3', pick: () => this.setState({ tab: k }) };
+      }),
+      specs: SPECS[s.tab].map(([l, v, n, hi]) => ({ l, v, n: n || '', hasNote: !!n, c: hi ? '#b8e600' : '#ffffff' })),
+      adv: [
+        ['Backing from the experts', 'Full support and backing from acclaimed professionals in the fitness business, led by founder Abhimanyu Sable.'],
+        ['Site to opening day', 'Complete assistance in setting up a fitness facility right from selection of the site to the final functioning of the club.'],
+        ['Club management systems', 'Benefits of using the tried and tested club management systems and programs that run every ABS club.'],
+        ['Operations training', 'Focused and personalized training related to all aspects of the club operations, at head office and on site.'],
+        ['Equipment at good prices', 'Help buying fitness equipment at good prices through the ABS network.'],
+        ['Needs analysis', 'Need analysis and setting up systems that suit your requirements, market and site.']
+      ].map(([t, d], i) => {
+        const open = s.adv === i;
+        return { no: String(i + 1).padStart(2, '0'), t, d, open, sign: open ? '−' : '+', bg: open ? '#0d0e0d' : 'transparent', bd: open ? '#b8e600' : 'rgba(242,242,243,.18)', toggle: () => this.setState({ adv: open ? -1 : i }) };
+      }),
+      profile: [
+        'Leadership experience in a related field.',
+        'A track record of success in providing the highest level of customer service and satisfaction in business.',
+        'The commitment and resources essential to market and represent ABS to a swiftly expanding and diverse customer population.',
+        'Entrepreneurial excellence with the zeal to become successful.'
+      ].map((t, i) => ({ no: String(i + 1).padStart(2, '0'), t })),
+      regions: REGIONS.map(([name], i) => ({ name, ...pill(s.region === i), pick: () => this.setState({ region: i }) })),
+      regionName: region[0], regionStates: region[1], regionCount: region[1].length + ' states & UTs',
+      faqs: [
+        ['How much does an ABS franchise cost?', 'The total investment is ₹50 lakh to ₹1 crore depending on city, site size and fit-out. The franchise / brand fee is ₹10,00,000.'],
+        ['How much space do I need?', 'A floor area of 1,000 – 2,000 sq ft. The ABS team helps evaluate and select the site.'],
+        ['How long is the franchise term?', 'The franchise term is 5 years and it is renewable. Every partner signs the standard ABS franchise agreement.'],
+        ['What training do I get?', 'Training happens at the ABS head office, covering all aspects of club operations. Field assistance is available at your club.'],
+        ['When can I expect payback?', 'The likely payback period of capital for a unit franchise is 2 – 3 years, with an anticipated ROI of 60%.'],
+        ['Which cities are open?', 'ABS is expanding PAN India across Tier 1 and Tier 2 cities in the North, South, East, West, Central regions and Union Territories.']
+      ].map(([q, a], i) => {
+        const open = s.faq === i;
+        return { q, a, open, sign: open ? '−' : '+', toggle: () => this.setState({ faq: open ? -1 : i }) };
+      }),
+      steps: [
+        ['Enquire', 'Send the form or call the franchise team.'],
+        ['Discuss', 'A call on your city, investment and experience.'],
+        ['Site evaluation', 'ABS evaluates your property or helps you find one.'],
+        ['Sign & launch', 'Agreement, training, fit-out and opening day.']
+      ].map(([t, d], i) => ({ no: String(i + 1).padStart(2, '0'), t, d })),
+      f, on, bd: { name: border('name'), phone: border('phone'), email: border('email'), state: border('state'), city: border('city'), invest: border('invest') },
+      allStates: ALL_STATES,
+      investOpts: ['₹30 L – 50 L', '₹50 L – 1 Cr', '₹1 Cr – 2 Cr', '₹2 Cr +'],
+      propOpts: ['Own property', 'Leased / will lease', 'Looking for one'].map(t => ({ t, ...pill(f.prop === t), pick: () => this.set('prop', t) })),
+      hasError: nErr > 0,
+      error: e.phone && nErr === 1 ? 'Enter a valid 10-digit Indian mobile number.' : e.email && nErr === 1 ? 'Enter a valid email address.' : 'Please fill the highlighted fields.',
+      sendLabel: s.sending ? 'Sending…' : 'Send franchise enquiry',
+      send: () => this.send(),
+      notSent: !s.sent, sent: s.sent,
+      firstName: f.name.trim().split(' ')[0],
+      reset: () => this.setState({ f: { ...EMPTY }, tried: false, sent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

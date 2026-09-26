@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0d0e0d;
+  --ink-raised: #151716;
+  --ink-select: #1b1d1c;
+  --paper: #f2f2f3;
+  --paper-ink: #1d1f20;
+  --volt: #b8e600;
+  --volt-hover: #cdf23c;
+  --volt-dark: #6d8a00;
+  --error: #ff9b8a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--volt-hover); }
+::selection { background: var(--volt); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--volt); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+p { text-wrap: pretty; }
+input::placeholder { color: rgba(242, 242, 243, .4); }
+
+/* Responsive show/hide + grid column counts — CSS handles layout, JS only drives the tap loop and live status (see TECH-STACK.md). */
+.nav-links { display: none; align-items: center; gap: 30px; }
+.nav-toggle { display: inline-grid; }
+@media (min-width: 1060px) {
+  .nav-links { display: flex; }
+  .nav-toggle { display: none; }
+}
+.hero-stat-card { display: none; }
+.rail-label { display: none; }
+@media (min-width: 900px) {
+  .hero-stat-card { display: block; }
+  .rail-label { display: block; }
+}
+.mobile-action-bar { display: flex; }
+.mobile-footer-spacer { height: 0; }
+@media (min-width: 780px) {
+  .mobile-action-bar { display: none; }
+}
+@media (max-width: 779.98px) {
+  .mobile-footer-spacer { height: 84px; }
+}
+.programs-grid { display: grid; gap: clamp(14px, 1.6vw, 20px); grid-template-columns: 1fr; }
+@media (min-width: 620px) { .programs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .programs-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.reviews-grid { display: grid; gap: 56px clamp(16px, 2vw, 24px); grid-template-columns: 1fr; }
+@media (min-width: 980px) { .reviews-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

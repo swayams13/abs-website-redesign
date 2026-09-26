@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Careers — ABS Fitness &amp; Wellness Club</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#0d0e0d;color:#f2f2f3;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#b8e600;text-decoration:none}
+a:hover{color:#cdf23c}
+h1,h2,h3,p{margin:0}
+::placeholder{color:rgba(242,242,243,.4)}
+</style>
+</helmet>
+
+<dc-import name="Nav" active="careers" hint-size="100%,70px"></dc-import>
+
+<main style="background:#0d0e0d">
+  <section data-screen-label="Careers Hero" style="position:relative;min-height:clamp(440px,60svh,640px);display:flex;align-items:flex-end;overflow:hidden">
+    <div style="position:absolute;inset:0"><image-slot id="cr-hero" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=2200&q=80" credit="Unsplash" credit-href="https://unsplash.com" shape="rect" placeholder="ABS coaches team"></image-slot></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(96deg,rgba(13,14,13,.97) 0%,rgba(13,14,13,.85) 48%,rgba(13,14,13,.3) 100%)"></div>
+    <div style="position:relative;width:100%;max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,100px) clamp(16px,4vw,44px) clamp(40px,5vw,60px)">
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Careers at ABS</div>
+      <h1 style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(46px,7.6vw,108px);line-height:.88;color:#ffffff;max-width:13ch">Make fitness your career.</h1>
+      <p style="margin-top:22px;font-size:clamp(16px,1.5vw,19px);line-height:1.55;max-width:52ch;color:rgba(242,242,243,.84)">Join a team of fitness professionals across 35+ clubs. We invest in education, certifications, workshops, and industry exposure for our team.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Why work here" style="background:#f2f2f3;color:#1d1f20">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(16px,4vw,44px);display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));border-top:0">
+      <sc-for list="{{ perks }}" as="p" hint-placeholder-count="4">
+        <div style="padding:24px 24px 24px 0;border-top:1.5px solid #1d1f20">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.2em;color:#4d5a00">{{ p.no }}</div>
+          <div style="margin-top:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:25px;line-height:1;color:#0d0e0d">{{ p.t }}</div>
+          <p style="margin-top:10px;font-size:14.5px;line-height:1.55;color:rgba(29,31,32,.75)">{{ p.d }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="openings" data-screen-label="Openings" style="background:#0d0e0d">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,68px);line-height:.94;color:#ffffff">Open roles <span style="color:#b8e600">{{ count }}</span></h2>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <select value="{{ dept }}" onChange="{{ onDept }}" style="background:#0d0e0d;border:1px solid rgba(242,242,243,.35);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:14px;padding:12px 14px;outline:0">
+            <sc-for list="{{ depts }}" as="d" hint-placeholder-count="4"><option value="{{ d }}">{{ d }}</option></sc-for>
+          </select>
+          <select value="{{ city }}" onChange="{{ onCity }}" style="background:#0d0e0d;border:1px solid rgba(242,242,243,.35);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:14px;padding:12px 14px;outline:0">
+            <sc-for list="{{ cities }}" as="c" hint-placeholder-count="4"><option value="{{ c }}">{{ c }}</option></sc-for>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:32px;border-top:1px solid rgba(242,242,243,.3)">
+        <sc-for list="{{ jobs }}" as="j" hint-placeholder-count="6">
+          <div style="border-bottom:1px solid rgba(242,242,243,.16)">
+            <button type="button" onClick="{{ j.toggle }}" style="width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;background:transparent;border:0;color:#f2f2f3;padding:22px 0;cursor:pointer;text-align:left;font-family:Barlow,sans-serif">
+              <span>
+                <span style="display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(22px,2.4vw,30px);line-height:1;color:#ffffff">{{ j.t }}</span>
+                <span style="display:block;margin-top:8px;font-size:13.5px;color:rgba(242,242,243,.6)">{{ j.dept }} · {{ j.city }} · {{ j.type }} · {{ j.exp }}</span>
+              </span>
+              <span style="font-size:22px;color:#b8e600">{{ j.sign }}</span>
+            </button>
+            <sc-if value="{{ j.open }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:0 0 28px;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+                <p style="font-size:15.5px;line-height:1.65;color:rgba(242,242,243,.75)">{{ j.d }}</p>
+                <div>
+                  <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b8e600;margin-bottom:10px">You’ll need</div>
+                  <sc-for list="{{ j.req }}" as="r" hint-placeholder-count="3">
+                    <div style="display:flex;gap:10px;align-items:baseline;padding:6px 0;font-size:14.5px;color:#f2f2f3"><span style="width:6px;height:6px;flex-shrink:0;background:#b8e600"></span>{{ r }}</div>
+                  </sc-for>
+                  <button type="button" onClick="{{ j.apply }}" style="margin-top:18px;background:#b8e600;color:#0d0e0d;border:0;font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:14px 22px;cursor:pointer">Apply for this role</button>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{ none }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:36px 0;font-size:15px;color:rgba(242,242,243,.6)">No openings match right now. Send a general application below and we’ll keep you in mind.</div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply" data-screen-label="Apply" style="background:#151716;border-top:1px solid rgba(242,242,243,.14)">
+    <div style="max-width:880px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(16px,4vw,44px)">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,4.6vw,60px);line-height:.94;color:#ffffff">Apply</h2>
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top:28px;display:grid;gap:12px">
+          <select value="{{ f.role }}" onChange="{{ on.role }}" style="width:100%;background:#151716;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0">
+            <option value="General application">General application</option>
+            <sc-for list="{{ roleOpts }}" as="r" hint-placeholder-count="6"><option value="{{ r }}">{{ r }}</option></sc-for>
+          </select>
+          <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+            <input type="text" value="{{ f.name }}" onChange="{{ on.name }}" placeholder="Full name *" style="background:transparent;border:1px solid {{ bd.name }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+            <input type="tel" value="{{ f.phone }}" onChange="{{ on.phone }}" placeholder="Mobile number *" style="background:transparent;border:1px solid {{ bd.phone }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+            <input type="email" value="{{ f.email }}" onChange="{{ on.email }}" placeholder="Email *" style="background:transparent;border:1px solid {{ bd.email }};color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+            <input type="text" value="{{ f.cert }}" onChange="{{ on.cert }}" placeholder="Certifications (ACE, ACSM, K11…)" style="background:transparent;border:1px solid rgba(242,242,243,.28);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:15px;padding:15px 16px;outline:0" style-focus="border-color:#b8e600">
+          </div>
+          <label style="display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px dashed {{ bd.cv }};padding:16px;cursor:pointer">
+            <span style="font-size:14.5px;color:rgba(242,242,243,.8)">{{ cvLabel }}</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b8e600">Upload CV</span>
+            <input type="file" accept=".pdf,.doc,.docx" onChange="{{ onCv }}" style="display:none">
+          </label>
+          <sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:#ff9b8a">Please fill the highlighted fields and attach your CV.</div></sc-if>
+          <button type="button" onClick="{{ send }}" style="background:#b8e600;color:#0d0e0d;border:0;font-family:Barlow,sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:18px;cursor:pointer" style-hover="background:#cdf23c">Submit application</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:28px;border:1px solid rgba(242,242,243,.24);padding:32px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#b8e600">Application received</div>
+          <div style="margin-top:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:36px;line-height:.95;color:#ffffff">Thanks, {{ firstName }}.</div>
+          <p style="margin-top:12px;font-size:15px;line-height:1.6;color:rgba(242,242,243,.7)">Our HR team will review your application for {{ f.role }} and get in touch at {{ f.email }}.</p>
+          <button type="button" onClick="{{ reset }}" style="margin-top:20px;background:transparent;border:1px solid rgba(242,242,243,.3);color:#f2f2f3;font-family:Barlow,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:12px 18px;cursor:pointer">Apply for another role</button>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const JOBS = [
+  ['Personal Trainer', 'Coaching', 'Pune', 'Full-time', '1–3 yrs', 'Coach members one-on-one, build programs and track progress every fortnight. Work alongside senior coaches on the floor.', ['A recognised fitness certification', 'Strong basics in strength training and nutrition', 'Clear communication in English, Hindi or Marathi']],
+  ['Group Exercise Instructor', 'Coaching', 'Pune', 'Part-time', '1+ yrs', 'Run HIIT, Zumba, spin or functional classes morning and evening. Keep energy high and form safe.', ['Certification in your class format', 'Experience leading groups', 'Comfortable with early mornings']],
+  ['Yoga Instructor', 'Coaching', 'Mumbai', 'Part-time', '2+ yrs', 'Lead Hatha and mobility sessions and support members recovering from injury.', ['Yoga teacher certification', 'Understanding of modifications for beginners']],
+  ['Fitness Trainer (Floor)', 'Coaching', 'Nashik', 'Full-time', '0–2 yrs', 'Guide members on the gym floor, correct form and help new members settle in.', ['Fitness certification or ongoing course', 'Passion for helping people start']],
+  ['Club Manager', 'Operations', 'Pune', 'Full-time', '4+ yrs', 'Run the day-to-day of an ABS club: team, members, sales targets and service standards.', ['Experience managing a gym or hospitality unit', 'Team leadership', 'Target-driven mindset']],
+  ['Fitness Consultant (Sales)', 'Sales', 'Kolhapur', 'Full-time', '1–3 yrs', 'Take prospects on club tours, explain memberships and programs, and follow up leads.', ['Sales or customer-facing experience', 'Good communication skills']],
+  ['Front Desk Executive', 'Operations', 'Mumbai', 'Full-time', '0–2 yrs', 'Welcome members, manage check-ins, bookings and enquiries.', ['Friendly and organised', 'Basic computer skills']],
+  ['Nutritionist', 'Coaching', 'Pune', 'Full-time', '2+ yrs', 'Create diet plans for 90-Day Challenge batches and personal training clients.', ['Degree in nutrition or dietetics', 'Experience with fat-loss and sports nutrition']]
+];
+const EMPTY = { role: 'General application', name: '', phone: '', email: '', cert: '', cv: '' };
+class Component extends DCLogic {
+  state = { dept: 'All departments', city: 'All cities', open: 0, f: { ...EMPTY }, tried: false, sent: false };
+  errs() {
+    const f = this.state.f, e = {};
+    if (f.name.trim().length < 2) e.name = 1;
+    if (!/^[6-9]\d{9}$/.test(f.phone.replace(/\D/g, '').slice(-10))) e.phone = 1;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) e.email = 1;
+    if (!f.cv) e.cv = 1;
+    return e;
+  }
+  renderVals() {
+    const s = this.state, f = s.f, e = s.tried ? this.errs() : {};
+    const set = (k, v) => this.setState(st => ({ f: { ...st.f, [k]: v } }));
+    const on = {}; Object.keys(EMPTY).forEach(k => { on[k] = ev => set(k, ev.target.value); });
+    const list = JOBS.map((j, i) => ({ i, t: j[0], dept: j[1], city: j[2], type: j[3], exp: j[4], d: j[5], req: j[6] }))
+      .filter(j => (s.dept === 'All departments' || j.dept === s.dept) && (s.city === 'All cities' || j.city === s.city));
+    const bdr = k => e[k] ? '#ff9b8a' : 'rgba(242,242,243,.28)';
+    return {
+      perks: [
+        ['Certification support', 'Workshops, certifications and industry exposure, led by founder Abhimanyu Sable.'],
+        ['Grow with 35+ clubs', 'Move from trainer to senior coach to club manager across the ABS network.'],
+        ['Real results', 'Coach a lakh-strong community with structured programs and systems.'],
+        ['Respected career', 'We believe fitness professionals should be respected and supported as a structured career.']
+      ].map(([t, d], i) => ({ no: String(i + 1).padStart(2, '0'), t, d })),
+      depts: ['All departments', 'Coaching', 'Operations', 'Sales'], cities: ['All cities', 'Pune', 'Mumbai', 'Nashik', 'Kolhapur'],
+      dept: s.dept, city: s.city, onDept: ev => this.setState({ dept: ev.target.value }), onCity: ev => this.setState({ city: ev.target.value }),
+      count: String(list.length).padStart(2, '0'), none: list.length === 0,
+      jobs: list.map(j => {
+        const open = s.open === j.i;
+        return { ...j, open, sign: open ? '−' : '+', toggle: () => this.setState({ open: open ? -1 : j.i }),
+          apply: () => { set('role', j.t + ' — ' + j.city); const el = document.getElementById('apply'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' }); } };
+      }),
+      roleOpts: JOBS.map(j => j[0] + ' — ' + j[2]),
+      f, on, bd: { name: bdr('name'), phone: bdr('phone'), email: bdr('email'), cv: e.cv ? '#ff9b8a' : 'rgba(242,242,243,.35)' },
+      cvLabel: f.cv || 'PDF or Word, up to 5 MB',
+      onCv: ev => { const file = ev.target.files && ev.target.files[0]; if (file) set('cv', file.name); },
+      hasErr: Object.keys(e).length > 0,
+      send: () => { this.setState({ tried: true }); if (!Object.keys(this.errs()).length) this.setState({ sent: true }); },
+      notSent: !s.sent, sent: s.sent, firstName: f.name.trim().split(' ')[0],
+      reset: () => this.setState({ f: { ...EMPTY }, tried: false, sent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

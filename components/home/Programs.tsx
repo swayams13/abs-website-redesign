@@ -40,7 +40,7 @@ export default function Programs() {
       <div style={{ maxWidth: 1320, margin: '0 auto', padding: 'clamp(72px,9vw,128px) clamp(16px,4vw,44px)' }}>
         <div ref={headerRef} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, marginBottom: 'clamp(36px,4vw,56px)' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#6d8a00' }}>What we coach</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: '#566e00' }}>What we coach</div>
             <h2 style={{ marginTop: 14, fontWeight: 700, fontSize: 'clamp(34px,4.6vw,60px)', lineHeight: 1.04, letterSpacing: '-.03em', maxWidth: '16ch' }}>
               Programs built around one goal at a time
             </h2>

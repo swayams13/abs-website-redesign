@@ -3,11 +3,12 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Service } from '@/lib/data';
+import { sendWhatsApp } from '@/lib/whatsapp';
 import { SERVICES, validPhone } from '@/lib/data';
 import { useReveal } from '@/lib/hooks';
 
 function Eyebrow({ children, dark = true }: { children: React.ReactNode; dark?: boolean }) {
-  return <div style={{ fontSize: 13, fontWeight: 600, color: dark ? '#b8e600' : '#6d8a00' }}>{children}</div>;
+  return <div style={{ fontSize: 13, fontWeight: 600, color: dark ? '#b8e600' : '#566e00' }}>{children}</div>;
 }
 
 function TabStrip({ activeSlug }: { activeSlug: string }) {
@@ -127,7 +128,7 @@ function Enquiry({ service, prev, next }: { service: Service; prev: Service; nex
     if (name.trim().length < 2) e = 'Please enter your full name.';
     else if (!validPhone(phone)) e = 'Enter a valid 10-digit Indian mobile number.';
     if (e) setError(e);
-    else { setSent(true); setError(''); }
+    else { sendWhatsApp(`Enquiry: ${service.name} (ABS website)`, { Name: name, Phone: phone }); setSent(true); setError(''); }
   };
   const reset = () => { setSent(false); setName(''); setPhone(''); };
 

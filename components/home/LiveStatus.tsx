@@ -21,10 +21,11 @@ export default function LiveStatus({ hours, full = false, variant = 'solid' }: {
     return () => anim.cancel();
   }, []);
 
+  // Reserve the widest label's width up front so the pill filling in after mount doesn't reflow the layout around it (CLS).
   const wrapStyle =
     variant === 'outline'
-      ? { border: '1px solid rgba(255,255,255,.22)', padding: '7px 14px', fontSize: 12.5 }
-      : { background: 'rgba(13,14,13,.55)', padding: '4px 10px', fontSize: 12 };
+      ? { border: '1px solid rgba(255,255,255,.22)', padding: '7px 14px', fontSize: 12.5, minWidth: full ? 186 : 92 }
+      : { background: 'rgba(13,14,13,.55)', padding: '4px 10px', fontSize: 12, minWidth: full ? 170 : 78 };
 
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, borderRadius: 999, fontWeight: 600, ...wrapStyle }}>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { nextBatch } from '@/lib/time';
 import { useReveal } from '@/lib/hooks';
+import SampleTag from '@/components/ui/SampleTag';
 
 const PHASES = [
   { d: 'Day 0', t: 'Assessment', x: 'Body composition, movement screen and a goal you both sign off on.' },
@@ -12,10 +13,10 @@ const PHASES = [
   { d: '61–90', t: 'Finish', x: 'Peak block, final measurements and a plan for day 91.' },
 ];
 const STATS = [
-  { n: '35+', k: 'Clubs across Maharashtra' },
-  { n: '1,00,000+', k: 'Members trained' },
-  { n: '10 lakh', k: 'Sq ft of training floor' },
-  { n: '1000+', k: 'Certified professionals' },
+  { n: '28', k: 'Clubs across Maharashtra', sample: false },
+  { n: '1,00,000+', k: 'Members trained', sample: true },
+  { n: '10 lakh', k: 'Sq ft of training floor', sample: true },
+  { n: '1000+', k: 'Certified professionals', sample: true },
 ];
 
 export default function Challenge() {
@@ -68,7 +69,7 @@ export default function Challenge() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%,200px),1fr))', gap: 24, marginTop: 'clamp(56px,7vw,96px)', paddingTop: 32, borderTop: '1px solid rgba(255,255,255,.16)' }}>
           {STATS.map((s, i) => (
-            <StatItem key={s.k} n={s.n} k={s.k} index={i} />
+            <StatItem key={s.k} n={s.n} k={s.k} sample={s.sample} index={i} />
           ))}
         </div>
       </div>
@@ -76,12 +77,12 @@ export default function Challenge() {
   );
 }
 
-function StatItem({ n, k, index }: { n: string; k: string; index: number }) {
+function StatItem({ n, k, sample, index }: { n: string; k: string; sample: boolean; index: number }) {
   const ref = useReveal<HTMLDivElement>(index);
   return (
     <div ref={ref}>
       <div style={{ fontSize: 'clamp(40px,4.6vw,60px)', fontWeight: 700, letterSpacing: '-.04em', lineHeight: 1, color: '#ffffff' }}>{n}</div>
-      <div style={{ marginTop: 10, fontSize: 14, color: 'rgba(242,242,243,.68)' }}>{k}</div>
+      <div style={{ marginTop: 10, fontSize: 14, color: 'rgba(242,242,243,.68)' }}>{k} {sample && <SampleTag style={{ marginLeft: 6 }} />}</div>
     </div>
   );
 }

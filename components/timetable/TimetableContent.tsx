@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { CLUBS } from '@/lib/data';
+import SampleTag from '@/components/ui/SampleTag';
 import { istMinutes, istWeekday } from '@/lib/time';
 import { useReveal } from '@/lib/hooks';
 
@@ -109,15 +110,19 @@ export default function TimetableContent() {
             </div>
             <h1 style={{ fontWeight: 800, fontSize: 'clamp(38px,5.4vw,76px)', lineHeight: 1, letterSpacing: '-.035em', color: '#ffffff' }}>This week at ABS</h1>
             <p style={{ margin: '18px 0 0', fontSize: 15.5, lineHeight: 1.6, maxWidth: '52ch', color: 'rgba(242,242,243,.7)' }}>
-              Group classes are free for members. Clubs are open 5:00 AM – 11:00 PM. Timings can differ slightly by club, so check with the front desk.
+              Group classes are free for members. Opening hours and class timings differ by club, so check with the front desk.
             </p>
+            <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(242,242,243,.7)' }}>
+              <SampleTag />
+              <span style={{ fontSize: 12.5 }}>Class schedule shown is a sample — confirm with your club.</span>
+            </div>
           </div>
-          <label style={{ display: 'grid', gap: 8, minWidth: 240 }}>
+          <label style={{ display: 'grid', gap: 8, minWidth: 'min(240px,100%)', maxWidth: '100%' }}>
             <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.2em', textTransform: 'uppercase', color: 'rgba(242,242,243,.55)' }}>Club</span>
             <select
               value={club}
               onChange={(e) => setClub(e.target.value)}
-              style={{ background: '#0d0e0d', border: '1px solid rgba(255,255,255,.28)', borderRadius: 14, color: '#f2f2f3', fontFamily: 'inherit', fontSize: 15, padding: '14px 16px', outline: 0 }}
+              style={{ background: '#0d0e0d', border: '1px solid rgba(255,255,255,.28)', borderRadius: 14, color: '#f2f2f3', fontFamily: 'inherit', fontSize: 15, padding: '14px 16px', outline: 0, width: '100%', minWidth: 0 }}
             >
               {CLUBS.map((c) => (
                 <option key={c.slug} value={c.slug}>

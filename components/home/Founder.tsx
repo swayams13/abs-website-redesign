@@ -22,12 +22,12 @@ export default function Founder() {
           </div>
         </div>
         <div ref={textRef}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#6d8a00' }}>Since club one · Pune, 29 August 2005</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: '#566e00' }}>Since club one · Pune, 29 August 2005</div>
           <blockquote style={{ margin: '18px 0 0', fontFamily: 'var(--font-cormorant), serif', fontStyle: 'italic', fontWeight: 500, fontSize: 'clamp(44px,5.6vw,80px)', lineHeight: 1, letterSpacing: '-.01em', color: '#1d1f20' }}>
             &ldquo;It&apos;s not a gym. It&apos;s life.&rdquo;
           </blockquote>
           <p style={{ marginTop: 28, fontSize: 17, lineHeight: 1.65, maxWidth: '50ch', color: 'rgba(29,31,32,.74)' }}>
-            Abhimanyu Sable has spent forty years in fitness and twenty building ABS. He opened the first club in Pune in 2005. Today there are more than thirty-five across six cities, all run on one membership and one idea.
+            Abhimanyu Sable has spent forty years in fitness and twenty building ABS. He opened the first club in Pune in 2005. Today there are 28 clubs across six cities, all run on one membership and one idea.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px,1fr))', gap: '0 28px', marginTop: 36, borderTop: '1px solid rgba(29,31,32,.14)' }}>
             {CREDS.map((c) => (

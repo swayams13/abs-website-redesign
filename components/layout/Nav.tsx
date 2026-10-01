@@ -26,7 +26,7 @@ export default function Nav() {
   const navBg = scrolled || menu ? 'rgba(13,14,13,.72)' : 'rgba(20,22,21,.28)';
 
   return (
-    <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 80, padding: '16px clamp(12px,3vw,32px)', pointerEvents: 'none' }}>
+    <header style={{ position: 'fixed', top: 'var(--banner-h, 40px)', left: 0, right: 0, zIndex: 80, padding: '16px clamp(12px,3vw,32px)', pointerEvents: 'none' }}>
       <nav
         style={{
           pointerEvents: 'auto', maxWidth: 1320, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
@@ -36,7 +36,7 @@ export default function Nav() {
       >
         <Link href="/#top" aria-label="ABS Fitness home" style={{ display: 'flex', alignItems: 'center' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/abs-logo-white.png" alt="ABS Fitness & Wellness Club" style={{ height: 30, width: 'auto', display: 'block' }} />
+          <img src="/assets/abs-logo-white.png" alt="ABS Fitness & Wellness Club" width={80} height={30} style={{ height: 30, width: 'auto', display: 'block' }} />
         </Link>
 
         <div className="nav-links">

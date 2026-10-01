@@ -62,7 +62,7 @@ const CITY_LABEL_POS: [string, number, number, number][] = [
 function SchematicMap({ pins }: { pins: ClubWithStatus[] }) {
   return (
     <div style={{ position: 'relative', border: '1px solid rgba(255,255,255,.16)', borderRadius: 22, background: '#151716', backgroundImage: 'linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px)', backgroundSize: '44px 44px', aspectRatio: '16/9', minHeight: 360, marginBottom: 'clamp(22px,3vw,34px)', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: 18, left: 20, fontSize: 11, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(242,242,243,.45)', zIndex: 3 }}>
+      <div style={{ position: 'absolute', top: 18, left: 20, fontSize: 11, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(242,242,243,.6)', zIndex: 3 }}>
         Schematic club map — not to scale
       </div>
       {CITY_LABEL_POS.map(([name, x, y, size]) => (
@@ -167,7 +167,7 @@ export default function LocationsContent() {
             <div style={{ borderLeft: '2px solid #b8e600', padding: '4px 0 4px 22px' }}>
               <div style={{ fontSize: 13, fontWeight: 600, color: '#b8e600' }}>One membership, every location</div>
               <p style={{ margin: '12px 0 0', fontSize: 15.5, lineHeight: 1.6, maxWidth: '46ch', color: 'rgba(242,242,243,.75)' }}>
-                The ABS Passport Program means the club you pick below is not the only one you get. Train at any of the 35+ clubs on the same card.
+                The ABS Passport Program means the club you pick below is not the only one you get. Visit any of the other {CLUBS.length} clubs as a guest, booked in advance through your home club.
               </p>
               <Link href="/#passport" style={{ display: 'inline-block', marginTop: 14, fontSize: 13, fontWeight: 700, color: '#f2f2f3', borderBottom: '2px solid #b8e600', paddingBottom: 4 }}>
                 How the Passport works →

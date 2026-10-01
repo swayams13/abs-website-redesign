@@ -3,6 +3,15 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { CITIES, clubsInCity } from '@/lib/data';
 import { useReveal, useReducedMotion } from '@/lib/hooks';
+import SampleTag from '@/components/ui/SampleTag';
+
+const RULES = [
+  'Visit any other ABS club as a guest, using your own membership card.',
+  'Your home club books the visit in advance — it isn’t a walk-in.',
+  'Up to 2 consecutive days, and up to 4 days a month, at other clubs.',
+  'Memberships can’t be transferred between clubs.',
+  'A few clubs aren’t part of the Passport programme.',
+];
 
 const CITY_LABELS = CITIES.map((c) => (c === 'Chhatrapati Sambhaji Nagar' ? 'Ch. Sambhaji Nagar' : c));
 
@@ -48,11 +57,18 @@ export default function Passport({ name }: { name: string }) {
         <div ref={leftRef}>
           <div style={{ fontSize: 13, fontWeight: 600, color: '#b8e600' }}>The ABS Passport</div>
           <h2 style={{ marginTop: 14, fontWeight: 700, fontSize: 'clamp(38px,5.4vw,76px)', lineHeight: 1, letterSpacing: '-.035em', color: '#ffffff' }}>
-            One card. <span style={{ fontFamily: 'var(--font-cormorant), serif', fontStyle: 'italic', fontWeight: 500, fontSize: '1.1em', letterSpacing: '-.01em' }}>Every</span> club.
+            One card. <span style={{ fontFamily: 'var(--font-cormorant), serif', fontStyle: 'italic', fontWeight: 500, fontSize: '1.1em', letterSpacing: '-.01em' }}>Guest access</span> everywhere.
           </h2>
           <p style={{ marginTop: 22, fontSize: 17, lineHeight: 1.6, maxWidth: '44ch', color: 'rgba(242,242,243,.78)' }}>
-            One membership, every ABS club. No transfer fees, no guest passes, no paperwork. Work in Kharadi and live in Baner? Train at both.
+            The ABS Passport lets you train as a guest at any other ABS club, booked through your home club. Here&apos;s exactly how it works:
           </p>
+          <div style={{ display: 'grid', gap: 10, marginTop: 20, maxWidth: '44ch' }}>
+            {RULES.map((r) => (
+              <div key={r} style={{ display: 'flex', gap: 10, fontSize: 14.5, lineHeight: 1.5, color: 'rgba(242,242,243,.82)' }}>
+                <span style={{ flexShrink: 0, color: '#b8e600' }}>·</span>{r}
+              </div>
+            ))}
+          </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 32 }}>
             {CITY_LABELS.map((label, i) => {
               const on = i === cityIdx;
@@ -82,7 +98,7 @@ export default function Passport({ name }: { name: string }) {
                 <div style={{ position: 'absolute', inset: 0, padding: 'clamp(16px,3.2vw,26px)', display: 'flex', flexDirection: 'column' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/assets/abs-logo-white.png" alt="" style={{ height: 'clamp(22px,3.4vw,30px)', width: 'auto', display: 'block' }} />
+                    <img src="/assets/abs-logo-white.png" alt="" width={80} height={30} style={{ height: 'clamp(22px,3.4vw,30px)', width: 'auto', display: 'block' }} />
                   </div>
                   <div style={{ marginTop: 'clamp(10px,2vw,18px)', display: 'flex', alignItems: 'center', gap: 14 }}>
                     <div style={{ width: 'clamp(34px,5vw,44px)', aspectRatio: '1.3', borderRadius: 7, background: 'linear-gradient(135deg,#e9e2c6,#b9ad85 45%,#e6ddbd 70%,#a89c74)', boxShadow: 'inset 0 0 0 1px rgba(0,0,0,.25)' }} />
@@ -94,7 +110,7 @@ export default function Passport({ name }: { name: string }) {
                   </div>
                   <div style={{ marginTop: 'auto' }}>
                     <div style={{ fontWeight: 800, fontSize: 'clamp(22px,3.8vw,32px)', letterSpacing: '-.03em', lineHeight: 1 }}>Passport</div>
-                    <div style={{ marginTop: 4, fontSize: 'clamp(10px,1.4vw,12px)', fontWeight: 600, color: '#b8e600' }}>Valid at every ABS club</div>
+                    <div style={{ marginTop: 4, fontSize: 'clamp(10px,1.4vw,12px)', fontWeight: 600, color: '#b8e600' }}>Your card works across the ABS network</div>
                     <div style={{ marginTop: 'clamp(10px,2vw,16px)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12 }}>
                       <div style={{ minWidth: 0 }}>
                         <div style={{ fontSize: 9, fontWeight: 600, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(242,242,243,.55)' }}>Member</div>
@@ -136,6 +152,32 @@ export default function Passport({ name }: { name: string }) {
             {clubs.length > shown.length && (
               <span style={{ padding: '6px 11px', fontSize: 12.5, fontWeight: 500, color: 'rgba(255,255,255,.75)' }}>+{clubs.length - shown.length} more</span>
             )}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 1320, margin: '0 auto', padding: '0 clamp(16px,4vw,44px) clamp(72px,9vw,128px)' }}>
+        <div style={{ borderRadius: 28, border: '1.5px dashed rgba(184,230,0,.45)', background: 'rgba(184,230,0,.05)', padding: 'clamp(28px,3.4vw,44px)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <SampleTag />
+            <div style={{ fontSize: 13, fontWeight: 700, color: '#b8e600' }}>Proposed: Passport 2.0 — an idea for ABS</div>
+          </div>
+          <p style={{ marginTop: 14, fontSize: 15.5, lineHeight: 1.6, maxWidth: '62ch', color: 'rgba(242,242,243,.78)' }}>
+            A priced upgrade to the Passport rules above — members choose their plan instead of the current fixed allowance.
+          </p>
+          <div style={{ display: 'grid', gap: 16, marginTop: 24, gridTemplateColumns: 'repeat(auto-fit, minmax(240px,1fr))' }}>
+            <div style={{ borderRadius: 20, border: '1px solid rgba(255,255,255,.14)', padding: 22 }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: '#ffffff' }}>Home club</div>
+              <p style={{ marginTop: 8, fontSize: 14, lineHeight: 1.55, color: 'rgba(242,242,243,.7)' }}>
+                Train at one club, with today&apos;s guest-pass allowance for occasional visits elsewhere.
+              </p>
+            </div>
+            <div style={{ borderRadius: 20, border: '1px solid rgba(255,255,255,.14)', padding: 22 }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: '#ffffff' }}>All clubs</div>
+              <p style={{ marginTop: 8, fontSize: 14, lineHeight: 1.55, color: 'rgba(242,242,243,.7)' }}>
+                Unlimited access across every ABS club, no booking through a home club required.
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -1,8 +1,26 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import LiveStatus from './LiveStatus';
+import { CLUBS } from '@/lib/data';
+import { status } from '@/lib/time';
+import SampleTag from '@/components/ui/SampleTag';
+
+function OpenCount() {
+  const [count, setCount] = useState<number | null>(null);
+  useEffect(() => {
+    const tick = () => setCount(CLUBS.filter((c) => status(c.hours).open).length);
+    tick();
+    const id = setInterval(tick, 60000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
+      <i style={{ width: 7, height: 7, borderRadius: '50%', background: count ? '#b8e600' : 'rgba(242,242,243,.45)', display: 'inline-block' }} />
+      {count === null ? ' ' : `${count} of ${CLUBS.length} clubs open now`}
+    </span>
+  );
+}
 
 export default function Hero() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -51,9 +69,14 @@ export default function Hero() {
 
       <div ref={contentRef} style={{ position: 'relative', width: '100%', maxWidth: 1320, margin: '0 auto', padding: '140px clamp(16px,4vw,44px) clamp(40px,6vw,72px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap' }}>
         <div style={{ maxWidth: 820 }}>
-          <div data-hero="" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '7px 14px 7px 8px', borderRadius: 999, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.2)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,.92)' }}>
-            <LiveStatus hours="5:00 AM – 11:00 PM" />
-            1,00,000+ members since 2005
+          <div data-hero="" style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '7px 14px 7px 10px', borderRadius: 999, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.2)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,.92)' }}>
+              <OpenCount />
+            </div>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 14px', borderRadius: 999, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.2)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,.92)' }}>
+              <SampleTag />
+              1,00,000+ members · since 2005
+            </div>
           </div>
           <h1 style={{ marginTop: 26, fontWeight: 800, fontSize: 'clamp(46px,7.4vw,112px)', lineHeight: 0.98, letterSpacing: '-.035em', color: '#ffffff' }}>
             <span data-hero="" style={{ display: 'block' }}>Your body can achieve it.</span>
@@ -63,7 +86,7 @@ export default function Hero() {
             </span>
           </h1>
           <p data-hero="" style={{ marginTop: 26, fontSize: 'clamp(16px,1.4vw,19px)', lineHeight: 1.6, fontWeight: 500, maxWidth: '52ch', color: 'rgba(242,242,243,.86)' }}>
-            35+ clubs across Maharashtra. Over a lakh members. Twenty years of Abhimanyu Sable&apos;s ABS. One membership card opens every single club.
+            28 clubs across Maharashtra. One membership card, a whole network.
           </p>
           <div data-hero="" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '14px 28px', marginTop: 34 }}>
             <Link
@@ -83,7 +106,7 @@ export default function Hero() {
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,.7)' }}>ABS today</div>
           <div style={{ display: 'grid', gap: 14, marginTop: 16 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', paddingBottom: 14, borderBottom: '1px solid rgba(255,255,255,.14)' }}>
-              <span style={{ fontSize: 34, fontWeight: 700, letterSpacing: '-.03em', color: '#ffffff' }}>35+</span>
+              <span style={{ fontSize: 34, fontWeight: 700, letterSpacing: '-.03em', color: '#ffffff' }}>28</span>
               <span style={{ fontSize: 13, color: 'rgba(255,255,255,.75)' }}>Clubs</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', paddingBottom: 14, borderBottom: '1px solid rgba(255,255,255,.14)' }}>

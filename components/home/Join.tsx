@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { CLUBS, clubBySlug, validPhone, PHONE, PHONE_HREF } from '@/lib/data';
+import { sendWhatsApp } from '@/lib/whatsapp';
 import { useReveal } from '@/lib/hooks';
 
 const CLUB_OPTIONS = CLUBS.map((c) => ({ slug: c.slug, label: `ABS ${c.name} · ${c.cityShort}` }));
@@ -20,7 +21,7 @@ export default function Join({ name, setName }: { name: string; setName: (v: str
     else if (!validPhone(phone)) e = 'Enter a valid 10-digit Indian mobile number.';
     else if (!club) e = 'Choose the club you want to tour.';
     if (e) setError(e);
-    else { setSent(true); setError(''); }
+    else { sendWhatsApp('Club tour request (ABS website)', { Name: name, Phone: phone, Club: clubBySlug(club)?.name ?? club }); setSent(true); setError(''); }
   };
   const reset = () => { setSent(false); setName(''); setPhone(''); setClub(''); };
 

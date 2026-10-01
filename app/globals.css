@@ -10,6 +10,7 @@
   --volt-hover: #cdf23c;
   --volt-dark: #6d8a00;
   --error: #ff9b8a;
+  --banner-h: 40px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

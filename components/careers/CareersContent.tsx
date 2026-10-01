@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { validPhone } from '@/lib/data';
+import SampleTag from '@/components/ui/SampleTag';
 
 // Jobs are placeholders, ported from the design reference — README flags these as needing real openings.
 const JOBS = [
@@ -16,10 +17,10 @@ const JOBS = [
 ] as const;
 
 const PERKS = [
-  ['Certification support', 'Workshops, certifications and industry exposure, led by founder Abhimanyu Sable.'],
-  ['Grow with 35+ clubs', 'Move from trainer to senior coach to club manager across the ABS network.'],
-  ['Real results', 'Coach a lakh-strong community with structured programs and systems.'],
-  ['Respected career', 'We believe fitness professionals should be respected and supported as a structured career.'],
+  { t: 'Certification support', d: 'Workshops, certifications and industry exposure, led by founder Abhimanyu Sable.', sample: false },
+  { t: 'Grow with 28 clubs', d: 'Move from trainer to senior coach to club manager across the ABS network.', sample: false },
+  { t: 'Real results', d: 'Coach a lakh-strong community with structured programs and systems.', sample: true },
+  { t: 'Respected career', d: 'We believe fitness professionals should be respected and supported as a structured career.', sample: false },
 ] as const;
 
 const DEPTS = ['All departments', 'Coaching', 'Operations', 'Sales'];
@@ -44,7 +45,7 @@ function Hero() {
           Make fitness your career.
         </h1>
         <p style={{ marginTop: 22, fontSize: 'clamp(16px,1.5vw,19px)', lineHeight: 1.55, maxWidth: '52ch', color: 'rgba(242,242,243,.84)' }}>
-          Join a team of fitness professionals across 35+ clubs. We invest in education, certifications, workshops, and industry exposure for our team.
+          Join a team of fitness professionals across 28 clubs. We invest in education, certifications, workshops, and industry exposure for our team.
         </p>
       </div>
     </section>
@@ -55,11 +56,14 @@ function Perks() {
   return (
     <section style={{ background: '#f2f2f3', color: '#1d1f20' }}>
       <div style={{ maxWidth: 1320, margin: '0 auto', padding: 'clamp(56px,8vw,104px) clamp(16px,4vw,44px)', display: 'grid', gap: 0, gridTemplateColumns: 'repeat(auto-fit, minmax(240px,1fr))' }}>
-        {PERKS.map(([t, d], i) => (
-          <div key={t} style={{ padding: 'clamp(20px,2.4vw,24px) clamp(20px,2.4vw,24px) clamp(20px,2.4vw,24px) 0', borderTop: '1.5px solid #1d1f20' }}>
+        {PERKS.map((p, i) => (
+          <div key={p.t} style={{ padding: 'clamp(20px,2.4vw,24px) clamp(20px,2.4vw,24px) clamp(20px,2.4vw,24px) 0', borderTop: '1.5px solid #1d1f20' }}>
             <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: '.2em', color: '#4d5a00' }}>{String(i + 1).padStart(2, '0')}</div>
-            <div style={{ marginTop: 12, fontWeight: 700, textTransform: 'uppercase', fontSize: 25, lineHeight: 1, color: '#0d0e0d' }}>{t}</div>
-            <p style={{ marginTop: 10, fontSize: 14.5, lineHeight: 1.55, color: 'rgba(29,31,32,.75)' }}>{d}</p>
+            <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ fontWeight: 700, textTransform: 'uppercase', fontSize: 25, lineHeight: 1, color: '#0d0e0d' }}>{p.t}</div>
+              {p.sample && <SampleTag />}
+            </div>
+            <p style={{ marginTop: 10, fontSize: 14.5, lineHeight: 1.55, color: 'rgba(29,31,32,.75)' }}>{p.d}</p>
           </div>
         ))}
       </div>

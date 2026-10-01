@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Club, ClubDetails } from '@/lib/data';
+import { sendWhatsApp } from '@/lib/whatsapp';
 import { clubPhotos, validPhone, PHONE, PHONE_HREF, EMAIL } from '@/lib/data';
 import { status } from '@/lib/time';
 import { useReveal } from '@/lib/hooks';
 import LiveStatus from '@/components/home/LiveStatus';
+import SampleTag from '@/components/ui/SampleTag';
 
 const TIME_SLOTS = [
   { value: 'Morning', label: 'Morning (6 – 10 AM)' },
@@ -15,7 +17,7 @@ const TIME_SLOTS = [
 ];
 
 function Eyebrow({ children, dark = true }: { children: React.ReactNode; dark?: boolean }) {
-  return <div style={{ fontSize: 13, fontWeight: 600, color: dark ? '#b8e600' : '#6d8a00' }}>{children}</div>;
+  return <div style={{ fontSize: 13, fontWeight: 600, color: dark ? '#b8e600' : '#566e00' }}>{children}</div>;
 }
 
 function StatusDot({ hours }: { hours: string }) {
@@ -74,7 +76,10 @@ function Hero({ club }: { club: Club }) {
                 </p>
               </div>
               <div>
-                <Eyebrow>Hours</Eyebrow>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Eyebrow>Hours</Eyebrow>
+                  {!club.verified && <SampleTag />}
+                </div>
                 <p style={{ margin: '8px 0 0', fontSize: 15, lineHeight: 1.55, color: 'rgba(242,242,243,.82)' }}>
                   Mon–Sat {club.hours}<br />Sunday {club.sunday}
                 </p>
@@ -97,7 +102,7 @@ function Hero({ club }: { club: Club }) {
           </div>
 
           <div style={{ position: 'relative', borderRadius: 28, border: '1px solid rgba(255,255,255,.16)', background: 'rgba(21,23,22,.9)', backgroundImage: 'linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px)', backgroundSize: '40px 40px', minHeight: 'clamp(300px,38vw,420px)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', top: 18, left: 20, fontSize: 11, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(242,242,243,.4)' }}>
+            <div style={{ position: 'absolute', top: 18, left: 20, fontSize: 11, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(242,242,243,.6)' }}>
               Map — {club.addr}
             </div>
             <div style={{ textAlign: 'center' }}>
@@ -141,7 +146,7 @@ function TourForm({ club }: { club: Club }) {
     if (name.trim().length < 2) e = 'Please enter your full name.';
     else if (!validPhone(phone)) e = 'Enter a valid 10-digit Indian mobile number.';
     if (e) setError(e);
-    else { setSent(true); setError(''); }
+    else { sendWhatsApp(`Club tour request: ABS ${club.name} (ABS website)`, { Name: name, Phone: phone, 'Preferred time': time }); setSent(true); setError(''); }
   };
   const reset = () => { setSent(false); setName(''); setPhone(''); };
 
@@ -154,13 +159,16 @@ function TourForm({ club }: { club: Club }) {
       {!sent ? (
         <div>
           <Eyebrow>Membership</Eyebrow>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 16 }}>
-            <span style={{ fontWeight: 700, fontSize: 'clamp(40px,5vw,60px)', letterSpacing: '-.03em', color: '#ffffff' }}>{club.price}</span>
-            <span style={{ fontSize: 14, color: 'rgba(242,242,243,.6)' }}>/ month</span>
+          <div style={{ marginTop: 16, fontWeight: 700, fontSize: 'clamp(26px,3vw,34px)', letterSpacing: '-.02em', color: '#ffffff' }}>
+            Plans &amp; pricing — ask the club
           </div>
           <p style={{ margin: '14px 0 0', fontSize: 15, lineHeight: 1.6, maxWidth: '38ch', color: 'rgba(242,242,243,.72)' }}>
-            Annual plans at ABS {club.name} start here and include full Passport access to all 35+ clubs, group classes and a quarterly body-composition assessment.
+            Plans at ABS {club.name} include Passport access to the ABS network, group classes and a quarterly body-composition assessment. Book a tour below and a coach will walk you through pricing.
           </p>
+          <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <SampleTag />
+            <span style={{ fontSize: 12.5, color: 'rgba(242,242,243,.55)' }}>Proposal: show &lsquo;from ₹___/month&rsquo; here</span>
+          </div>
           <div style={{ marginTop: 26, paddingTop: 22, borderTop: '1px solid rgba(255,255,255,.14)' }}>
             <Eyebrow>Free club tour at {club.name}</Eyebrow>
           </div>
@@ -200,7 +208,7 @@ function TourForm({ club }: { club: Club }) {
               Book my free tour
             </button>
           </div>
-          <p style={{ margin: '14px 0 0', fontSize: 12.5, color: 'rgba(242,242,243,.45)', textAlign: 'center' }}>
+          <p style={{ margin: '14px 0 0', fontSize: 12.5, color: 'rgba(242,242,243,.6)', textAlign: 'center' }}>
             Or walk in any day, {club.hours}.
           </p>
         </div>
@@ -237,7 +245,10 @@ function TrainerCard({ t, index }: { t: ClubDetails['trainers'][number]; index: 
       <Image src={t.photo} alt={t.name} fill style={{ objectFit: 'cover' }} sizes="(min-width: 900px) 24vw, (min-width: 600px) 48vw, 100vw" />
       <div style={{ position: 'absolute', inset: 'auto 0 0 0', height: '55%', pointerEvents: 'none', background: 'linear-gradient(0deg,rgba(13,14,13,.92),rgba(13,14,13,0))' }} />
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '18px 18px 20px' }}>
-        <div style={{ fontWeight: 700, fontSize: 21, letterSpacing: '-.02em', color: '#ffffff' }}>{t.name}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ fontWeight: 700, fontSize: 21, letterSpacing: '-.02em', color: '#ffffff' }}>{t.name}</div>
+          {t.sample && <SampleTag />}
+        </div>
         <div style={{ marginTop: 6, fontSize: 12.5, fontWeight: 600, color: '#b8e600' }}>{t.role}</div>
         <div style={{ marginTop: 6, fontSize: 13.5, color: 'rgba(242,242,243,.7)' }}>{t.spec}</div>
       </div>
@@ -283,9 +294,13 @@ function Timetable({ timetable, rating, reviewCount, reviews }: Pick<ClubDetails
               Class timetable
             </h2>
           </div>
-          <p style={{ margin: 0, fontSize: 14, color: 'rgba(29,31,32,.6)', maxWidth: '34ch' }}>
+          <p style={{ margin: 0, fontSize: 14, color: 'rgba(29,31,32,.72)', maxWidth: '34ch' }}>
             Group classes are included in every membership. Drop in — no booking needed.
           </p>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+          <SampleTag />
+          <span style={{ fontSize: 12.5, color: 'rgba(29,31,32,.72)' }}>Sample timetable</span>
         </div>
         <div ref={tableRef} style={{ overflowX: 'auto', borderRadius: 22, border: '1px solid rgba(29,31,32,.14)' }}>
           <table style={{ width: '100%', minWidth: 640, borderCollapse: 'collapse', fontSize: 14.5 }}>
@@ -310,9 +325,13 @@ function Timetable({ timetable, rating, reviewCount, reviews }: Pick<ClubDetails
           </table>
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: 14, margin: 'clamp(56px,7vw,88px) 0 clamp(28px,3vw,40px)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: 14, margin: 'clamp(56px,7vw,88px) 0 20px' }}>
           <h2 style={{ fontWeight: 700, fontSize: 'clamp(30px,4.4vw,56px)', lineHeight: 1.04, letterSpacing: '-.03em' }}>Member reviews</h2>
-          <span style={{ fontSize: 14, color: 'rgba(29,31,32,.6)' }}>{rating} ★ · {reviewCount} Google reviews for this club</span>
+          {rating && <span style={{ fontSize: 14, color: 'rgba(29,31,32,.72)' }}>★ {rating} · {reviewCount} Google reviews</span>}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 'clamp(28px,3vw,40px)' }}>
+          <SampleTag />
+          <span style={{ fontSize: 12.5, color: 'rgba(29,31,32,.72)' }}>Sample reviews — to be replaced with real ABS member reviews</span>
         </div>
         <div style={{ display: 'grid', gap: 'clamp(14px,1.8vw,24px)', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))' }}>
           {reviews.map((q, i) => (
@@ -328,13 +347,13 @@ function ReviewCard({ q, index }: { q: ClubDetails['reviews'][number]; index: nu
   const ref = useReveal<HTMLElement>(index);
   return (
     <figure ref={ref} style={{ margin: 0, borderRadius: 22, background: '#ffffff', padding: 'clamp(22px,2.4vw,30px)', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ fontSize: 13, letterSpacing: 2, color: '#6d8a00' }}>★★★★★</div>
+      <div style={{ fontSize: 13, letterSpacing: 2, color: '#566e00' }}>★★★★★</div>
       <blockquote style={{ margin: '16px 0 0', fontFamily: 'var(--font-cormorant), serif', fontStyle: 'italic', fontWeight: 500, fontSize: 'clamp(19px,2vw,23px)', lineHeight: 1.3 }}>
         &ldquo;{q.quote}&rdquo;
       </blockquote>
       <figcaption style={{ marginTop: 'auto', paddingTop: 22, fontSize: 14 }}>
         <span style={{ fontWeight: 700 }}>{q.name}</span>
-        <span style={{ display: 'block', marginTop: 3, color: 'rgba(29,31,32,.6)', fontSize: 13 }}>{q.meta}</span>
+        <span style={{ display: 'block', marginTop: 3, color: 'rgba(29,31,32,.72)', fontSize: 13 }}>{q.meta}</span>
       </figcaption>
     </figure>
   );
@@ -422,7 +441,7 @@ export default function ClubDetail({ club, details, nearby }: { club: Club; deta
               Traveling? Use this club as a guest with your membership card.
             </h2>
             <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.6, maxWidth: '52ch', color: 'rgba(13,14,13,.78)' }}>
-              Already an ABS member at another club? Show your card at the {club.name} front desk and train. No day pass, no extra charge.
+              Already an ABS member elsewhere? Ask your home club to book your visit here in advance, then show your card at the {club.name} front desk.
             </p>
           </div>
           <Link href="/#passport" style={{ background: '#0d0e0d', color: '#b8e600', fontSize: 14, fontWeight: 700, borderRadius: 999, padding: '18px 30px', flexShrink: 0 }}>

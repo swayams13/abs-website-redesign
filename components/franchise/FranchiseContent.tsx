@@ -2,28 +2,30 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import SampleTag from '@/components/ui/SampleTag';
+import { sendWhatsApp } from '@/lib/whatsapp';
 
 const HERO_STATS = [
-  ['35+', 'ABS clubs'],
-  ['1,00,000+', 'Members served'],
-  ['20 yrs', 'Brand since 2005'],
-  ['2–3 yrs', 'Likely payback'],
+  { v: '28', l: 'ABS clubs', sample: false },
+  { v: '1,00,000+', l: 'Members served', sample: true },
+  { v: '20 yrs', l: 'Brand since 2005', sample: false },
+  { v: '2–3 yrs', l: 'Likely payback', sample: true },
 ] as const;
 
 const WHY = [
-  ['Proven business formula', 'A club format refined across 35+ ABS locations and more than a lakh members.'],
-  ['Easy to handle the business', 'Tried and tested club management systems and programs, handed over from day one.'],
-  ['Reputed brand name', 'Open under a name Maharashtra already trusts. #ItsNotGymItsLife.'],
-  ['Low investment model', 'A club sized for 1,000 – 2,000 sq ft, with equipment bought at ABS network pricing.'],
-  ['Highly profitable business', 'An anticipated 60% return on investment, with payback in 2 – 3 years.'],
+  { t: 'Proven business formula', d: 'A club format refined across 28 ABS locations.', sample: false },
+  { t: 'Easy to handle the business', d: 'Tried and tested club management systems and programs, handed over from day one.', sample: false },
+  { t: 'Reputed brand name', d: 'Open under a name Maharashtra already trusts. #ItsNotGymItsLife.', sample: false },
+  { t: 'Low investment model', d: 'A club sized for 1,000 – 2,000 sq ft, with equipment bought at ABS network pricing.', sample: false },
+  { t: 'Highly profitable business', d: 'An anticipated 60% return on investment, with payback in 2 – 3 years.', sample: true },
 ] as const;
 
-const SPECS: Record<string, { l: string; v: string; n?: string; hi?: boolean }[]> = {
+const SPECS: Record<string, { l: string; v: string; n?: string; hi?: boolean; sample?: boolean }[]> = {
   Investment: [
-    { l: 'Total investment', v: '₹50 L – 1 Cr', n: 'Covers fit-out, equipment and launch. Depends on site size and city.' },
-    { l: 'Franchise / brand fee', v: '₹10,00,000', n: 'One-time fee for the ABS brand, systems and setup support.' },
-    { l: 'Anticipated ROI', v: '60%', n: 'Anticipated percentage return on investment.', hi: true },
-    { l: 'Payback period', v: '2 – 3 years', n: 'Likely payback of capital for a unit franchise.', hi: true },
+    { l: 'Total investment', v: '₹50 L – 1 Cr', n: 'Covers fit-out, equipment and launch. Depends on site size and city.', sample: true },
+    { l: 'Franchise / brand fee', v: '₹10,00,000', n: 'One-time fee for the ABS brand, systems and setup support.', sample: true },
+    { l: 'Anticipated ROI', v: '60%', n: 'Anticipated percentage return on investment.', hi: true, sample: true },
+    { l: 'Payback period', v: '2 – 3 years', n: 'Likely payback of capital for a unit franchise.', hi: true, sample: true },
   ],
   Property: [
     { l: 'Floor area', v: '1,000 – 2,000 sq ft' },
@@ -34,7 +36,7 @@ const SPECS: Record<string, { l: string; v: string; n?: string; hi?: boolean }[]
     { l: 'Franchise term', v: '5 years', n: 'Renewable at the end of the term.', hi: true },
     { l: 'Agreement', v: 'Standard', n: 'A standard ABS franchise agreement for every partner.' },
     { l: 'Training', v: 'Head office', n: 'Pune head office, with field assistance at your club.' },
-    { l: 'Brand since', v: '2005', n: 'Franchising since 2014.' },
+    { l: 'Brand since', v: '2005' },
   ],
 };
 const TABS = ['Investment', 'Property', 'Agreement'] as const;
@@ -66,11 +68,11 @@ const REGIONS: [string, string[]][] = [
 const ALL_STATES = [...new Set(REGIONS.flatMap((r) => r[1]).concat(['Andhra Pradesh', 'Telangana', 'Uttar Pradesh']))].sort();
 
 const AGREEMENT_FAQ: [string, string][] = [
-  ['How much does an ABS franchise cost?', 'The total investment is ₹50 lakh to ₹1 crore depending on city, site size and fit-out. The franchise / brand fee is ₹10,00,000.'],
+  ['How much does an ABS franchise cost?', 'Sample figures, not final pricing: a total investment of ₹50 lakh to ₹1 crore depending on city, site size and fit-out, plus a franchise / brand fee of ₹10,00,000.'],
   ['How much space do I need?', 'A floor area of 1,000 – 2,000 sq ft. The ABS team helps evaluate and select the site.'],
   ['How long is the franchise term?', 'The franchise term is 5 years and it is renewable. Every partner signs the standard ABS franchise agreement.'],
   ['What training do I get?', 'Training happens at the ABS head office, covering all aspects of club operations. Field assistance is available at your club.'],
-  ['When can I expect payback?', 'The likely payback period of capital for a unit franchise is 2 – 3 years, with an anticipated ROI of 60%.'],
+  ['When can I expect payback?', 'Sample figures, not final numbers: a likely payback period of 2 – 3 years, with an anticipated ROI of 60%.'],
   ['Which cities are open?', 'ABS is expanding PAN India across Tier 1 and Tier 2 cities in the North, South, East, West, Central regions and Union Territories.'],
 ];
 
@@ -120,10 +122,13 @@ function Hero() {
           </Link>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px,1fr))', marginTop: 'clamp(44px,6vw,72px)', paddingTop: 26, borderTop: '1px solid rgba(255,255,255,.18)' }}>
-          {HERO_STATS.map(([v, l]) => (
-            <div key={l}>
-              <div style={{ fontWeight: 700, fontSize: 'clamp(30px,3.4vw,44px)', lineHeight: 1, letterSpacing: '-.03em', color: '#ffffff' }}>{v}</div>
-              <div style={{ marginTop: 8, fontSize: 11, fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(242,242,243,.6)' }}>{l}</div>
+          {HERO_STATS.map((s) => (
+            <div key={s.l}>
+              <div style={{ fontWeight: 700, fontSize: 'clamp(30px,3.4vw,44px)', lineHeight: 1, letterSpacing: '-.03em', color: '#ffffff' }}>{s.v}</div>
+              <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(242,242,243,.6)' }}>
+                {s.l}
+                {s.sample && <SampleTag />}
+              </div>
             </div>
           ))}
         </div>
@@ -154,12 +159,15 @@ function WhyFranchise() {
           </div>
         </div>
         <div style={{ borderTop: '1.5px solid #1d1f20' }}>
-          {WHY.map(([t, d], i) => (
-            <div key={t} style={{ display: 'grid', gridTemplateColumns: '48px 1fr', gap: 16, padding: '22px 0', borderBottom: '1px solid rgba(29,31,32,.16)' }}>
+          {WHY.map((w, i) => (
+            <div key={w.t} style={{ display: 'grid', gridTemplateColumns: '48px 1fr', gap: 16, padding: '22px 0', borderBottom: '1px solid rgba(29,31,32,.16)' }}>
               <div style={{ fontWeight: 700, fontSize: 15, letterSpacing: '.14em', color: '#4d5a00' }}>{String(i + 1).padStart(2, '0')}</div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: 'clamp(20px,2vw,25px)', letterSpacing: '-.01em', lineHeight: 1.1, color: '#0d0e0d' }}>{t}</div>
-                <p style={{ marginTop: 8, fontSize: 14.5, lineHeight: 1.55, color: 'rgba(29,31,32,.7)' }}>{d}</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div style={{ fontWeight: 700, fontSize: 'clamp(20px,2vw,25px)', letterSpacing: '-.01em', lineHeight: 1.1, color: '#0d0e0d' }}>{w.t}</div>
+                  {w.sample && <SampleTag />}
+                </div>
+                <p style={{ marginTop: 8, fontSize: 14.5, lineHeight: 1.55, color: 'rgba(29,31,32,.7)' }}>{w.d}</p>
               </div>
             </div>
           ))}
@@ -192,13 +200,16 @@ function Investment() {
         <div style={{ display: 'grid', gap: 1, background: 'rgba(255,255,255,.14)', border: '1px solid rgba(255,255,255,.14)', borderRadius: 16, overflow: 'hidden', gridTemplateColumns: 'repeat(auto-fit, minmax(240px,1fr))' }}>
           {SPECS[tab].map((s) => (
             <div key={s.l} style={{ background: '#0d0e0d', padding: 'clamp(24px,2.8vw,36px)' }}>
-              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(242,242,243,.55)' }}>{s.l}</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(242,242,243,.55)' }}>
+                {s.l}
+                {s.sample && <SampleTag />}
+              </div>
               <div style={{ marginTop: 14, fontWeight: 700, fontSize: 'clamp(28px,3.2vw,42px)', letterSpacing: '-.02em', lineHeight: 1, color: s.hi ? '#b8e600' : '#ffffff' }}>{s.v}</div>
               {s.n && <p style={{ marginTop: 10, fontSize: 13.5, lineHeight: 1.5, color: 'rgba(242,242,243,.6)' }}>{s.n}</p>}
             </div>
           ))}
         </div>
-        <p style={{ marginTop: 18, fontSize: 12.5, lineHeight: 1.6, color: 'rgba(242,242,243,.45)', maxWidth: '80ch' }}>
+        <p style={{ marginTop: 18, fontSize: 12.5, lineHeight: 1.6, color: 'rgba(242,242,243,.6)', maxWidth: '80ch' }}>
           Figures are indicative and vary with city, site size and fit-out. Final terms are shared after the site evaluation and signed in the standard ABS franchise agreement.
         </p>
       </div>
@@ -307,7 +318,7 @@ function Expansion() {
             ))}
           </div>
           <div style={{ marginTop: 28, paddingTop: 18, borderTop: '1px solid rgba(255,255,255,.1)', fontSize: 13.5, lineHeight: 1.6, color: 'rgba(242,242,243,.6)' }}>
-            Home base: 35+ ABS clubs across Pune, Mumbai, Nashik, Kolhapur, Ahilyanagar and Chhatrapati Sambhaji Nagar.
+            Home base: 28 ABS clubs across Pune, Mumbai, Nashik, Kolhapur, Ahilyanagar and Chhatrapati Sambhaji Nagar.
           </div>
         </div>
       </div>
@@ -350,7 +361,6 @@ function AgreementFaq() {
 function ApplyForm() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [tried, setTried] = useState(false);
-  const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
   const errors = () => {
@@ -370,8 +380,8 @@ function ApplyForm() {
   const send = () => {
     setTried(true);
     if (Object.keys(errors()).length) return;
-    setSending(true);
-    setTimeout(() => { setSending(false); setSent(true); }, 500);
+    sendWhatsApp('Franchise enquiry (ABS website)', { Name: form.name, Phone: form.phone, Email: form.email, State: form.state, City: form.city, 'Investment range': form.invest, Property: form.prop, Message: form.msg });
+    setSent(true);
   };
   const reset = () => { setForm(EMPTY_FORM); setTried(false); setSent(false); };
 
@@ -431,9 +441,9 @@ function ApplyForm() {
             onClick={send}
             style={{ width: '100%', background: '#b8e600', color: '#0d0e0d', border: 0, borderRadius: 999, fontFamily: 'inherit', fontSize: 14, fontWeight: 700, padding: 18, cursor: 'pointer', transition: 'background .25s' }}
           >
-            {sending ? 'Sending…' : 'Send franchise enquiry'}
+            Send franchise enquiry
           </button>
-          <div style={{ fontSize: 12, color: 'rgba(242,242,243,.45)', textAlign: 'center' }}>Your details go only to the ABS franchise team.</div>
+          <div style={{ fontSize: 12, color: 'rgba(242,242,243,.6)', textAlign: 'center' }}>Your details go only to the ABS franchise team.</div>
         </div>
       ) : (
         <div style={{ minHeight: 340, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>

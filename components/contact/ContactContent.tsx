@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { CLUBS, PHONE, PHONE_HREF, EMAIL, validPhone } from '@/lib/data';
+import { sendWhatsApp } from '@/lib/whatsapp';
 
 const CHANNELS = [
   { l: 'Call', v: PHONE, href: PHONE_HREF },
@@ -65,7 +66,10 @@ function ContactForm() {
 
   const send = () => {
     setTried(true);
-    if (Object.keys(errors()).length === 0) setSent(true);
+    if (Object.keys(errors()).length === 0) {
+      sendWhatsApp(`Contact: ${topic} (ABS website)`, { Name: form.name, Phone: form.phone, Email: form.email, Club: form.club, Message: form.msg });
+      setSent(true);
+    }
   };
   const reset = () => { setForm(EMPTY_FORM); setTried(false); setSent(false); };
 

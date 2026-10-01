@@ -2,7 +2,10 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import SampleTag from '@/components/ui/SampleTag';
 import { CLUBS, TRAINERS, clubBySlug, validPhone, type Trainer } from '@/lib/data';
+import { sendWhatsApp } from '@/lib/whatsapp';
+import { nextBatch, nextBatchDate } from '@/lib/time';
 import { useReveal } from '@/lib/hooks';
 
 const FOCUS = ['All', 'Strength', 'Fat loss', 'Yoga', 'HIIT', 'Onboarding'] as const;
@@ -19,14 +22,13 @@ const PROGRAMS = [
   { no: '02', slug: 'group-classes', img: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=1200&q=80', t: 'Group Classes', meta: 'Included in membership', d: 'HIIT, spin, Zumba and functional circuits running morning and evening at every ABS club.', points: ['No booking needed — drop in', 'Morning and evening slots daily', 'Same timetable across Pune clubs'], cta: 'See a club timetable' },
   { no: '03', slug: 'mobility', img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80', t: 'Yoga & Wellness', meta: 'Led by Sana Merchant', d: 'Hatha and vinyasa, plus a dedicated mobility track for members coming back from injury.', points: ['Beginner and intermediate streams', 'Breathwork and recovery sessions', 'Post-injury modifications'], cta: 'Join this program' },
   { no: '04', slug: 'strength', img: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=1200&q=80', t: 'Strength Training', meta: 'Platforms at 12 clubs', d: 'Full free-weight floors, racks and Olympic platforms with progressive programming from first squat to competition.', points: ['Technique coaching on the platform', 'Linear and block periodisation', 'Meet prep for competitive lifters'], cta: 'Join this program' },
-  { no: '05', slug: '90-day', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1200&q=80', t: '90-Day Weight Loss Challenge', meta: 'Next batch 1 Oct', d: 'The current ABS campaign. One goal, 12 coached weeks, measured checkpoints and a result you can see in the photos.', points: ['Fortnightly body-composition tracking', 'Nutrition plan and weekly check-ins', 'Open to members and non-members'], cta: 'Enrol now' },
+  { no: '05', slug: '90-day', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1200&q=80', t: '90-Day Weight Loss Challenge', meta: null, d: 'The current ABS campaign. One goal, 12 coached weeks, measured checkpoints and a result you can see in the photos.', points: ['Fortnightly body-composition tracking', 'Nutrition plan and weekly check-ins', 'Open to members and non-members'], cta: 'Enrol now' },
 ];
 
 const GOALS = ['Fat loss', 'Muscle gain', 'Post-injury return', 'General fitness'];
-const BATCH = new Date('2026-10-01T06:00:00+05:30').getTime();
 
 function Eyebrow({ children, dark = true }: { children: React.ReactNode; dark?: boolean }) {
-  return <div style={{ fontSize: 13, fontWeight: 600, color: dark ? '#b8e600' : '#6d8a00' }}>{children}</div>;
+  return <div style={{ fontSize: 13, fontWeight: 600, color: dark ? '#b8e600' : '#566e00' }}>{children}</div>;
 }
 
 function chipStyle(active: boolean): React.CSSProperties {
@@ -93,7 +95,7 @@ function TrainerCard({ t, index }: { t: Trainer; index: number }) {
           ))}
         </div>
         {club && (
-          <div style={{ marginTop: 16, fontSize: 13, color: 'rgba(29,31,32,.55)' }}>
+          <div style={{ marginTop: 16, fontSize: 13, color: 'rgba(29,31,32,.72)' }}>
             Based at <Link href={`/clubs/${club.slug}`} style={{ color: '#1d1f20', borderBottom: '1.5px solid #b8e600' }}>ABS {club.name}</Link>
           </div>
         )}
@@ -118,7 +120,7 @@ function Roster() {
             </h2>
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(29,31,32,.55)', marginBottom: 10 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(29,31,32,.72)', marginBottom: 10 }}>
               Filter by focus
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -147,8 +149,9 @@ function Roster() {
   );
 }
 
-function ProgramCard({ p, index }: { p: (typeof PROGRAMS)[number]; index: number }) {
+function ProgramCard({ p, index, batch }: { p: (typeof PROGRAMS)[number]; index: number; batch: string | null }) {
   const ref = useReveal<HTMLAnchorElement>(index);
+  const meta = p.meta ?? (batch ? `Next batch ${batch}` : 'Next batch …');
   return (
     <Link
       ref={ref}
@@ -162,7 +165,7 @@ function ProgramCard({ p, index }: { p: (typeof PROGRAMS)[number]; index: number
       <div style={{ position: 'relative', padding: 'clamp(24px,2.6vw,32px)', display: 'flex', flexDirection: 'column', flex: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
           <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '.16em', color: '#b8e600' }}>{p.no}</span>
-          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(242,242,243,.6)' }}>{p.meta}</span>
+          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(242,242,243,.6)' }}>{meta}</span>
         </div>
         <h3 style={{ margin: 'auto 0 0', paddingTop: 70, fontWeight: 700, fontSize: 'clamp(24px,2.4vw,30px)', letterSpacing: '-.02em', lineHeight: 1.05, color: '#ffffff' }}>{p.t}</h3>
         <p style={{ margin: '14px 0 0', fontSize: 15, lineHeight: 1.6, color: 'rgba(242,242,243,.75)' }}>{p.d}</p>
@@ -181,6 +184,12 @@ function ProgramCard({ p, index }: { p: (typeof PROGRAMS)[number]; index: number
 
 function Programs() {
   const headerRef = useReveal<HTMLDivElement>(0);
+  const [batch, setBatch] = useState<string | null>(null);
+  useEffect(() => {
+    // IST-dependent value — must be computed client-side only, see TECH-STACK.md "Hydration".
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setBatch(nextBatch());
+  }, []);
   return (
     <section id="programs" style={{ background: '#0d0e0d', color: '#f2f2f3' }}>
       <div style={{ maxWidth: 1320, margin: '0 auto', padding: 'clamp(72px,9vw,128px) clamp(16px,4vw,44px)' }}>
@@ -192,7 +201,7 @@ function Programs() {
         </div>
         <div style={{ display: 'grid', gap: 'clamp(14px,1.8vw,24px)', gridTemplateColumns: 'repeat(auto-fit, minmax(290px,1fr))' }}>
           {PROGRAMS.map((p, i) => (
-            <ProgramCard key={p.slug} p={p} index={i} />
+            <ProgramCard key={p.slug} p={p} index={i} batch={batch} />
           ))}
         </div>
       </div>
@@ -205,7 +214,7 @@ function Challenge() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [goal, setGoal] = useState(GOALS[0]);
-  const [club, setClub] = useState('magarpatta-city');
+  const [club, setClub] = useState('magarpatta');
   const [error, setError] = useState('');
   const [enrolled, setEnrolled] = useState(false);
 
@@ -219,7 +228,8 @@ function Challenge() {
   const leftRef = useReveal<HTMLDivElement>(0);
   const panelRef = useReveal<HTMLDivElement>(1);
 
-  const ms = now ? Math.max(0, BATCH - now) : 0;
+  const batchMs = now ? nextBatchDate(now).getTime() : 0;
+  const ms = now ? Math.max(0, batchMs - now) : 0;
   const s = Math.floor(ms / 1000);
   const pad = (n: number) => String(n).padStart(2, '0');
   const countdown = [
@@ -234,7 +244,7 @@ function Challenge() {
     if (name.trim().length < 2) e = 'Please enter your full name.';
     else if (!validPhone(phone)) e = 'Enter a valid 10-digit Indian mobile number.';
     if (e) setError(e);
-    else { setEnrolled(true); setError(''); }
+    else { sendWhatsApp('90-Day Challenge enrolment (ABS website)', { Name: name, Phone: phone, Club: clubBySlug(club)?.name ?? club }); setEnrolled(true); setError(''); }
   };
   const reset = () => { setEnrolled(false); setName(''); setPhone(''); };
 
@@ -267,11 +277,8 @@ function Challenge() {
             ))}
           </div>
           <p style={{ margin: '16px 0 0', fontSize: 13.5, fontWeight: 600 }}>
-            Until the next batch starts — 1 October 2026. 38 of 60 places taken across Pune clubs.
+            Until the next batch starts — {now ? nextBatch(now) : '…'}.
           </p>
-          <div style={{ marginTop: 12, height: 4, borderRadius: 999, background: 'rgba(13,14,13,.2)' }}>
-            <div style={{ height: '100%', borderRadius: 999, width: `${Math.round((38 / 60) * 100)}%`, background: '#0d0e0d' }} />
-          </div>
         </div>
 
         <div ref={panelRef} style={{ padding: 'clamp(26px,3vw,40px)', borderRadius: 28, background: '#0d0e0d', color: '#f2f2f3', border: '1.5px solid rgba(0,0,0,.2)' }}>
@@ -281,8 +288,9 @@ function Challenge() {
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 16 }}>
                 <span style={{ fontWeight: 700, fontSize: 'clamp(36px,4.4vw,52px)', lineHeight: 0.95, color: '#ffffff' }}>₹11,999</span>
                 <span style={{ fontSize: 14, color: 'rgba(242,242,243,.6)' }}>for the full 12 weeks</span>
+                <SampleTag />
               </div>
-              <p style={{ margin: '12px 0 0', fontSize: 14, color: 'rgba(242,242,243,.62)' }}>Open to members and non-members. Existing members pay ₹8,999.</p>
+              <p style={{ margin: '12px 0 0', fontSize: 14, color: 'rgba(242,242,243,.62)' }}>Open to members and non-members. Existing members pay ₹8,999 (sample pricing).</p>
               <div style={{ display: 'grid', gap: 10, marginTop: 24 }}>
                 <input
                   type="text"
@@ -329,7 +337,7 @@ function Challenge() {
                   Enrol in the challenge
                 </button>
               </div>
-              <p style={{ margin: '14px 0 0', fontSize: 12.5, color: 'rgba(242,242,243,.45)' }}>
+              <p style={{ margin: '14px 0 0', fontSize: 12.5, color: 'rgba(242,242,243,.6)' }}>
                 A coach calls you within 24 hours to schedule your baseline assessment.
               </p>
             </div>

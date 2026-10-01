@@ -18,7 +18,7 @@ export default function ClubRail() {
   return (
     <div style={{ background: '#f2f2f3', color: '#1d1f20', padding: '26px 0', borderBottom: '1px solid rgba(29,31,32,.1)' }}>
       <div style={{ maxWidth: 1320, margin: '0 auto', padding: '0 clamp(16px,4vw,44px)', display: 'flex', alignItems: 'center', gap: 28 }}>
-        <div className="rail-label" style={{ flexShrink: 0, fontSize: 13, fontWeight: 600, color: 'rgba(29,31,32,.6)', maxWidth: '16ch', lineHeight: 1.4 }}>
+        <div className="rail-label" style={{ flexShrink: 0, fontSize: 13, fontWeight: 600, color: 'rgba(29,31,32,.72)', maxWidth: '16ch', lineHeight: 1.4 }}>
           One card opens every club
         </div>
         <div style={{ flex: 1, minWidth: 0, overflow: 'hidden', WebkitMaskImage: 'linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)', maskImage: 'linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)' }}>
@@ -26,7 +26,7 @@ export default function ClubRail() {
             {doubled.map((r, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'baseline', gap: 8, padding: '0 26px', whiteSpace: 'nowrap' }}>
                 <span style={{ fontSize: 20, fontWeight: 700, letterSpacing: '-.02em', color: '#1d1f20' }}>{r.name}</span>
-                <span style={{ fontSize: 12, fontWeight: 500, color: 'rgba(29,31,32,.5)' }}>{r.city}</span>
+                <span style={{ fontSize: 12, fontWeight: 500, color: 'rgba(29,31,32,.72)' }}>{r.city}</span>
               </div>
             ))}
           </div>

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { validPhone } from '@/lib/data';
+import SampleTag from '@/components/ui/SampleTag';
 
 // Events are placeholders except GROW 2026 and 20 Years of ABS — README flags these as the two real entries.
 const EVENTS = [
@@ -15,6 +16,8 @@ const EVENTS = [
   { iso: '2025-12-14', cat: 'Anniversary', title: '20 Years of ABS', where: 'Pune', time: '7:00 PM', fee: 'Members & team', desc: 'Celebrating 20 years of ABS Fitness & Wellness Clubs and 40 years of Abhimanyu Sable in fitness.', img: 'https://images.unsplash.com/photo-1550259979-ed79b48d2a30?auto=format&fit=crop&w=1200&q=80' },
   { iso: '2025-11-02', cat: 'Festival', title: 'Diwali Fitness Fest 2025', where: 'All clubs', time: '6:30 PM', fee: 'Members', desc: 'Festive workouts and celebrations across ABS clubs.', img: 'https://images.unsplash.com/photo-1567598508481-65985588e295?auto=format&fit=crop&w=1200&q=80' },
 ] as const;
+
+const isSample = (title: string) => title !== 'GROW 2026' && title !== '20 Years of ABS';
 
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -39,7 +42,7 @@ function EventCard({ ev, onClick }: { ev: (typeof EVENTS)[number]; onClick: () =
         </div>
       </div>
       <div style={{ padding: 22 }}>
-        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase', color: '#b8e600' }}>{ev.cat}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase', color: '#b8e600' }}>{ev.cat}{isSample(ev.title) && <SampleTag />}</div>
         <div style={{ marginTop: 10, fontWeight: 700, textTransform: 'uppercase', fontSize: 24, lineHeight: 1.1, color: '#ffffff' }}>{ev.title}</div>
         <div style={{ marginTop: 10, fontSize: 13.5, color: 'rgba(242,242,243,.6)' }}>{ev.where} · {ev.time}</div>
       </div>
@@ -76,7 +79,7 @@ function EventModal({ ev, isUpcoming, registered, onRegister, onClose }: {
       <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 760, maxHeight: '90vh', overflow: 'auto', background: '#0d0e0d', border: '1px solid rgba(255,255,255,.3)', borderRadius: 22 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, padding: '24px 28px', borderBottom: '1px solid rgba(255,255,255,.14)' }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase', color: '#b8e600' }}>{ev.cat} · {fmt(ev.iso).full}</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, fontWeight: 700, letterSpacing: '.18em', textTransform: 'uppercase', color: '#b8e600' }}>{ev.cat} · {fmt(ev.iso).full}{isSample(ev.title) && <SampleTag />}</div>
             <div style={{ marginTop: 10, fontWeight: 700, textTransform: 'uppercase', fontSize: 'clamp(28px,3.4vw,40px)', lineHeight: 0.95, color: '#ffffff' }}>{ev.title}</div>
           </div>
           <button type="button" onClick={onClose} aria-label="Close" style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 999, background: 'transparent', border: '1px solid rgba(255,255,255,.3)', color: '#f2f2f3', fontSize: 20, cursor: 'pointer' }}>

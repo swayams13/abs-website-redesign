@@ -11,12 +11,13 @@ export interface Club {
   zone: string;
   addr: string;
   hours: string;
+  sunday: string;
   tag: string;
   mx: number;
   my: number;
-  price: string;
-  sunday: string;
   maps: string;
+  /** Hours are confirmed from absfitnessclub.in — unverified clubs keep a placeholder and render <SampleTag />. */
+  verified: boolean;
 }
 
 export interface Trainer {
@@ -29,6 +30,8 @@ export interface Trainer {
   club: string;
   slot: string;
   photo: string;
+  /** Everyone except the founder is a placeholder profile — render <SampleTag /> wherever this is true. */
+  sample: boolean;
 }
 
 export interface ClubDetails {
@@ -36,47 +39,46 @@ export interface ClubDetails {
   trainers: Trainer[];
   timetable: { time: string; cls: string; coach: string; days: string }[];
   reviews: { quote: string; name: string; meta: string }[];
-  rating: string;
-  reviewCount: number;
+  rating?: string;
+  reviewCount?: number;
 }
 
 const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
-// name, city, zone, address, hours, tag, mapX, mapY
-const ROWS: [string, string, string, string, string, string, number, number][] = [
-  ['Magarpatta City', 'Pune', 'East', '3rd Floor, Destination Centre, Magarpatta City, Hadapsar', '5:00 AM – 11:00 PM', 'Flagship', 22, 62],
-  ['Hadapsar', 'Pune', 'East', 'Solapur Road, near Amanora', '5:30 AM – 10:30 PM', '', 26, 70],
-  ['EON 2 Kharadi', 'Pune', 'East', 'EON Free Zone Phase 2, Kharadi', '5:00 AM – 11:00 PM', '24×7 access', 34, 44],
-  ['Keshavnagar', 'Pune', 'East', 'Keshavnagar, Mundhwa', '5:30 AM – 10:30 PM', '', 30, 56],
-  ['Manjri', 'Pune', 'East', 'Manjri Budruk, Solapur Road', '6:00 AM – 10:30 PM', '', 38, 70],
-  ['Wagholi', 'Pune', 'East', 'Nagar Road, Wagholi', '5:30 AM – 10:30 PM', '', 44, 36],
-  ['Viman Nagar', 'Pune', 'East', 'Nagar Road, Viman Nagar', '5:30 AM – 11:00 PM', '', 32, 32],
-  ['Kalyani Nagar', 'Pune', 'East', 'Kalyani Nagar, near Joggers Park', '5:30 AM – 11:00 PM', '', 23, 39],
-  ['Yerwada', 'Pune', 'East', 'Airport Road, Yerwada', '6:00 AM – 10:30 PM', '', 16, 31],
-  ['Camp', 'Pune', 'Central', 'MG Road, Camp', '6:00 AM – 10:30 PM', '', 20, 53],
-  ['Model Colony', 'Pune', 'Central', 'Model Colony, Shivajinagar', '6:00 AM – 10:30 PM', '', 13, 47],
-  ['Bibwewadi', 'Pune', 'South', 'Bibwewadi Road, near Upper Depot', '5:30 AM – 10:30 PM', '', 13, 70],
-  ['Kondhwa', 'Pune', 'South', 'NIBM Road, Kondhwa', '5:30 AM – 10:30 PM', '', 24, 80],
-  ['Nanded City', 'Pune', 'South', 'Nanded City, Sinhagad Road', '5:30 AM – 10:30 PM', '', 3, 78],
-  ['Baner', 'Pune', 'West', 'Baner Road, opposite Balewadi High Street', '5:30 AM – 10:30 PM', 'Ladies-only hours', 8, 34],
-  ['ICCSB Road', 'Pune', 'West', 'ICC Trade Tower Road, Senapati Bapat Road', '6:00 AM – 10:00 PM', '', 4, 41],
-  ['Pimple Saudagar', 'Pune', 'West', 'Kunal Icon Road, Pimple Saudagar', '5:30 AM – 10:30 PM', '', 9, 26],
-  ['Punawale', 'Pune', 'West', 'Punawale, Mumbai–Bengaluru Highway', '6:00 AM – 10:30 PM', '', 2, 21],
-  ['Pimpri', 'Pune', 'West', 'Pimpri Camp, Mumbai–Pune Road', '5:30 AM – 10:30 PM', '', 9, 17],
-  ['Chinchwad', 'Pune', 'West', 'Chinchwad Station Road', '5:30 AM – 10:30 PM', '', 2, 13],
-  ['Moshi', 'Pune', 'West', 'Moshi, Alandi Road', '6:00 AM – 10:00 PM', '', 12, 8],
-  ['BKC', 'Mumbai', '', 'Bandra Kurla Complex, Bandra East', '5:30 AM – 11:00 PM', 'Premium', 72, 30],
-  ['Kandivali', 'Mumbai', '', 'Mahavir Nagar, Kandivali West', '5:30 AM – 11:00 PM', '', 68, 20],
-  ['College Road', 'Nashik', '', 'College Road, Nashik', '6:00 AM – 10:30 PM', '', 60, 8],
-  ['Indira Nagar', 'Nashik', '', 'Indira Nagar, Nashik', '6:00 AM – 10:30 PM', '', 66, 11],
-  ['Rajarampuri', 'Kolhapur', '', 'Rajarampuri 6th Lane, Kolhapur', '6:00 AM – 10:00 PM', '', 48, 86],
-  ['Tarabai Park', 'Kolhapur', '', 'Tarabai Park, Kolhapur', '6:00 AM – 10:00 PM', '', 60, 80],
-  ['Savedi', 'Ahilyanagar', '', 'Savedi Road, Ahilyanagar', '6:00 AM – 10:00 PM', '', 46, 52],
-  ['CIDCO', 'Chhatrapati Sambhaji Nagar', '', 'CIDCO N-5, Chhatrapati Sambhaji Nagar', '6:00 AM – 10:30 PM', '', 78, 56],
-  ['Jalna Road', 'Chhatrapati Sambhaji Nagar', '', 'Jalna Road, Chhatrapati Sambhaji Nagar', '6:00 AM – 10:30 PM', '', 80, 63],
+// The 28 clubs ABS lists in its own club-finder, as of 2026 — Pune (22), Mumbai (2), and one each in
+// Kolhapur, Chhatrapati Sambhaji Nagar, Nashik and Ahilyanagar. Removed: Manjri, Model Colony, Hadapsar
+// as a standalone club, and the second Nashik/Kolhapur/Sambhaji Nagar locations.
+// name, city, zone, address, hours, tag, mapX, mapY, verified
+const ROWS: [string, string, string, string, string, string, number, number, boolean][] = [
+  ['Camp', 'Pune', 'Central', 'Atur Foundation House, 4 Dr Babasaheb Ambedkar Rd, above Jawaharlal Nehru Memorial Hall, Agarkar Nagar, Pune 411001', '6:00 AM – 10:30 PM', '', 20, 53, false],
+  ['ICC', 'Pune', 'West', '9th Floor, ICC Trade Tower, A Wing, Senapati Bapat Rd, Shivajinagar, Pune 411016', '6:00 AM – 1:00 PM, 5:00 PM – 10:00 PM', 'Head office', 4, 41, true],
+  ['Magarpatta', 'Pune', 'East', 'Magarpatta City, Pune', '6:00 AM – 10:00 PM', 'Flagship', 22, 62, true],
+  ['Nanded City', 'Pune', 'South', 'Nanded City, Pune', '5:30 AM – 10:30 PM', '', 3, 78, false],
+  ['EON 2 Kharadi', 'Pune', 'East', 'EON Free Zone, Cluster D, Kharadi, Pune', '5:00 AM – 11:00 PM', '24×7 access', 34, 44, false],
+  ['Business Bay', 'Pune', 'East', 'Poonawalla Business Bay, Yerwada, Pune', '6:00 AM – 10:30 PM', '', 16, 31, false],
+  ['Viman Nagar', 'Pune', 'East', 'Viman Nagar, Pune', '5:30 AM – 11:00 PM', '', 32, 32, false],
+  ['Serum Institute', 'Pune', 'East', 'Serum Institute Road, Pune', '5:30 AM – 10:30 PM', '', 28, 58, false],
+  ['Bibwewadi', 'Pune', 'South', 'Pushp Mangal Karyalay, near City Pride, Bibwewadi, Pune', '5:30 AM – 10:30 PM', '', 13, 70, false],
+  ['Baner', 'Pune', 'West', 'Baner, Pune', '5:30 AM – 10:30 PM', 'Ladies-only hours', 8, 34, false],
+  ['Pimpri', 'Pune', 'West', 'Pimpri, Pune', '5:30 AM – 10:30 PM', '', 9, 17, false],
+  ['Chinchwad', 'Pune', 'West', 'Swiss Plaza, Thergaon, Pune', '5:30 AM – 10:30 PM', '', 2, 13, false],
+  ['Amanora', 'Pune', 'East', 'Amanora, Pune', '5:30 AM – 10:30 PM', '', 26, 70, false],
+  ['Pimple Saudagar', 'Pune', 'West', 'Pimple Saudagar, Pune', '5:30 AM – 10:30 PM', '', 9, 26, false],
+  ['Punawale', 'Pune', 'West', 'Punawale, Pune', '6:00 AM – 10:30 PM', '', 2, 21, false],
+  ['Keshav Nagar', 'Pune', 'East', 'SR Oriana, Keshav Nagar, Mundhwa, Pune', '5:30 AM – 10:30 PM', '', 30, 56, false],
+  ['Wagholi', 'Pune', 'East', 'Menlo Business Hub, Wagholi, Pune', '5:30 AM – 10:30 PM', '', 44, 36, false],
+  ['Kondhwa', 'Pune', 'South', 'Onyx Business, Tilekar Nagar, Kondhwa, Pune', '5:30 AM – 10:30 PM', '', 24, 80, false],
+  ['DPU Pimpri', 'Pune', 'West', 'Pimpri, Pune', '5:30 AM – 10:30 PM', '', 11, 15, false],
+  ['Kalyani Nagar', 'Pune', 'East', 'Blue Grass, Kalyani Nagar, Pune', '5:30 AM – 11:00 PM', '', 23, 39, false],
+  ['Charoli', 'Pune', 'East', 'Charoli, Pune', '5:30 AM – 10:30 PM', '', 40, 30, false],
+  ['Moshi', 'Pune', 'West', 'Moshi, Pune', '6:00 AM – 10:00 PM', '', 12, 8, false],
+  ['BKC', 'Mumbai', '', 'BKC, Mumbai', '5:30 AM – 11:00 PM', 'Premium', 72, 30, false],
+  ['Kandivali', 'Mumbai', '', 'Kandivali, Mumbai', '5:30 AM – 11:00 PM', '', 68, 20, false],
+  ['Kolhapur', 'Kolhapur', '', 'Kolhapur', '6:00 AM – 10:00 PM', '', 54, 83, false],
+  ['Chhatrapati Sambhaji Nagar', 'Chhatrapati Sambhaji Nagar', '', 'Chhatrapati Sambhaji Nagar', '6:00 AM – 10:30 PM', '', 79, 60, false],
+  ['Nashik', 'Nashik', '', 'Nashik', '6:00 AM – 10:30 PM', '', 63, 10, false],
+  ['Ahilyanagar', 'Ahilyanagar', '', 'Ahilyanagar', '6:00 AM – 10:00 PM', '', 46, 52, false],
 ];
-
-const PRICE: Record<string, string> = { Pune: '₹3,499', Mumbai: '₹4,999', Nashik: '₹2,999', Kolhapur: '₹2,999', Ahilyanagar: '₹2,499', 'Chhatrapati Sambhaji Nagar': '₹2,999' };
 
 export const CLUBS: Club[] = ROWS.map((r) => ({
   slug: slugify(r[0]),
@@ -86,15 +88,16 @@ export const CLUBS: Club[] = ROWS.map((r) => ({
   zone: r[2],
   addr: r[3],
   hours: r[4],
+  // Both clubs with confirmed hours are Mon–Sat only; Sunday isn't published for the rest, so it keeps a sample placeholder.
+  sunday: r[8] ? 'Closed' : '6:00 AM – 2:00 PM',
   tag: r[5],
   mx: r[6],
   my: r[7],
-  price: r[5] === 'Flagship' ? '₹3,999' : PRICE[r[1]],
-  sunday: '6:00 AM – 2:00 PM',
   maps: 'https://maps.google.com/?q=' + encodeURIComponent('ABS Fitness ' + r[0] + ', ' + r[3] + ', ' + r[1]),
+  verified: r[8],
 }));
 
-export const CITIES = ['Pune', 'Mumbai', 'Nashik', 'Kolhapur', 'Ahilyanagar', 'Chhatrapati Sambhaji Nagar'];
+export const CITIES = ['Pune', 'Mumbai', 'Kolhapur', 'Chhatrapati Sambhaji Nagar', 'Nashik', 'Ahilyanagar'];
 export const ZONES = ['East', 'West', 'Central', 'South'];
 
 const CLUB_PHOTOS = [
@@ -114,27 +117,41 @@ export const clubPhotos = (slug: string) => { const h = hash(slug); return [0, 1
 export const clubBySlug = (slug: string) => CLUBS.find((c) => c.slug === slug) || null;
 export const clubsInCity = (city: string) => CLUBS.filter((c) => c.city === city);
 
+// Ratings pulled from a public Google listing — verify on Google Maps before sharing.
+const REAL_RATINGS: Record<string, { rating: number; reviews: number }> = {
+  'icc': { rating: 4.7, reviews: 1265 },
+  'magarpatta': { rating: 4.4, reviews: 1221 },
+  'bibwewadi': { rating: 4.7, reviews: 586 },
+  'camp': { rating: 4.6, reviews: 400 },
+  'eon-2-kharadi': { rating: 4.2, reviews: 312 },
+  'kondhwa': { rating: 4.8, reviews: 216 },
+  'wagholi': { rating: 4.2, reviews: 113 },
+  'chinchwad': { rating: 4.3, reviews: 69 },
+  'business-bay': { rating: 4.7, reviews: 54 },
+  'keshav-nagar': { rating: 4.8, reviews: 12 },
+};
+
 export const TRAINERS: Trainer[] = [
-  { id: 'abhimanyu', name: 'Abhimanyu Sable', role: 'Founder & Head Coach', spec: 'Strength & transformation', bio: 'Opened the first ABS club in Pune and still coaches the transformation blocks himself. Specialises in taking people from zero to a sustainable strength base.', tags: ['Strength', 'Transformation'], club: 'magarpatta-city', slot: 'tp-abhimanyu', photo: 'https://images.unsplash.com/photo-1519505907962-0a6cb0167c73?auto=format&fit=crop&w=900&q=80' },
-  { id: 'govind', name: 'Govind Koli', role: 'Senior Trainer', spec: 'Functional training & fat loss', bio: 'Twelve years on the floor. Builds fat-loss programmes around real schedules — shift workers, new parents, people who travel for work.', tags: ['Fat loss', 'Functional'], club: 'magarpatta-city', slot: 'tp-govind', photo: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80' },
-  { id: 'roma', name: 'Roma Vidhate', role: 'Sales Manager', spec: 'Memberships & onboarding', bio: 'Runs membership and onboarding across the Pune clubs, and coaches the ladies-only circuit at Magarpatta. Your first conversation with ABS is usually with Roma.', tags: ['Onboarding', 'Ladies circuit'], club: 'magarpatta-city', slot: 'tp-roma', photo: 'https://images.unsplash.com/photo-1559595500-e15296bdbb48?auto=format&fit=crop&w=900&q=80' },
-  { id: 'kiran', name: 'Kiran Jadhav', role: 'Strength Coach', spec: 'Powerlifting & Olympic lifting', bio: 'Competitive powerlifter turned coach. Handles the platforms, technique work and anyone chasing a specific number on the bar.', tags: ['Powerlifting', 'Olympic lifting', 'Strength'], club: 'eon-2-kharadi', slot: 'tp-kiran', photo: 'https://images.unsplash.com/photo-1620188467120-5042ed1eb5da?auto=format&fit=crop&w=900&q=80' },
-  { id: 'sana', name: 'Sana Merchant', role: 'Yoga & Wellness Lead', spec: 'Hatha, vinyasa, mobility', bio: 'Designs the yoga and mobility syllabus used across all 30+ clubs. Works closely with members returning from injury.', tags: ['Hatha', 'Mobility', 'Yoga'], club: 'baner', slot: 'tp-sana', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=900&q=80' },
-  { id: 'nikhil', name: 'Nikhil Pawar', role: 'Group Fitness Trainer', spec: 'Spin, HIIT & Zumba', bio: 'Runs the evening spin and Zumba floors. The reason the 6:30 PM class at Magarpatta fills up before 6.', tags: ['Spin', 'HIIT', 'Zumba'], club: 'magarpatta-city', slot: 'tp-nikhil', photo: 'https://images.unsplash.com/photo-1550259979-ed79b48d2a30?auto=format&fit=crop&w=900&q=80' },
+  { id: 'abhimanyu', name: 'Abhimanyu Sable', role: 'Founder, MD & CEO', spec: 'Strength & transformation', bio: 'Opened the first ABS club in Pune and still coaches the transformation blocks himself. Specialises in taking people from zero to a sustainable strength base.', tags: ['Strength', 'Transformation'], club: 'magarpatta', slot: 'tp-abhimanyu', photo: '/assets/abhimanyu-sable.jpg', sample: false },
+  { id: 'govind', name: 'Govind Koli', role: 'Senior Trainer', spec: 'Functional training & fat loss', bio: 'Twelve years on the floor. Builds fat-loss programmes around real schedules — shift workers, new parents, people who travel for work.', tags: ['Fat loss', 'Functional'], club: 'magarpatta', slot: 'tp-govind', photo: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80', sample: true },
+  { id: 'roma', name: 'Roma Vidhate', role: 'Sales Manager', spec: 'Memberships & onboarding', bio: 'Runs membership and onboarding across the Pune clubs, and coaches the ladies-only circuit at Magarpatta. Your first conversation with ABS is usually with Roma.', tags: ['Onboarding', 'Ladies circuit'], club: 'magarpatta', slot: 'tp-roma', photo: 'https://images.unsplash.com/photo-1559595500-e15296bdbb48?auto=format&fit=crop&w=900&q=80', sample: true },
+  { id: 'kiran', name: 'Kiran Jadhav', role: 'Strength Coach', spec: 'Powerlifting & Olympic lifting', bio: 'Competitive powerlifter turned coach. Handles the platforms, technique work and anyone chasing a specific number on the bar.', tags: ['Powerlifting', 'Olympic lifting', 'Strength'], club: 'eon-2-kharadi', slot: 'tp-kiran', photo: 'https://images.unsplash.com/photo-1620188467120-5042ed1eb5da?auto=format&fit=crop&w=900&q=80', sample: true },
+  { id: 'sana', name: 'Sana Merchant', role: 'Yoga & Wellness Lead', spec: 'Hatha, vinyasa, mobility', bio: 'Designs the yoga and mobility syllabus used across all 28 clubs. Works closely with members returning from injury.', tags: ['Hatha', 'Mobility', 'Yoga'], club: 'baner', slot: 'tp-sana', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=900&q=80', sample: true },
+  { id: 'nikhil', name: 'Nikhil Pawar', role: 'Group Fitness Trainer', spec: 'Spin, HIIT & Zumba', bio: 'Runs the evening spin and Zumba floors. The reason the 6:30 PM class at Magarpatta fills up before 6.', tags: ['Spin', 'HIIT', 'Zumba'], club: 'magarpatta', slot: 'tp-nikhil', photo: 'https://images.unsplash.com/photo-1550259979-ed79b48d2a30?auto=format&fit=crop&w=900&q=80', sample: true },
 ];
 
 const AMENITIES = ['Fully air-conditioned floor', 'Hot & cold showers', 'Personal lockers', 'Free-weight floor', 'Functional training rig', 'Cardio deck', 'Group class studio', 'Dedicated ladies section', 'Olympic lifting platforms', 'Steam room', 'Basement parking', 'Nutrition counselling desk', 'Protein bar & supplements'];
 
 const REVIEWS: [string, string, string][] = [
   ['Cleanest gym floor in the area. Equipment is maintained and there is never a queue for the racks, even at 7 PM.', 'Rahul Deshpande', 'Member 3 years'],
-  ['I moved here from another ABS club and the transfer took one conversation. Same card, same plan, new club.', 'Pooja Nikam', 'Member 2 years'],
+  ['The 6 AM functional class runs like clockwork and the coaches remember your name from day one.', 'Pooja Nikam', 'Member 2 years'],
   ['Kiran fixed my deadlift setup in the first week. Coaching here is actual coaching, not just counting reps.', 'Sameer Kulkarni', 'Member 18 months'],
   ['The 6 AM functional class is the reason I get out of bed. Small group, coach knows everyone by name.', 'Aditi Rane', 'Member 1 year'],
   ['Joined for the 90-day challenge, stayed for the people. Lost 11 kg and kept it off.', 'Imran Shaikh', 'Member 2 years'],
   ['Ladies section is properly separate and properly equipped — not two treadmills in a corner.', 'Sneha Kulkarni', 'Member 14 months'],
   ['Parking, showers, lockers, and a floor that is never crowded. Everything a working person needs.', 'Prasad Bhosale', 'Member 4 years'],
   ['Trainers actually walk the floor and correct form. That alone is worth the membership.', 'Neha Joshi', 'Member 9 months'],
-  ['Passport means I train here on weekdays and near home on weekends. No second membership.', 'Vikram Patil', 'Member 2 years'],
+  ['Used the Passport programme to train at another ABS club while travelling — my home club booked the visit in advance and it was seamless.', 'Vikram Patil', 'Member 2 years'],
 ];
 
 export function clubDetails(c: Club): ClubDetails {
@@ -156,7 +173,8 @@ export function clubDetails(c: Club): ClubDetails {
     { time: '8:30 PM', cls: '90-Day Challenge Block', coach: tn(0), days: 'Mon · Thu' },
   ];
   const reviews = [0, 1, 2].map((k) => { const r = REVIEWS[(h + k * 4) % REVIEWS.length]; return { quote: r[0], name: r[1], meta: r[2] + ' · ABS ' + c.name }; });
-  return { amenities, trainers, timetable, reviews, rating: (4.6 + (h % 4) / 10).toFixed(1), reviewCount: 120 + (h % 340) + (big ? 180 : 0) };
+  const real = REAL_RATINGS[c.slug];
+  return { amenities, trainers, timetable, reviews, rating: real ? real.rating.toFixed(1) : undefined, reviewCount: real?.reviews };
 }
 
 export const validPhone = (s: string) => /^(\+91[\s-]?)?[6-9]\d{9}$/.test(String(s).replace(/[\s-]/g, ''));

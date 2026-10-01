@@ -10,7 +10,7 @@ export default function ClubNotFound() {
           We don&rsquo;t have a club by that name yet.
         </h1>
         <p style={{ margin: '20px 0 0', fontSize: 16, lineHeight: 1.6, color: 'rgba(242,242,243,.7)' }}>
-          Browse all 35+ ABS clubs across Maharashtra, or call <a href={PHONE_HREF} style={{ color: '#b8e600' }}>{PHONE}</a> and we&rsquo;ll point you to the nearest one.
+          Browse all 28 ABS clubs across Maharashtra, or call <a href={PHONE_HREF} style={{ color: '#b8e600' }}>{PHONE}</a> and we&rsquo;ll point you to the nearest one.
         </p>
         <Link href="/locations" style={{ display: 'inline-block', marginTop: 28, background: '#b8e600', color: '#0d0e0d', fontSize: 14, fontWeight: 700, borderRadius: 999, padding: '16px 28px' }}>
           All locations →

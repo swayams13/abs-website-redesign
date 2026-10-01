@@ -3,12 +3,13 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useReveal } from '@/lib/hooks';
+import SampleTag from '@/components/ui/SampleTag';
 
 const STATS = [
-  ['35+', 'Locations'],
-  ['1,00,000+', 'Members served'],
-  ['10,00,000', 'Sq ft managed'],
-  ['2005', 'Established'],
+  { v: '28', l: 'Locations', sample: false },
+  { v: '1,00,000+', l: 'Members served', sample: true },
+  { v: '10,00,000', l: 'Sq ft managed', sample: true },
+  { v: '2005', l: 'Established', sample: false },
 ] as const;
 
 const MV = {
@@ -61,7 +62,7 @@ const TIMELINE = [
   ['ACSM', 'Certified in Atlanta, USA', 'Earned certification from the American College of Sports Medicine and became a member of IHRSA. First Indian to be certified by ACSM.'],
   ['2003', 'ACE nomination', 'Nominated for the ACE Fitness Professional of the Year Award, held in San Francisco.'],
   ['2005', 'ABS Fitness is founded', 'The first ABS Fitness & Wellness Club opens in Pune. Franchising follows in 2014.'],
-  ['Today', '35+ clubs, 1 lakh+ members', 'Founder President of UHFF, India’s first association of fitness club owners. Mentoring the next generation of fitness professionals.'],
+  ['Today', '28 clubs', 'Founder President of UHFF, India’s first association of fitness club owners. Mentoring the next generation of fitness professionals.'],
 ] as const;
 
 const REVIEWS: [string, string, string, string][] = [
@@ -117,10 +118,13 @@ function Hero() {
           Welcome to ABS Fitness – #ItsNotGymItsLife. One of Maharashtra&rsquo;s fastest-growing fitness chains, founded by Abhimanyu Sable.
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px,1fr))', marginTop: 'clamp(40px,6vw,64px)', paddingTop: 26, borderTop: '1px solid rgba(255,255,255,.18)' }}>
-          {STATS.map(([v, l]) => (
-            <div key={l}>
-              <div style={{ fontWeight: 700, fontSize: 'clamp(28px,3.4vw,42px)', lineHeight: 1, letterSpacing: '-.03em', color: '#ffffff' }}>{v}</div>
-              <div style={{ marginTop: 8, fontSize: 11, fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(242,242,243,.6)' }}>{l}</div>
+          {STATS.map((s) => (
+            <div key={s.l}>
+              <div style={{ fontWeight: 700, fontSize: 'clamp(28px,3.4vw,42px)', lineHeight: 1, letterSpacing: '-.03em', color: '#ffffff' }}>{s.v}</div>
+              <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(242,242,243,.6)' }}>
+                {s.l}
+                {s.sample && <SampleTag />}
+              </div>
             </div>
           ))}
         </div>
@@ -212,7 +216,7 @@ function FounderStory() {
           <h2 style={{ marginTop: 16, fontWeight: 700, fontSize: 'clamp(38px,5.4vw,68px)', lineHeight: 1, letterSpacing: '-.03em' }}>
             Abhimanyu Sable
           </h2>
-          <div style={{ marginTop: 10, fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(29,31,32,.6)' }}>
+          <div style={{ marginTop: 10, fontSize: 13, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(29,31,32,.72)' }}>
             Founder. President. Pioneer.
           </div>
           <div style={{ position: 'relative', marginTop: 26, aspectRatio: '4/5', maxWidth: 420, borderRadius: 22, overflow: 'hidden', background: '#e0e0e2' }}>
@@ -221,6 +225,15 @@ function FounderStory() {
           <p style={{ marginTop: 22, fontSize: 15.5, lineHeight: 1.65, maxWidth: '48ch', color: 'rgba(29,31,32,.8)' }}>
             Founder of ABS Fitness and Founder President of UHFF, India&rsquo;s first registered association of fitness club owners. With 35+ years of fitness industry expertise, he has helped convert fitness into a structured business category by introducing standards, training systems, and scalable operational models.
           </p>
+          <div style={{ marginTop: 28, paddingTop: 22, borderTop: '1px solid rgba(29,31,32,.16)', display: 'flex', alignItems: 'center', gap: 14 }}>
+            <div style={{ flexShrink: 0, width: 52, height: 52, borderRadius: '50%', background: '#1d1f20', color: '#b8e600', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 16 }}>
+              SS
+            </div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 17, letterSpacing: '-.01em' }}>Shantanu Sable</div>
+              <div style={{ marginTop: 2, fontSize: 12.5, fontWeight: 600, color: '#4d5a00' }}>Director – Operations</div>
+            </div>
+          </div>
         </div>
         <div style={{ borderLeft: '1.5px solid #1d1f20', paddingLeft: 'clamp(20px,3vw,40px)' }}>
           {TIMELINE.map(([y, t, d]) => (
@@ -263,6 +276,10 @@ function Reviews() {
             <h2 style={{ marginTop: 16, fontWeight: 700, fontSize: 'clamp(32px,4.6vw,58px)', lineHeight: 1, letterSpacing: '-.03em', color: '#ffffff' }}>
               In their words.
             </h2>
+            <div style={{ marginTop: 14, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <SampleTag />
+              <span style={{ fontSize: 12.5, color: 'rgba(242,242,243,.55)' }}>Sample reviews — to be replaced with real ABS member reviews</span>
+            </div>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {REVIEW_TABS.map((t) => (

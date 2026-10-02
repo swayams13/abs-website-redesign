@@ -86,7 +86,10 @@ function TrainerCard({ t, index }: { t: Trainer; index: number }) {
         <Image src={t.photo} alt={t.name} fill style={{ objectFit: 'cover' }} sizes="(min-width: 900px) 24vw, (min-width: 600px) 48vw, 100vw" />
       </div>
       <div style={{ padding: 'clamp(20px,2.2vw,26px)', display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <h3 style={{ fontWeight: 700, fontSize: 22, letterSpacing: '-.02em', lineHeight: 1.05 }}>{t.name}</h3>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+          <h3 style={{ fontWeight: 700, fontSize: 22, letterSpacing: '-.02em', lineHeight: 1.05 }}>{t.name}</h3>
+          {t.sample && <SampleTag />}
+        </div>
         <div style={{ marginTop: 8, fontSize: 11.5, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: '#5c7500' }}>{t.role}</div>
         <p style={{ margin: '14px 0 0', fontSize: 14.5, lineHeight: 1.6, color: 'rgba(29,31,32,.72)' }}>{t.bio}</p>
         <div style={{ marginTop: 'auto', paddingTop: 20, borderTop: '1px solid rgba(29,31,32,.12)', display: 'flex', flexWrap: 'wrap', gap: 7 }}>
@@ -277,7 +280,7 @@ function Challenge() {
             ))}
           </div>
           <p style={{ margin: '16px 0 0', fontSize: 13.5, fontWeight: 600 }}>
-            Until the next batch starts — {now ? nextBatch(now) : '…'}.
+            Until the next batch starts — {now ? nextBatch(now) : '…'}. <SampleTag style={{ marginLeft: 6 }} />
           </p>
         </div>
 

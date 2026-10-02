@@ -39,12 +39,12 @@ function getObserver() {
         }
       });
     },
-    { rootMargin: '0px 0px -8% 0px', threshold: 0.05 }
+    { rootMargin: '0px 0px -3% 0px', threshold: 0.01 }
   );
   return sharedObserver;
 }
 
-/** Scroll-reveal, ported from the design reference's `_reveal()`. `index` staggers the delay (i % 4) * 80ms. */
+/** Scroll-reveal, ported from the design reference's `_reveal()`. `index` staggers the delay (i % 4) * 50ms. */
 export function useReveal<T extends HTMLElement>(index = 0) {
   const ref = useRef<T | null>(null);
   useEffect(() => {
@@ -52,10 +52,10 @@ export function useReveal<T extends HTMLElement>(index = 0) {
     if (!el) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (el.getBoundingClientRect().top < window.innerHeight * 0.94) return;
-    const delay = (index % 4) * 80;
+    const delay = (index % 4) * 50;
     el.style.opacity = '0';
-    el.style.transform = 'translateY(26px)';
-    el.style.transition = `opacity .8s cubic-bezier(.22,1,.36,1) ${delay}ms, transform .8s cubic-bezier(.22,1,.36,1) ${delay}ms, box-shadow .45s ease-out`;
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = `opacity .45s cubic-bezier(.22,1,.36,1) ${delay}ms, transform .45s cubic-bezier(.22,1,.36,1) ${delay}ms, box-shadow .45s ease-out`;
     const obs = getObserver();
     obs.observe(el);
     return () => obs.unobserve(el);

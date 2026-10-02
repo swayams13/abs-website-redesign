@@ -31,7 +31,7 @@ export default function Hero() {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!reduced && rootRef.current) {
       rootRef.current.querySelectorAll<HTMLElement>('[data-hero]').forEach((el, i) => {
-        el.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 900, delay: 150 + i * 110, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' });
+        el.animate([{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 80 + i * 70, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' });
       });
     }
 
@@ -67,28 +67,29 @@ export default function Hero() {
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg,rgba(13,14,13,.55) 0%,rgba(13,14,13,0) 26%,rgba(13,14,13,.35) 55%,rgba(13,14,13,.94) 100%)' }} />
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(90deg,rgba(13,14,13,.7) 0%,rgba(13,14,13,0) 65%)' }} />
 
-      <div ref={contentRef} style={{ position: 'relative', width: '100%', maxWidth: 1320, margin: '0 auto', padding: '140px clamp(16px,4vw,44px) clamp(40px,6vw,72px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap' }}>
+      <div ref={contentRef} style={{ position: 'relative', width: '100%', maxWidth: 1320, margin: '0 auto', padding: 'clamp(112px,16svh,140px) clamp(16px,4vw,44px) clamp(32px,5svh,72px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap' }}>
         <div style={{ maxWidth: 820 }}>
           <div data-hero="" style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '7px 14px 7px 10px', borderRadius: 999, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.2)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,.92)' }}>
               <OpenCount />
+              <SampleTag />
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 14px', borderRadius: 999, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.2)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,.92)' }}>
               <SampleTag />
               1,00,000+ members · since 2005
             </div>
           </div>
-          <h1 style={{ marginTop: 26, fontWeight: 800, fontSize: 'clamp(46px,7.4vw,112px)', lineHeight: 0.98, letterSpacing: '-.035em', color: '#ffffff' }}>
+          <h1 style={{ marginTop: 'clamp(16px,3svh,26px)', fontWeight: 800, fontSize: 'clamp(44px,min(7.4vw,10svh),112px)', lineHeight: 0.98, letterSpacing: '-.035em', color: '#ffffff' }}>
             <span data-hero="" style={{ display: 'block' }}>Your body can achieve it.</span>
             <span data-hero="" style={{ display: 'block' }}>
               Your mind must{' '}
               <span style={{ fontFamily: 'var(--font-cormorant), serif', fontStyle: 'italic', fontWeight: 500, letterSpacing: '-.01em', fontSize: '1.1em', color: '#b8e600' }}>believe it.</span>
             </span>
           </h1>
-          <p data-hero="" style={{ marginTop: 26, fontSize: 'clamp(16px,1.4vw,19px)', lineHeight: 1.6, fontWeight: 500, maxWidth: '52ch', color: 'rgba(242,242,243,.86)' }}>
+          <p data-hero="" style={{ marginTop: 'clamp(16px,3svh,26px)', fontSize: 'clamp(16px,1.4vw,19px)', lineHeight: 1.6, fontWeight: 500, maxWidth: '52ch', color: 'rgba(242,242,243,.86)' }}>
             28 clubs across Maharashtra. One membership card, a whole network.
           </p>
-          <div data-hero="" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '14px 28px', marginTop: 34 }}>
+          <div data-hero="" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '14px 28px', marginTop: 'clamp(20px,4svh,34px)' }}>
             <Link
               href="#join"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: '#b8e600', color: '#0d0e0d', fontSize: 15, fontWeight: 700, padding: '18px 20px 18px 28px', borderRadius: 999, transition: 'background .3s ease-out, transform .3s ease-out' }}

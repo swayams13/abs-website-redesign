@@ -23,7 +23,7 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navBg = scrolled || menu ? 'rgba(13,14,13,.72)' : 'rgba(20,22,21,.28)';
+  const navBg = scrolled || menu ? 'rgba(13,14,13,.92)' : 'rgba(20,22,21,.28)';
 
   return (
     <header style={{ position: 'fixed', top: 'var(--banner-h, 40px)', left: 0, right: 0, zIndex: 80, padding: '16px clamp(12px,3vw,32px)', pointerEvents: 'none' }}>

@@ -51,7 +51,7 @@ export default function Challenge() {
                 Enrol for the next batch
               </Link>
               <span style={{ fontSize: 14, color: 'rgba(242,242,243,.72)' }}>
-                Next batch starts <strong style={{ color: '#ffffff', fontWeight: 600 }}>{batch ?? '…'}</strong>
+                Next batch starts <strong style={{ color: '#ffffff', fontWeight: 600 }}>{batch ?? '…'}</strong> <SampleTag style={{ marginLeft: 6 }} />
               </span>
             </div>
           </div>
